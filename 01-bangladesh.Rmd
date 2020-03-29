@@ -1,0 +1,222 @@
+
+# Bangladesh Situation
+
+```{r, load-packages, echo=FALSE, message=FALSE, }
+require(ggplot2)
+require(ggrepel)
+require(tidyverse)
+require(lubridate)
+require(knitr)
+require(kableExtra)
+opts_knit$set(eval.after = "fig.cap")
+```
+
+```{r, get-data, echo=FALSE, message=FALSE, cache=F}
+jhu_url <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", sep = "")
+
+us_confirmed_long_jhu <- read_csv(jhu_url)
+
+```
+
+```{r, echo=FALSE}
+df <- us_confirmed_long_jhu %>%
+  rename(province = "Province/State", 
+         country = "Country/Region") %>% 
+  # Exclude China
+  filter(
+    country != "China"
+  ) %>%
+  pivot_longer(-c(province, country, Lat, Long), 
+               names_to = "Date", values_to = "cum_dead") %>%
+  select(country, Date, cum_dead) %>%
+  group_by(country, Date) %>%
+  summarize(
+    cum_dead = sum(cum_dead)
+  )
+
+df_bd <- us_confirmed_long_jhu %>%
+  rename(province = "Province/State", 
+         country = "Country/Region") %>% 
+  # Exclude China
+  filter(
+    country == "Bangladesh"
+  ) %>%
+  pivot_longer(-c(province, country, Lat, Long), 
+               names_to = "Date", values_to = "cum_dead") %>%
+  select(country, Date, cum_dead) %>%
+  group_by(country, Date) %>%
+  summarize(
+    cum_dead = sum(cum_dead)
+  )
+
+
+n_world <- df %>%
+  group_by(country) %>%
+  summarise(
+    max_n_dead = max(cum_dead)
+  ) %>%
+  arrange(desc(max_n_dead)) %>%
+  top_n(5, max_n_dead)
+
+# n for Bangladesh
+n_bd <- df_bd %>% group_by(country) %>%
+  summarise(
+    max_n_dead = max(cum_dead)
+  )
+
+# Combined n countries
+n <- rbind(n_world, n_bd)
+
+
+dead <- df %>%
+  filter(country %in% n$country, cum_dead >0) %>%
+  arrange(country, cum_dead) %>%
+  group_by(country) %>%
+  mutate(
+    id = row_number()
+  )
+
+# Last date updated or last reported date
+last_reported_date =  max(mdy(df$Date))
+```
+
+চিত্র ও টেবিল আপডেট করা হয়েছে `r last_reported_date` তারিখের ডেটা অনুযায়ী। 
+
+দুটি সেকশনে সামারি আছে। __দেখতে স্ক্রল করে নিচে নামুন__
+- বিশ্বের সাথে বাংলাদেশের তুলনা
+- দক্ষিণ এশিয়ার সাথে বাংলাদেশের তুলনা। 
+
+## Current Situation
+
+করোনাভাইরাস-এ কতজন আক্রান্ত হয়েছে এই সংখ্যাটি নির্ভর করে কতজনকে করোনাভাইরাসের পরীক্ষা করা হয়েছে তার ওপর।
+
+তাই নতুন করে কতজন আক্রান্ত হয়েছে সেটি দেশ-ভেদে পার্থক্য হবে কেননা সেটি নির্ভর করে সেই দেশ কী পরিমাণ টেস্ট করছে তার উপর। তাই আমার কাছে কতজন নতুন করে আক্রান্ত হয়েছে সেটির চেয়ে বরং দেশ-প্রতি কতজন মারা গিয়েছে সেটি এককভাবে বেশি গুরুত্বপূর্ণ একটি মেট্রিক।
+
+নিচে প্রথম রিপোর্টেড মৃত্যু থেকে বর্তমান অবস্থায় পৌঁছুতে কতদিন লেগেছে তার তুলনামূলক চিত্র দেখানো হয়েছে। সেই সাথে বাংলাদেশের অবস্হান কোথায় তা দেখানো হয়েছে। করোনাভাইরােসর কারণে মৃত্যুর হার যদি একই থাকে, এ চিত্র থেকে বাংলাদেশের পরিস্হতি আগামি ৩০ দিনে কীভাবে পরিবর্তিত হতে পারে সে সম্পর্কে ধারণা পাওয়া যাবে।
+
+এখন পর্যন্ত যা পরিষ্কার তা হল বাংলাদেশের পরিস্থিতি আগামী একমাস পর্যবেক্ষণ করতে হবে।
+
+## Bangladesh compared to the world 
+
+```{r, covid19-death-world, echo = FALSE}
+
+p <- ggplot(dead, aes(x = id, y = cum_dead, color=country)) +
+  geom_line(size=1.1) +
+  geom_point(data = dead[dead$country == 'Bangladesh' & mdy(dead$Date)==last_reported_date, ], aes(x=id, y=cum_dead), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=country),
+                  function(df) df[mdy(df$Date) == last_reported_date, ])+
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none") +
+  # theme_void() + 
+  theme(legend.position="none") +
+  ggtitle("COVID19 cumulative deaths since first death \n(top 5 countries excluding China)", as.Date(last_reported_date) ) +
+  xlab("Days since first death") +
+  ylab("Cumulative deaths")
+
+p
+
+ggsave("featured.jpg", width=8, height=6)
+```
+
+```{r, echo=FALSE}
+
+# Summary of deaths till date by country
+world_summary <- dead %>%
+  filter(mdy(Date) == last_reported_date) %>%
+  group_by(country) %>%
+  summarise(
+    TotalDeath = max(cum_dead)
+  ) %>%
+  arrange(desc(TotalDeath))
+
+
+world_summary %>%
+  kable(format = "html", caption=paste("Total number of deaths till", last_reported_date)) %>%
+  kable_styling(position = "center")
+```
+
+
+
+## Bangladesh in South Asia
+
+```{r, echo=FALSE, message=FALSE}
+
+df_south_asia <- us_confirmed_long_jhu %>%
+  rename(province = "Province/State", 
+         country = "Country/Region") %>% 
+  # Exclude China
+  filter(
+    country %in% c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
+                   "Bhutan", "Sri Lanka", "Malaysia", "Maldives", 
+                   "Indonesia", "Uganda")
+  ) %>%
+  pivot_longer(-c(province, country, Lat, Long), 
+               names_to = "Date", values_to = "cum_dead") %>%
+  select(country, Date, cum_dead) %>%
+  group_by(country, Date) %>%
+  summarize(
+    cum_dead = sum(cum_dead)
+  )
+
+
+n_south_asia <- df_south_asia %>%
+  group_by(country) %>%
+  summarise(
+    max_n_dead = max(cum_dead)
+  ) %>%
+  arrange(desc(max_n_dead)) %>%
+  top_n(10, max_n_dead)
+
+
+# Combined n countries
+# n_south_ais <- rbind(n_world, n_bd)
+
+dead_south_asia <- df_south_asia %>%
+  filter(country %in% n_south_asia$country, cum_dead >0) %>%
+  arrange(country, cum_dead) %>%
+  group_by(country) %>%
+  mutate(
+    id = row_number()
+  )
+
+```
+
+```{r, covid19-death-south-asia, echo=FALSE}
+
+# Plot
+ggplot(dead_south_asia, aes(x = id, y = cum_dead, color=country)) +
+  geom_line(size=1.1) +
+  geom_point(data = dead[dead$country == 'Bangladesh' & mdy(dead$Date)==last_reported_date, ], aes(x=id, y=cum_dead), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=country),
+                  function(df) df[mdy(df$Date) == last_reported_date, ])+
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none") +
+  # theme_void() + 
+  theme(legend.position="none") +
+  ggtitle("COVID19 cumulative deaths since first death \n(Bangladesh's peers)", as.Date(last_reported_date) ) +
+  xlab("Days since first death") +
+  ylab("Cumulative deaths")
+```
+
+
+```{r, echo=FALSE}
+
+# Summary of deaths till date by country
+sa_summary <- dead_south_asia %>%
+  filter(mdy(Date) == last_reported_date) %>%
+  group_by(country) %>%
+  summarise(
+    TotalDeath = max(cum_dead)
+  ) %>%
+  arrange(desc(TotalDeath))
+
+sa_summary %>%
+  kable(format = "html", caption=paste("Total number of deaths till", last_reported_date)) %>%
+  kable_styling(position = "center")
+
+```
+
+
+## Summary
+
+অন্য দেশের সাথে তুলনা করলে আমরা দেখব যে বিপদ এখনো কাটেনি। বরং সামনের দিনগুলোতে পরিস্হিতি বদলে যেতে পারে। এক্ষেত্রে এসাম্পসন হচ্ছে বাংলাদেশের ডেটা রিপোর্টিং ঠিকমত হচ্ছে এবং তা বজায় থাকবে। 

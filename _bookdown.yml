@@ -1,0 +1,5 @@
+book_filename: "covid19"
+language:
+  ui:
+    chapter_name: "Report "
+delete_merged_file: true
