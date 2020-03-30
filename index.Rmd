@@ -9,7 +9,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: raheems/covid19
-cover-image: "social-sharing.png"
+cover-image: "cover.png"
 description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations."
 ---
 
@@ -18,5 +18,5 @@ description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis o
 This live report is updated a few times daily. So please check back to get the most up to date report.
 
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'),}
-# knitr::include_graphics('images/cover.png', dpi = NA)
+knitr::include_graphics('images/cover.png', dpi = NA)
 ```
