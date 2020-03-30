@@ -48,7 +48,7 @@ If you have experience with R programming, and have interest in controbuting to 
 - fitting statistical models
 - timeseries forecasting
 
-## Found and error? {-}
+## Found error? {-}
 
 - If you have found an error, please create an issue at https://github.com/raheems/covid19/issues 
 
