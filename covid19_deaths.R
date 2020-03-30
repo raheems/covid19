@@ -10,13 +10,15 @@ require(knitr)
 require(kableExtra)
 
 
+jhu_deaths_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", sep = "")
+# jhu_confirmed_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", sep = "")
 
-jhu_confirmed_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", sep = "")
-jhu_confirmed_global <- read_csv(jhu_confirmed_global_src)
+jhu_deaths_global <- read_csv(jhu_deaths_global_src)
+# jhu_confirmed_global <- read_csv(jhu_confirmed_global_src)
 
 
 # Create working data set excluding China
-df <- jhu_confirmed_global %>%
+df <- jhu_deaths_global %>%
   rename(province = "Province/State",
          country = "Country/Region") %>%
   # Exclude China
@@ -38,7 +40,7 @@ df <- jhu_confirmed_global %>%
 data_last_refreshed =  max(ymd(df$Date))
 
 # Confirmed for Bangladesh
-df_bd <- jhu_confirmed_global %>%
+df_bd <- jhu_deaths_global %>%
   rename(province = "Province/State",
          country = "Country/Region") %>%
   filter(

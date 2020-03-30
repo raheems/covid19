@@ -1,6 +1,7 @@
 
 # World at a glance {#world}
 
+## Confirmed Cases 
 
 ```{r, echo=FALSE, message=FALSE, cache=TRUE}
 source("covid19_confirmed.R")
@@ -11,10 +12,10 @@ __Report last updated:__ `r Sys.Date()`
 __Data last refreshed:__ : `r data_last_refreshed`
 
 
-```{r, covid19-confirmed-cases-world, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
-ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
+p <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$Date)==data_last_refreshed, ],
              aes(x=Day, y=cum_cases), color='red', size=5) +
@@ -28,6 +29,15 @@ ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   xlab("Days since first confirmed case") +
   ylab("Cumulative cases")
 
+p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+
+# # Here we define spaces as the big separator
+# point <- format_format(big.mark = " ", decimal.mark = ",", scientific = FALSE)
+# # Plot it
+# p  <- ggplot(data = df, aes(x=x, y=y)) + geom_line() + geom_point()
+# p + scale_x_continuous(labels = point)
+
+
 # 
 # 
 # plotly::ggplotly(p)
@@ -35,4 +45,75 @@ ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
 ```
 
 
+```{r, echo=FALSE}
 
+# Summary of cases till date by country
+world_summary <- df %>%
+  filter(ymd(Date) == data_last_refreshed) %>%
+  group_by(country) %>%
+  summarise(
+    Confirmed = max(cum_cases)
+  ) %>%
+  top_n(10, Confirmed) %>%
+  arrange(desc(Confirmed))
+
+
+world_summary %>%
+  kable(format = "html", caption=paste("Top 10 countries by confirmed cases as of", data_last_refreshed)) %>%
+  kable_styling(position = "center")
+
+
+```
+
+
+## Deaths
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+source("covid19_deaths.R")
+```
+
+
+```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+# Cumulative Cases since first identified case
+
+p2 <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
+  geom_line(size=1.1) +
+  geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$Date)==data_last_refreshed, ],
+             aes(x=Day, y=cum_cases), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=country),
+                  function(case_summary) case_summary[ymd(case_summary$Date) == data_last_refreshed, ])+
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none") +
+  # theme_void() +
+  theme(legend.position="none") +
+  ggtitle("COVID19 cumulative deaths since first death \n(top 5 countries excluding China)", as.Date(last_reported_date) ) +
+  xlab("Days since first death") +
+  ylab("Cumulative deaths")
+
+p2 + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+
+# 
+# 
+# plotly::ggplotly(p)
+
+```
+
+```{r, echo=FALSE}
+
+# Summary of deaths till date by country
+world_summary <- df %>%
+  filter(ymd(Date) == data_last_refreshed) %>%
+  group_by(country) %>%
+  summarise(
+    Deaths = max(cum_cases)
+  ) %>%
+  top_n(10, Deaths) %>%
+  arrange(desc(Deaths))
+
+
+world_summary %>%
+  kable(format = "html", caption=paste("Top 10 countries by total deaths as of", data_last_refreshed)) %>%
+  kable_styling(position = "center")
+
+
+```

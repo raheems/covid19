@@ -15,8 +15,18 @@ description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis o
 
 # Disclaimer {-}
 
-This live report is updated a few times daily. So please check back to get the most up to date report.
+The information provided here are for education purposes only. All data have been collected from freely available resources. For complete referecnes, please check the Reference section of this report.
+
+This live report is updated a few times daily. So please check back to get the most up to date report. 
 
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'),}
 knitr::include_graphics('images/cover.png', dpi = NA)
 ```
+
+
+# Data Sources {-}
+
+- 2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE https://github.com/CSSEGISandData/COVID-19
+
+- নিউ ইয়র্ক টাইমস গিটহাব রিপজিটরি https://github.com/nytimes/covid-19-data
+
