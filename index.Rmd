@@ -13,20 +13,42 @@ cover-image: "cover.png"
 description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations."
 ---
 
-# Disclaimer {-}
+# About this report {-}
 
-The information provided here are for education purposes only. All data have been collected from freely available resources. For complete referecnes, please check the Reference section of this report.
-
-This live report is updated a few times daily. So please check back to get the most up to date report. 
+This is a live report about the COVID-19 pandemic also known as SARS-CoV2. 
 
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'),}
 knitr::include_graphics('images/cover.png', dpi = NA)
 ```
 
+## Disclaimer {-}
 
-# Data Sources {-}
+The information provided here are for education purposes only. All data have been collected from freely available resources. For complete referecnes, please check the Reference section of this report.
+
+This live report is updated a few times daily. So please check back to get the most up to date report. 
+
+## Purpose {-}
+
+The goal of this report is to provide up to date summary of the global situation and compare that with __Bangladesh__.
+
+
+## Data sources {-}
 
 - 2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE https://github.com/CSSEGISandData/COVID-19
 
 - নিউ ইয়র্ক টাইমস গিটহাব রিপজিটরি https://github.com/nytimes/covid-19-data
+
+## Volunteering opportunity {-}
+
+If you have experience with R programming, and have interest in controbuting to this project, please reach out to me vial email: enayetur.raheem@brfbd.org. Please mention specifically how you want to contribute. Because I receive too many inquiries, I cannot reply to each an every email. I will only respond if your email has sufficient information to spark my interest. Thanks in advance :)
+
+### What skills are useful {-}
+
+- writing R functions to perform a specific task given a data set
+- fitting statistical models
+- timeseries forecasting
+
+# Found and error? {-}
+
+- If you have found an error, please create an issue at https://github.com/raheems/covid19/issues 
 
