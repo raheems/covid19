@@ -23,7 +23,7 @@ knitr::include_graphics('images/cover.png', dpi = NA)
 
 ## Disclaimer {-}
 
-The information provided here are for education purposes only. All data have been collected from freely available resources. For complete referecnes, please check the Reference section of this report.
+The information provided here are for educational purposes only. All data have been collected from freely available sources. For details, please check the Reference section of this report.
 
 This live report is updated a few times daily. So please check back to get the most up to date report. 
 
