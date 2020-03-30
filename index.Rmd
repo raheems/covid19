@@ -46,7 +46,7 @@ If you have experience with R programming, and have interest in controbuting to 
 
 - writing R functions to perform a specific task given a data set
 - fitting statistical models
-- timeseries forecasting
+- time series forecasting
 
 ## Found an error? {-}
 
