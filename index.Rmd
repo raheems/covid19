@@ -10,7 +10,7 @@ biblio-style: apalike
 link-citations: yes
 github-repo: raheems/covid19
 cover-image: "cover.png"
-description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations."
+description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations. This report is focused on current situation in Bangladesh and the aftermath of COVID-19."
 ---
 
 # About this report {-}
