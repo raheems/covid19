@@ -9,7 +9,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: raheems/covid19
-cover-image: images/cover.jpg
+cover-image: "cover.jpg"
 description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations."
 ---
 
