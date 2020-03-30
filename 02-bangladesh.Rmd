@@ -1,5 +1,5 @@
 
-# Bangladesh Situation
+# Bangladesh at a glance {#bangladesh}
 
 ```{r, load-packages, echo=FALSE, message=FALSE, }
 require(ggplot2)
