@@ -1,36 +1,38 @@
-# Sat Mar 28 19:12:21 2020 ------------------------------
-# This code is for confirmed cases -----------
+# Mon Mar 30 19:05:52 2020 ------------------------------
+# COVID incidences and deaths
+# USA by state
+
+# Source:
+# https://github.com/nytimes/covid-19-data
+
+# Load packages
+require(ggplot2)
+require(ggrepel)
+require(tidyverse)
+require(lubridate)
+require(knitr)
+require(kableExtra)
 
 
-# Update JHU Death Data ------------
-jhu_deaths_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", sep = "")
-jhu_deaths_global <- read_csv(jhu_deaths_global_src)
-write_csv(jhu_deaths_global, "jhu_deaths_global.csv")
+
+nyt_us_states <- paste("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv", sep = "")
+nyt_us_states <- read_csv(nyt_us_states)
+
 
 # Create working data set excluding China
-df <- jhu_deaths_global %>%
-  rename(province = "Province/State",
-         country = "Country/Region") %>%
-  # Exclude China
-  filter(
-    country != 'China'
-  ) %>%
-  pivot_longer(-c(province, country, Lat, Long),
-               names_to = "Date", values_to = "cum_cases") %>%
-  mutate(
-    Date = mdy(Date)
-  ) %>%
-  select(country, Date, cum_cases) %>%
-  group_by(country, Date) %>%
+df <- nyt_us_states %>%
+  group_by(state, date) %>%
   summarize(
-    cum_cases = sum(cum_cases)
-  )
+    cum_cases = sum(cases),
+    cum_deaths = sum(deaths)
+  ) %>%
+  top_n(10,cum_deaths)
 
 # Last date updated or last reported date
 data_last_refreshed =  max(ymd(df$Date))
 
 # Confirmed for Bangladesh
-df_bd <- jhu_deaths_global %>%
+df_bd <- jhu_confirmed_global %>%
   rename(province = "Province/State",
          country = "Country/Region") %>%
   filter(

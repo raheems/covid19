@@ -1,11 +1,42 @@
 
 # Bangladesh at a glance {#bangladesh}
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("covid19_bd.R")
+```
+
 I am currently working on it. Please check back soon. 
 
 The following report will be provided (tentative).
+
 
 ## Bangladesh government data
 
 ## Report based on publicly available data
 
+```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
+a <- df %>% filter(varname != "cum_tests")
+
+# Plot
+p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
+  geom_line(size=1.1) +
+  theme_minimal(base_size = 14) +
+  # theme(legend.position = "none") +
+  # theme_void() +
+  # theme(legend.position="none") +
+  ggtitle("Bangladesh: COVID19 cumulative cases\n(SUSPECTED cases are UNOFFICIAL)",
+          data_last_refreshed ) +
+  xlab("Date") +
+  ylab("Cumulative cases") +
+  theme(legend.position="bottom") +
+  labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")
+
+p + scale_color_discrete(name="Type",
+                       breaks=c("cum_deaths_suspected", "cum_deaths_govt",
+                                "cum_change_deaths_govt", "cum_change_deaths_susp"),
+                       labels=c("Deaths (suspected)", "Deaths (confirmed)", "Daily change (confirmed)",
+                                "Daily change (suspected)")
+) +
+  guides(fill=guides(colour=guide_legend(ncol=2,nrow=2,byrow=TRUE)))
+
+```
