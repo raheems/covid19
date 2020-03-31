@@ -139,7 +139,7 @@ PC = \frac{New - Original}{Original} * 100
 $$
 where `New` is the number of cases on a given date, and `Original` is the number 3 days prior to that. 
 
-__How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward tending line suggests a slow growth. When it goes below zero, we can say that the situation is improving.
+__How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.
 
 ```{r, echo=FALSE, message=FALSE, cache=FALSE}
 source("global_incidence_deaths.R")
