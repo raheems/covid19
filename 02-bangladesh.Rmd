@@ -5,14 +5,15 @@
 source("covid19_bd.R")
 ```
 
-I am currently working on it. Please check back soon. 
-
-The following report will be provided (tentative).
+This iniitial report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
 
 
-## Bangladesh government data
+## Bangladesh government data (TBD)
 
 ## Report based on publicly available data
+
+Please note that publicly available data are NOT OFFICIAL and MAY BE INACCURATE. I personally did not verify them. Use at your discretion.
+
 
 ```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 a <- df %>% filter(varname != "cum_tests")

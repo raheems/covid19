@@ -8,7 +8,7 @@ library(plotly)
 
 # RUN covid_update_data.R to update the data
 
-df <- read_csv('covid19_bd_govt.csv')
+df <- read_csv('covid19_bd.csv')
 
 # names(df)
 
