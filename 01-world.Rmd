@@ -1,5 +1,5 @@
 
-# World at a glance {#world}
+# World {#world}
 
 ## Confirmed Cases 
 
@@ -127,5 +127,51 @@ world_plus_bd <- rbind(world_summary, confirmed_bd)
 world_plus_bd %>%
   kable(format = "html", caption=paste("Top 10 countries by total deathsas of", data_last_refreshed)) %>%
   kable_styling(position = "center")
+
+```
+
+## 3-day % changes for top 6 countries {#perc-change-top6}
+
+The percent change is calculated as 
+
+$$
+PC = \frac{New - Original}{Original} * 100
+$$
+where `New` is the number of cases on a given date, and `Original` is the number 3 days prior to that. 
+
+__How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward tending line suggests a slow growth. When it goes below zero, we can say that the situation is improving.
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+source("global_incidence_deaths.R")
+```
+
+```{r, fig.width=8, fig.height=9, echo = FALSE, warning=FALSE}
+
+# Global top 6 countries by deaths --------------
+
+# Top 6 countries by deaths
+global_top_deaths <- global %>%
+  filter(!country %in% c('China')) %>%
+  group_by(country) %>%
+  summarise(
+    max_n_cases = max(cum_deaths)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(6, max_n_cases)
+
+p <- global_gr_lagx(global, global_top_deaths$country, 3)
+p <- p + theme(legend.position="none") +
+  ggtitle("COVID19 3-day % change in select metrics \n(Top 6 countries by death, excluding China)", data_last_refreshed ) +
+  xlab("Days since first death") +
+  ylab("% change") +
+  theme(legend.position="bottom") +
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center")
+
+p + scale_color_discrete(name="Metric",
+                         breaks=c("case_gr_rate", "death_gr_rate"),
+                         labels=c("New cases", "Deaths")) +
+  guides(fill=guides(colour=guide_legend(ncol=2,nrow=1,byrow=TRUE))) +
+  facet_wrap( ~ country, ncol = 2) +
+  ylim(0, 300)
 
 ```
