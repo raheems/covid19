@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-684495-5"></script>
     <script>
@@ -127,11 +128,11 @@
 <h2><span class="header-section-number">2.1</span> Confirmed Cases</h2>
 <p><strong>Report last updated:</strong> 2020-03-31</p>
 <p><strong>Data last refreshed:</strong> : 2020-03-30</p>
-<p><img src="covid19_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
 </div>
 <div id="deaths-1" class="section level2">
 <h2><span class="header-section-number">2.2</span> Deaths</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 
 </div>
 </div>
@@ -191,6 +192,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
