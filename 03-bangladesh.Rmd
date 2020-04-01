@@ -14,7 +14,7 @@ Please see the graph below.
 
 ## Report based on publicly available data
 
-Please note that publicly available data are __not official__ and __MAY BE UNRELIABLE__. I personally did not verify them. I take no responsibility of its authenticity. I am providing it here for educational purposes. Use at your discretion.
+Please note that publicly available data are __not official__ and __MAY BE UNRELIABLE__. I personally did not verify them. I am using them for educational purposes. Use at your discretion.
 
 
 ```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
