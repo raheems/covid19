@@ -58,6 +58,6 @@ df %>%
     `Total Deaths (Official)` = max(cum_deaths_govt)
     , `Total Deaths (Suspected)` = max(cum_deaths_suspected)
     , `Total Tests` = max(total_tests, na.rm = TRUE)
-  ) %>% kable(caption="Bangladesh summary.")
+  ) %>% kable(caption=paste("Bangladesh summary as of ", data_last_refreshed))
 
 ```
