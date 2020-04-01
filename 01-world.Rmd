@@ -132,7 +132,53 @@ world_plus_bd %>%
 
 ```
 
-## 3-day % changes for top 6 countries {#perc-change-top6}
+
+## Recovery-to-death ratio {#recovery-death-ratio}
+
+The recovered to deaths ratio (RDR) is calculated as
+
+$$
+RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,\, deaths}
+$$
+
+
+__How to interpret__: The ratio of cumulative number of patients recovered divided by the cumulative number of deaths over time can tell the proportion of people recovering compared to dying. An upward trend may indicate more recovery than deaths. 
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+source("global_recovery_death_ratio.R")
+```
+
+```{r, recovery-to-death-ratio-by-country, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# Global top 5 countries by deaths --------------
+
+global <- df %>%
+  filter(is.finite(cum_recov_death_ratio)) %>%
+  filter(country %in% n$country, cum_recov_death_ratio >= 0) %>%
+  arrange(country, date, cum_recov_death_ratio) %>%
+  group_by(country) %>%
+  mutate(
+    day = row_number()
+  )
+   p <- ggplot(global, aes(x = day, y = cum_recov_death_ratio, color=country)) +
+      geom_point(size=1) + geom_smooth() +
+     geom_text_repel(size=5, aes(label=country),
+                     function(global) global[ymd(global$date) == data_last_refreshed, ])+
+     theme_minimal(base_size = 14)
+
+  p <-  p + ggtitle("Recovery-to-death ratio \n(Top 5 countries by death, excluding China)", data_last_refreshed ) +
+      xlab("Days since first death") +
+      ylab("Cumulative recovery / cumulative deaths") +
+      theme(legend.position="top") +
+      labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center") +
+      scale_color_discrete(name="Country")
+  
+suppressMessages(print(p))
+
+
+```
+
+## 3-day % changes {#perc-change-top6}
 
 The percent change is calculated as 
 
