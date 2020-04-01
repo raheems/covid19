@@ -18,7 +18,8 @@ Please note that publicly available data are __not official__ and __MAY BE INACC
 
 
 ```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
-a <- df_ %>% filter(varname != "cum_tests")
+a <- df_ %>% filter(!varname %in% c("cum_tests", "cum_change_deaths_susp",
+                                    "cum_change_deaths_govt") )
 
 # Plot
 p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
