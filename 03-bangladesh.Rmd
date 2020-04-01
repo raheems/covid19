@@ -67,7 +67,7 @@ df %>%
 ## Bangladesh in South Asia
 
 
-```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
+```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 source("covid19_deaths.R")
 
 df_south_asia <- jhu_deaths_global %>%

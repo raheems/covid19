@@ -26,10 +26,6 @@ jhu_recovered_global <- read_csv(jhu_recovered_global_src)
 df_deaths <- jhu_deaths_global %>%
   rename(province = "Province/State",
          country = "Country/Region") %>%
-  # Exclude China
-  filter(
-    country != 'China'
-  ) %>%
   pivot_longer(-c(province, country, Lat, Long),
                names_to = "date", values_to = "cum_cases") %>%
   mutate(
@@ -47,10 +43,6 @@ df_deaths <- jhu_deaths_global %>%
 df_recov <- jhu_recovered_global %>%
   rename(province = "Province/State",
          country = "Country/Region") %>%
-  # Exclude China
-  filter(
-    country != 'China'
-  ) %>%
   pivot_longer(-c(province, country, Lat, Long),
                names_to = "date", values_to = "cum_cases") %>%
   mutate(
@@ -75,17 +67,5 @@ df <- df %>%
 data_last_refreshed =  max(ymd(df$date))
 
 
-# Top 10 countries
-n_world <- df %>%
-  group_by(country) %>%
-  summarise(
-    deaths = max(cum_deaths)
-    , recovered = max(cum_recov)
-  ) %>%
-  arrange(country) %>%
-  top_n(5, deaths)
-
-# Combined n countries
-n <- n_world
 
 
