@@ -17,7 +17,7 @@ Please see the graph below.
 Please note that publicly available data are __not official__ and __MAY BE UNRELIABLE__. I personally did not verify them. I am using them for educational purposes. Use at your discretion.
 
 
-```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
+```{r, covid19-bangladesh, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 a <- df_ %>% filter(!varname %in% c("cum_tests", "cum_change_deaths_susp",
                                     "cum_change_deaths_govt") )
 
@@ -67,7 +67,7 @@ df %>%
 ## Bangladesh in South Asia
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 source("covid19_deaths.R")
 
 df_south_asia <- jhu_deaths_global %>%
