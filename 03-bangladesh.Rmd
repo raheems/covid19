@@ -46,7 +46,7 @@ p + scale_color_discrete(name="Type",
                                 "Daily change (suspected)",
                                 "Daily change (confirmed)")
 ) +
-  guides(fill=guides(colour=guide_legend(ncol=2,nrow=2,byrow=TRUE)))
+  guides(fill=guides(colour=guide_legend(ncol=2,nrow=1,byrow=TRUE)))
 
 ```
 
