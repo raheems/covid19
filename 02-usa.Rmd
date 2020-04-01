@@ -1,11 +1,45 @@
 
 # USA {#usa}
 
-## Confirmed Cases 
 
 ```{r, echo=FALSE, message=FALSE, cache=FALSE}
 source("covid19_usa.R")
 ```
+
+
+## Overall trend {#us-overall}
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+# 
+# head(df)
+# dfw <- df %>%
+#   group_by(date) %>%
+#   summarise(
+#     cases = sum(cases)
+#     , deaths = sum(deaths)
+#   ) %>%
+#   mutate(
+#     daily_cases = c(0, diff(cases))
+#     , daily_deaths = c(0, diff(deaths))
+#   )
+#   
+# 
+# change_cases = (dfw$cases - lag(dfw$cases, 1))/lag(dfw$cases, 1) * 100
+# change_cases = as.ts(xts(change_cases, order.by = dfw$date))
+# change_deaths = (dfw$deaths - lag(dfw$deaths, 1))/lag(dfw$deaths, 1) * 100
+# change_deaths = as.ts(xts(change_deaths, order.by = dfw$date))
+# 
+# 
+# autoplot(change_cases, series = 'Cases') +
+#   autolayer(ma(change_cases, 7), series = '5-MA') +
+#   autolayer(change_deaths, series ='Deaths')+
+#   autolayer(ma(change_deaths, 7), series ='5-MA-Deaths')
+# 
+
+```
+
+
+## Confirmed Cases 
 
 __Report last updated:__ `r Sys.Date()`
 

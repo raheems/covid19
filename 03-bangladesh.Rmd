@@ -8,15 +8,17 @@ source("covid19_bd.R")
 This iniitial report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
 
 
-## Bangladesh government data (TBD)
+## Bangladesh official data (TBD)
+
+Please see the graph below.
 
 ## Report based on publicly available data
 
-Please note that publicly available data are NOT OFFICIAL and MAY BE INACCURATE. I personally did not verify them. Use at your discretion.
+Please note that publicly available data are __not official__ and __MAY BE INACCURATE. I personally did not verify them. Use at your discretion.
 
 
 ```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
-a <- df %>% filter(varname != "cum_tests")
+a <- df_ %>% filter(varname != "cum_tests")
 
 # Plot
 p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
@@ -33,11 +35,29 @@ p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
   labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")
 
 p + scale_color_discrete(name="Type",
-                       breaks=c("cum_deaths_suspected", "cum_deaths_govt",
-                                "cum_change_deaths_govt", "cum_change_deaths_susp"),
-                       labels=c("Deaths (suspected)", "Deaths (confirmed)", "Daily change (confirmed)",
-                                "Daily change (suspected)")
+                       breaks=c("cum_deaths_suspected", 
+                                "cum_deaths_govt",
+                                "cum_change_deaths_susp",
+                                "cum_change_deaths_govt"),
+                       
+                       labels=c("Deaths (suspected)", 
+                                "Deaths (confirmed)", 
+                                "Daily change (suspected)",
+                                "Daily change (confirmed)")
 ) +
   guides(fill=guides(colour=guide_legend(ncol=2,nrow=2,byrow=TRUE)))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+# Bangladesh summary table
+
+df %>%
+  arrange(date) %>%
+  summarise(
+    `Total Deaths (Official)` = max(cum_deaths_govt)
+    , `Total Deaths (Suspected)` = max(cum_deaths_suspected)
+    , `Total Tests` = max(total_tests, na.rm = TRUE)
+  ) %>% kable(caption="Bangladesh summary.")
 
 ```

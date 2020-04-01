@@ -32,18 +32,18 @@ df <- df %>%
     , change_deaths_susp = ifelse(is.na(change_deaths_susp), 0, change_deaths_susp)
     , cum_deaths_govt = cumsum(daily_deaths_govt)
     , cum_deaths_suspected = cumsum(daily_deaths_suspected)
-    , cum_tests = cumsum(total_tests)
     , cum_change_deaths_govt= cumsum(change_deaths_govt)
     , cum_change_deaths_susp = cumsum(change_deaths_susp)
   ) %>%
   arrange(
     date
-  ) %>%
-  gather(varname, cum_cases, cum_change_deaths_govt, cum_change_deaths_susp,
-         cum_deaths_govt, cum_deaths_suspected, cum_tests,
-         factor_key=TRUE)
+  )
 
-data_last_refreshed = max(df$date)
+df_ <- df %>%
+  gather(varname, cum_cases, cum_change_deaths_govt, cum_change_deaths_susp,
+         cum_deaths_govt, cum_deaths_suspected, factor_key=TRUE)
+
+data_last_refreshed = max(df_$date)
 
 
 
