@@ -60,7 +60,8 @@ ggplot(us_new_cases, aes(x = date, y = n, color=state)) +
   theme(legend.position="none") +
   ggtitle("COVID19 Total cases \n(Top 5 US states excluding New York and New Jersey)", data_last_refreshed ) +
   xlab("Days since first confirmed case") +
-  ylab("Cumulative cases")
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
 # p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
 
@@ -90,7 +91,8 @@ ggplot(us_new_deaths, aes(x = date, y = n, color=state)) +
   theme(legend.position="none") +
   ggtitle("COVID19 Total deaths \n(Top 5 states in US excluding New York and New Jersey)", data_last_refreshed ) +
   xlab("Days since first confirmed case") +
-  ylab("Cumulative cases")
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
 # p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
 

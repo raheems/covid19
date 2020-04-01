@@ -27,7 +27,8 @@ p <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   theme(legend.position="none") +
   ggtitle("COVID19 cumulative cases since first case \n(top 5 countries excluding China)", data_last_refreshed ) +
   xlab("Days since first confirmed case") +
-  ylab("Cumulative cases")
+  ylab("Cumulative cases")+
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 
 p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
 
@@ -90,7 +91,8 @@ p2 <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   theme(legend.position="none") +
   ggtitle("COVID19 cumulative deaths since first death \n(top 5 countries excluding China)", data_last_refreshed ) +
   xlab("Days since first death") +
-  ylab("Cumulative deaths")
+  ylab("Cumulative deaths") +
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 
 p2 + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
 

@@ -124,7 +124,8 @@ ggplot(dead_south_asia, aes(x = id, y = cum_dead, color=country)) +
   theme(legend.position="none") +
   ggtitle( paste("COVID19 cumulative deaths since first death \n(Bangladesh's peers)\n", date_data_refreshed)) +
   xlab("Days since first death") +
-  ylab("Cumulative deaths")
+  ylab("Cumulative deaths") +
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 ```
 
 
