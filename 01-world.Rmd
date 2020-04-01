@@ -135,14 +135,7 @@ world_plus_bd %>%
 
 ## Recovery-to-death ratio {#recovery-death-ratio}
 
-The recovered to deaths ratio (RDR) is calculated as
 
-$$
-RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,\, deaths}
-$$
-
-
-__How to interpret__: The ratio of cumulative number of patients recovered divided by the cumulative number of deaths over time can tell the proportion of people recovering compared to dying. An upward trend may indicate more recovery than deaths. 
 
 ```{r, echo=FALSE, message=FALSE, cache=FALSE}
 source("global_recovery_death_ratio.R")
@@ -177,17 +170,17 @@ suppressMessages(print(p))
 
 
 ```
+The recovered to deaths ratio (RDR) is calculated as
+
+$$
+RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,\, deaths}
+$$
+
+
+__How to interpret__: The ratio of cumulative number of patients recovered divided by the cumulative number of deaths over time can tell the proportion of people recovering compared to dying. An upward trend may indicate more recovery than deaths. 
 
 ## 3-day % changes {#perc-change-top6}
 
-The percent change is calculated as 
-
-$$
-PC = \frac{New - Original}{Original} * 100
-$$
-where `New` is the number of cases on a given date, and `Original` is the number 3 days prior to that. 
-
-__How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.
 
 ```{r, echo=FALSE, message=FALSE, cache=FALSE}
 source("global_incidence_deaths.R")
@@ -223,3 +216,14 @@ p + scale_color_discrete(name="Metric",
   ylim(0, 300)
 
 ```
+
+
+The percent change is calculated as 
+
+$$
+PC = \frac{New - Original}{Original} * 100
+$$
+where `New` is the number of cases on a given date, and `Original` is the number 3 days prior to that. 
+
+__How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.
+
