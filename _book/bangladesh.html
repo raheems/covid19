@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="usa.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="scipubs.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-684495-5"></script>
     <script>
@@ -100,7 +101,9 @@
 <li class="chapter" data-level="3" data-path="bangladesh.html"><a href="bangladesh.html"><i class="fa fa-check"></i><b>3</b> Bangladesh</a><ul>
 <li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-official-data-tbd"><i class="fa fa-check"></i><b>3.1</b> Bangladesh official data (TBD)</a></li>
 <li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#report-based-on-publicly-available-data"><i class="fa fa-check"></i><b>3.2</b> Report based on publicly available data</a></li>
+<li class="chapter" data-level="3.3" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.3</b> Bangladesh in South Asia</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="scipubs.html"><a href="scipubs.html"><i class="fa fa-check"></i><b>4</b> Publications</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/raheems/covid19" target="blank">Published with bookdown</a></li>
@@ -132,10 +135,10 @@
 <div id="report-based-on-publicly-available-data" class="section level2">
 <h2><span class="header-section-number">3.2</span> Report based on publicly available data</h2>
 <p>Please note that publicly available data are <strong>not official</strong> and __MAY BE INACCURATE. I personally did not verify them. Use at your discretion.</p>
-<p><img src="covid19_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-3">Table 3.1: </span>Bangladesh summary as of 2020-03-31
+<span id="tab:unnamed-chunk-16">Table 3.1: </span>Bangladesh summary as of 2020-03-31
 </caption>
 <thead>
 <tr>
@@ -164,6 +167,83 @@ Total Tests
 </tr>
 </tbody>
 </table>
+</div>
+<div id="bangladesh-in-south-asia" class="section level2">
+<h2><span class="header-section-number">3.3</span> Bangladesh in South Asia</h2>
+<p><img src="covid19_files/figure-html/covid19-death-south-asia-1.png" width="672" /></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-18">Table 3.2: </span>Total number of deaths as of 2020-03-31
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+TotalDeath
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Indonesia
+</td>
+<td style="text-align:right;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Malaysia
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+India
+</td>
+<td style="text-align:right;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pakistan
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bangladesh
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Singapore
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sri Lanka
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
@@ -173,7 +253,7 @@ Total Tests
         </div>
       </div>
 <a href="usa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scipubs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -223,6 +303,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
