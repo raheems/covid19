@@ -170,7 +170,7 @@ suppressMessages(print(p))
 
 
 ```
-The recovered to deaths ratio (RDR) is calculated as
+The recovery to deaths ratio (RDR) is calculated as
 
 $$
 RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,\, deaths}
