@@ -9,6 +9,7 @@ require(lubridate)
 require(knitr)
 require(kableExtra)
 library(gsheet)
+library(scales)
 
 # Update JHU Confirmed cases data ------------
 
