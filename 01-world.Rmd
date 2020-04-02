@@ -82,7 +82,7 @@ source("covid19_deaths.R")
 ```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
-p2 <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
+p <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$Date)==data_last_refreshed, ],
              aes(x=Day, y=cum_cases), color='red', size=5) +
@@ -95,8 +95,9 @@ p2 <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   ylab("Cumulative deaths") +
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 
-p2 + scale_color_discrete(name="Country") + 
-  scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+p + scale_color_discrete(name="Country") + 
+  scale_y_continuous(labels=comma)
+
 
 # 
 # 
