@@ -244,7 +244,7 @@ suppressMessages(print(p))
 ```
 
 
-### Recovery-to-death ratio (South Asia)
+### Recovery-to-death ratio (South and South-East Asia)
 
 
 ```{r, recovery-to-death-ratio-south-asia, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
