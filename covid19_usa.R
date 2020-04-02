@@ -9,6 +9,7 @@ library(tidyverse)
 us_state_data <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
 df <- read_csv(us_state_data)
 
+
 df_ <- df %>%
   rename(
     cum_cases = cases
