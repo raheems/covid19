@@ -4,8 +4,27 @@
 
 # Update JHU Death Data ------------
 jhu_deaths_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", sep = "")
-jhu_deaths_global <- read_csv(jhu_deaths_global_src)
-write_csv(jhu_deaths_global, "jhu_deaths_global.csv")
+
+tryCatch(
+  expr ={
+    jhu_deaths_global <- read_csv(jhu_deaths_global_src)
+    write_csv(jhu_deaths_global, "jhu_deaths_global.csv")
+  },
+  error = function(e){
+    message('Caught an error!')
+    print(e)
+  },
+  warning = function(w){
+    message('Caugnt an warning!')
+    print(w)
+  },
+  finally = {
+    jhu_deaths_global <- read_csv("jhu_deaths_global.csv")
+  }
+
+)
+
+
 
 # Create working data set excluding China
 df <- jhu_deaths_global %>%

@@ -14,8 +14,28 @@ library(scales)
 # Update JHU Confirmed cases data ------------
 
 jhu_confirmed_global_src <- paste("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", sep = "")
-jhu_confirmed_global <- read_csv(jhu_confirmed_global_src)
-write_csv(jhu_confirmed_global, "jhu_confirmed_global.csv")
+
+
+tryCatch(
+  expr ={
+    jhu_confirmed_global <- read_csv(jhu_confirmed_global_src)
+    write_csv(jhu_confirmed_global, "jhu_confirmed_global.csv")
+  },
+  error = function(e){
+    message('Caught an error!')
+    print(e)
+  },
+  warning = function(w){
+    message('Caugnt an warning!')
+    print(w)
+  },
+  finally = {
+    jhu_confirmed_global <- read_csv("jhu_confirmed_global.csv")
+  }
+
+)
+
+
 
 # Create working data set excluding China
 df <- jhu_confirmed_global %>%

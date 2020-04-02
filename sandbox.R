@@ -2,6 +2,7 @@
 
 
 # RUN covid_update_data.R to update the data
+
 us_state_data <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
 df <- read_csv(us_state_data)
 
@@ -11,9 +12,6 @@ df <- df %>%
     daily_cases = c(0, diff(cases))
     , daily_deaths = c(0, diff(deaths))
   )
-
-ggplot(df, aes(x= lag(daily_cases, 6), y = daily_deaths ))+
-  geom_point() + geom_smooth()
 
 
 state_list = c("New York", "New Jersey")
@@ -29,6 +27,8 @@ df %>%
   ggplot(aes(x=date, y=n, color=metric)) +
   geom_line() + geom_smooth()
 
-ggplot(df_ny, aes(x= lag(daily_cases, 1), y = daily_deaths ))+
+ggplot(df_ny, aes(x= lag(daily_cases, 8), y = daily_deaths ))+
   geom_point() + geom_smooth()
 
+summary(df_ny$daily_cases)
+boxplot(df_ny$daily_cases)

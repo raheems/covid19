@@ -8,19 +8,33 @@ require(tidyverse)
 require(lubridate)
 require(knitr)
 require(kableExtra)
-
+library(scales)
 library(gsheet)
 
 
 # Update Bangladesh unofficial and official data
 
-sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
-df = gsheet2tbl(sheet_3)
-write_csv(df, 'covid19_bd.csv')
 
-# RUN covid_update_data.R to update the data
+tryCatch(
+  expr ={
+    sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
+    df_gogle_sheet = gsheet2tbl(sheet_3)
+    write_csv(df_gogle_sheet, 'covid19_bd.csv')
 
-df <- read_csv('covid19_bd.csv')
+  },
+  error = function(e){
+    message('Caught an error!')
+    print(e)
+  },
+  warning = function(w){
+    message('Caugnt an warning!')
+    print(w)
+  },
+  finally = {
+    df <- read_csv('covid19_bd.csv')
+  }
+
+)
 
 # names(df)
 
