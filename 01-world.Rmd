@@ -19,7 +19,7 @@ p <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$Date)==data_last_refreshed, ],
              aes(x=Day, y=cum_cases), color='red', size=5) +
-  geom_text_repel(size=5, aes(label=cum_cases),
+  geom_text_repel(size=5, aes(label=comma_format()(cum_cases)),
                   function(case_summary) case_summary[ymd(case_summary$Date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
@@ -86,7 +86,7 @@ p <- ggplot(case_summary, aes(x = Day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$Date)==data_last_refreshed, ],
              aes(x=Day, y=cum_cases), color='red', size=5) +
-  geom_text_repel(size=5, aes(label=cum_cases),
+  geom_text_repel(size=5, aes(label=comma_format()(cum_cases)),
                   function(case_summary) case_summary[ymd(case_summary$Date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
