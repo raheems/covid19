@@ -77,7 +77,7 @@ n_world <- df %>%
     max_n_cases = max(cum_cases)
   ) %>%
   arrange(desc(max_n_cases)) %>%
-  top_n(5, max_n_cases)
+  top_n(6, max_n_cases)
 
 # Top 10 countries
 n_bd <- df_bd %>%
