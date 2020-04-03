@@ -5,7 +5,7 @@
 source("covid19_bd.R")
 ```
 
-This iniitial report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
+This report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
 
 
 ## Bangladesh official data (TBD)
@@ -57,7 +57,7 @@ df %>%
   arrange(date) %>%
   summarise(
     `Total Deaths (Official)` = max(cum_deaths_govt)
-    , `Total Deaths (Suspected)` = max(cum_deaths_suspected)
+    , `Total Deaths (Suspected)` = max(cum_deaths_suspected, na.rm = TRUE)
     , `Total Tests` = max(total_tests, na.rm = TRUE)
   ) %>% kable(caption=paste("Bangladesh summary as of ", data_last_refreshed))
 

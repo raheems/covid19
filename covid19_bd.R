@@ -48,6 +48,11 @@ df <- df %>%
   select(
     date, daily_deaths_govt, daily_deaths_suspected, total_tests
   ) %>%
+  mutate(
+    daily_deaths_govt = replace_na(as.numeric(daily_deaths_govt), 0)
+    , daily_deaths_suspected = replace_na(as.numeric(daily_deaths_suspected), 0)
+    , total_tests = replace_na(as.numeric(total_tests), 0)
+  ) %>%
   drop_na(date) %>%
   mutate(
     date = as.Date(date, "%d/%m/%Y")
