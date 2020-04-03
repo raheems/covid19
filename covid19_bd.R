@@ -27,8 +27,8 @@ tryCatch(
     print(e)
   },
   warning = function(w){
-    message('Caugnt an warning!')
-    print(w)
+    message('Caught an warning!')
+    #print(w)
   },
   finally = {
     df <- read_csv('covid19_bd.csv')

@@ -22,7 +22,7 @@ df_ny <- df %>% filter(state %in% state_list) %>%
     , daily_deaths = c(0, diff(deaths))
   )
 
-df %>%
+df_ny %>%
   gather(metric, n, daily_cases, daily_deaths, factor_key = TRUE) %>%
   ggplot(aes(x=date, y=n, color=metric)) +
   geom_line() + geom_smooth()
