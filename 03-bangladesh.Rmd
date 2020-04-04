@@ -35,7 +35,8 @@ p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
   theme(legend.position="top") +
   labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")
 
-p + scale_color_discrete(name="Type",
+p + scale_y_continuous(labels=comma, trans = "log10") +
+  scale_color_discrete(name="Type",
                        breaks=c("cum_deaths_suspected", 
                                 "cum_deaths_govt",
                                 "cum_change_deaths_susp",
@@ -66,7 +67,74 @@ df %>%
 
 ## Bangladesh in South Asia
 
+### Infection
 
+```{r, incidences-bd-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
+source("covid19_deaths.R")
+
+df_south_asia <- jhu_confirmed_global %>%
+  rename(province = "Province/State", 
+         country = "Country/Region") %>% 
+  # Exclude China
+  filter(
+    country %in% c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
+                   "Bhutan", "Sri Lanka", "Malaysia", "Maldives", 
+                   "Indonesia", "Uganda")
+  ) %>%
+  pivot_longer(-c(province, country, Lat, Long), 
+               names_to = "Date", values_to = "cum_dead") %>%
+  select(country, Date, cum_dead) %>%
+  group_by(country, Date) %>%
+  summarize(
+    cum_dead = sum(cum_dead)
+  )
+
+
+n_south_asia <- df_south_asia %>%
+  group_by(country) %>%
+  summarise(
+    max_n_dead = max(cum_dead)
+  ) %>%
+  arrange(desc(max_n_dead)) %>%
+  top_n(10, max_n_dead)
+
+
+# Combined n countries
+# n_south_ais <- rbind(n_world, n_bd)
+
+dead_south_asia <- df_south_asia %>%
+  filter(country %in% n_south_asia$country, cum_dead >0) %>%
+  arrange(country, cum_dead) %>%
+  group_by(country) %>%
+  mutate(
+    id = row_number()
+  )
+
+```
+
+```{r, covid19-cases-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
+date_data_refreshed = ymd(max(mdy(dead_south_asia$Date)))
+
+# Plot
+ggplot(dead_south_asia, aes(x = id, y = cum_dead, color=country)) +
+  geom_line(size=1.1) +
+  geom_point(data = dead_south_asia[dead_south_asia$country == 'Bangladesh' & mdy(dead_south_asia$Date)==date_data_refreshed, ], aes(x=id, y=cum_dead), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=country),
+                  function(df) df[mdy(df$Date) == date_data_refreshed, ])+
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none") +
+  # theme_void() + 
+  theme(legend.position="none") +
+  ggtitle( paste("COVID19 cumulative incidences since first incidence \n(Bangladesh's peers)\n", date_data_refreshed)) +
+  xlab("Days since first incidence") +
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")+
+  scale_y_continuous(labels=comma, trans = "log10")
+```
+
+
+
+### Deaths
 ```{r, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 source("covid19_deaths.R")
 
@@ -110,7 +178,8 @@ dead_south_asia <- df_south_asia %>%
 
 ```
 
-```{r, covid19-death-south-asia, echo=FALSE}
+
+```{r, covid19-death-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 date_data_refreshed = ymd(max(mdy(dead_south_asia$Date)))
 
 # Plot
@@ -126,7 +195,8 @@ ggplot(dead_south_asia, aes(x = id, y = cum_dead, color=country)) +
   ggtitle( paste("COVID19 cumulative deaths since first death \n(Bangladesh's peers)\n", date_data_refreshed)) +
   xlab("Days since first death") +
   ylab("Cumulative deaths") +
-  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")+
+  scale_y_continuous(labels=comma, trans = "log10")
 ```
 
 
@@ -146,3 +216,5 @@ sa_summary %>%
   kable_styling(position = "center")
 
 ```
+
+
