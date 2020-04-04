@@ -89,14 +89,15 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#found-an-error"><i class="fa fa-check"></i>Found an error?</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="world.html"><a href="world.html"><i class="fa fa-check"></i><b>1</b> World</a><ul>
-<li class="chapter" data-level="1.1" data-path="world.html"><a href="world.html#confirmed-cases"><i class="fa fa-check"></i><b>1.1</b> Confirmed Cases</a></li>
-<li class="chapter" data-level="1.2" data-path="world.html"><a href="world.html#deaths"><i class="fa fa-check"></i><b>1.2</b> Deaths</a></li>
-<li class="chapter" data-level="1.3" data-path="world.html"><a href="world.html#recovery-death-ratio"><i class="fa fa-check"></i><b>1.3</b> Recovery-to-death ratio</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="world.html"><a href="world.html#recovery-to-death-ratio-including-china"><i class="fa fa-check"></i><b>1.3.1</b> Recovery-to-death ratio (including China)</a></li>
-<li class="chapter" data-level="1.3.2" data-path="world.html"><a href="world.html#recovery-to-death-ratio-south-and-south-east-asia"><i class="fa fa-check"></i><b>1.3.2</b> Recovery-to-death ratio (South and South-East Asia)</a></li>
-<li class="chapter" data-level="1.3.3" data-path="world.html"><a href="world.html#recovery-to-death-ratio-middle-east"><i class="fa fa-check"></i><b>1.3.3</b> Recovery-to-death ratio (Middle East)</a></li>
+<li class="chapter" data-level="1.1" data-path="world.html"><a href="world.html#incidence-recovery-death"><i class="fa fa-check"></i><b>1.1</b> Daily Incidence, Recovery, Deaths</a></li>
+<li class="chapter" data-level="1.2" data-path="world.html"><a href="world.html#world-case-fatality"><i class="fa fa-check"></i><b>1.2</b> Case Fatality Rate</a></li>
+<li class="chapter" data-level="1.3" data-path="world.html"><a href="world.html#confirmed-cases"><i class="fa fa-check"></i><b>1.3</b> Confirmed Cases</a></li>
+<li class="chapter" data-level="1.4" data-path="world.html"><a href="world.html#deaths"><i class="fa fa-check"></i><b>1.4</b> Deaths</a></li>
+<li class="chapter" data-level="1.5" data-path="world.html"><a href="world.html#recovery-death-ratio"><i class="fa fa-check"></i><b>1.5</b> Recovery-to-death ratio</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="world.html"><a href="world.html#recovery-to-death-ratio-south-and-south-east-asia"><i class="fa fa-check"></i><b>1.5.1</b> Recovery-to-death ratio (South and South-East Asia)</a></li>
+<li class="chapter" data-level="1.5.2" data-path="world.html"><a href="world.html#recovery-to-death-ratio-middle-east"><i class="fa fa-check"></i><b>1.5.2</b> Recovery-to-death ratio (Middle East)</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="world.html"><a href="world.html#perc-change-top6"><i class="fa fa-check"></i><b>1.4</b> 3-day % changes</a></li>
+<li class="chapter" data-level="1.6" data-path="world.html"><a href="world.html#perc-change-top6"><i class="fa fa-check"></i><b>1.6</b> 3-day % changes</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="usa.html"><a href="usa.html"><i class="fa fa-check"></i><b>2</b> USA</a><ul>
 <li class="chapter" data-level="2.1" data-path="usa.html"><a href="usa.html#us-overall"><i class="fa fa-check"></i><b>2.1</b> Overall trend</a></li>
@@ -132,14 +133,83 @@
             <section class="normal" id="section-">
 <div id="world" class="section level1">
 <h1><span class="header-section-number">Report 1</span> World</h1>
-<div id="confirmed-cases" class="section level2">
-<h2><span class="header-section-number">1.1</span> Confirmed Cases</h2>
 <p><strong>Report last updated:</strong> 2020-04-03</p>
-<p><strong>Data last refreshed:</strong> : 2020-04-02</p>
-<p><img src="covid19_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<p><strong>Data last refreshed:</strong> : 2020-04-03</p>
+<div id="incidence-recovery-death" class="section level2">
+<h2><span class="header-section-number">1.1</span> Daily Incidence, Recovery, Deaths</h2>
+<p><img src="covid19_files/figure-html/global-incidence-recovery-deaths-1.png" width="768" /></p>
+</div>
+<div id="world-case-fatality" class="section level2">
+<h2><span class="header-section-number">1.2</span> Case Fatality Rate</h2>
+<p>Case fatality rate is calculated by dividing the number of deaths from a specified disease over a defined period of time by the number of individuals diagnosed with the disease during that time; the resulting ratio is then multiplied by 100 to yield a percentage <span class="citation">(Harrington <a href="#ref-cfr_britanica">2020</a>)</span>.</p>
+<p><span class="math display">\[CFR = \frac{\# Deaths}{\#Infected} \times 100 \,\, per \,\,unit \,\, time\]</span></p>
+<p><img src="covid19_files/figure-html/global-case-fatality-rate-1.png" width="768" /></p>
+<!-- ### Case fatality (top 5) -->
+<!-- ```{r, case-fatality-rate-top5, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE} -->
+<!-- #  -->
+<!-- # # Confirmed for Bangladesh -->
+<!-- # df_bd <- df %>% -->
+<!-- #   filter( -->
+<!-- #     country=='Bangladesh' -->
+<!-- #   )  -->
+<!-- #  -->
+<!-- # # Top 10 countries -->
+<!-- # n_world <- df %>% -->
+<!-- #   group_by(country) %>% -->
+<!-- #   summarise( -->
+<!-- #     max_n_cases = max(cum_deaths) -->
+<!-- #   ) %>% -->
+<!-- #   arrange(desc(max_n_cases)) %>% -->
+<!-- #   top_n(5, max_n_cases) -->
+<!-- #  -->
+<!-- # # Top 10 countries -->
+<!-- # n_bd <- df_bd %>% -->
+<!-- #   group_by(country) %>% -->
+<!-- #   summarise( -->
+<!-- #     max_n_cases = max(cum_deaths) -->
+<!-- #   ) -->
+<!-- #  -->
+<!-- #  -->
+<!-- # # Combined n countries -->
+<!-- # n <- rbind(n_world, n_bd) -->
+<!-- country_list = c("Bangladesh", "India", "Singapore", "Pakistan") -->
+<!-- p <- df %>% filter(country %in% country_list) %>% -->
+<!--   group_by(country, date) %>% -->
+<!--   summarise( -->
+<!--       cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_confirmed))*100 -->
+<!--     , daily_case_fatality_rate = (sum(daily_deaths)/sum(daily_confirmed))*100 -->
+<!--   ) %>% -->
+<!--   gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE) %>% -->
+<!--   ggplot(aes(x=date, y=n, color=metric))+ -->
+<!--   # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) + -->
+<!--   geom_point() + -->
+<!--   geom_smooth() + -->
+<!--   theme_minimal(base_size = 14) + -->
+<!--   theme(legend.position="top") + -->
+<!--   ggtitle("GLOBAL case fatality rate", data_last_refreshed ) + -->
+<!--   xlab("Date") + -->
+<!--   ylab("Case fatality rate (%)")+ -->
+<!--   labs( -->
+<!--     title= "GLOBAL case fatality rate", -->
+<!--     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center" -->
+<!--     ) -->
+<!-- p = p + scale_y_continuous(labels=comma) + -->
+<!--   scale_color_discrete(name="Metric", -->
+<!--                          breaks=c("cum_case_fatality_rate",  -->
+<!--                                   "daily_case_fatality_rate"), -->
+<!--                          labels=c("Cumulative case fatality",  -->
+<!--                                   "Daily case fatality")) + -->
+<!--   guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE))) + -->
+<!--   facet_wrap(~ country, ncol=2) -->
+<!-- suppressMessages(print(p)) -->
+<!-- ``` -->
+</div>
+<div id="confirmed-cases" class="section level2">
+<h2><span class="header-section-number">1.3</span> Confirmed Cases</h2>
+<p><img src="covid19_files/figure-html/global-confirmed-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-4">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-02
+<span id="tab:unnamed-chunk-3">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-03
 </caption>
 <thead>
 <tr>
@@ -157,7 +227,7 @@ Confirmed
 US
 </td>
 <td style="text-align:right;">
-243453
+275586
 </td>
 </tr>
 <tr>
@@ -165,7 +235,7 @@ US
 Italy
 </td>
 <td style="text-align:right;">
-115242
+119827
 </td>
 </tr>
 <tr>
@@ -173,7 +243,7 @@ Italy
 Spain
 </td>
 <td style="text-align:right;">
-112065
+119199
 </td>
 </tr>
 <tr>
@@ -181,7 +251,15 @@ Spain
 Germany
 </td>
 <td style="text-align:right;">
-84794
+91159
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+China
+</td>
+<td style="text-align:right;">
+82511
 </td>
 </tr>
 <tr>
@@ -189,7 +267,7 @@ Germany
 France
 </td>
 <td style="text-align:right;">
-59929
+65202
 </td>
 </tr>
 <tr>
@@ -197,7 +275,7 @@ France
 Iran
 </td>
 <td style="text-align:right;">
-50468
+53183
 </td>
 </tr>
 <tr>
@@ -205,15 +283,7 @@ Iran
 United Kingdom
 </td>
 <td style="text-align:right;">
-34173
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Switzerland
-</td>
-<td style="text-align:right;">
-18827
+38689
 </td>
 </tr>
 <tr>
@@ -221,15 +291,15 @@ Switzerland
 Turkey
 </td>
 <td style="text-align:right;">
-18135
+20921
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Belgium
+Switzerland
 </td>
 <td style="text-align:right;">
-15348
+19606
 </td>
 </tr>
 <tr>
@@ -237,18 +307,18 @@ Belgium
 Bangladesh
 </td>
 <td style="text-align:right;">
-56
+61
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="deaths" class="section level2">
-<h2><span class="header-section-number">1.2</span> Deaths</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
+<h2><span class="header-section-number">1.4</span> Deaths</h2>
+<p><img src="covid19_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-7">Table 1.2: </span>Top 10 countries by total deathsas of 2020-04-02
+<span id="tab:unnamed-chunk-6">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-04-03
 </caption>
 <thead>
 <tr>
@@ -256,7 +326,7 @@ Bangladesh
 country
 </th>
 <th style="text-align:right;">
-Deaths
+Confirmed
 </th>
 </tr>
 </thead>
@@ -266,7 +336,7 @@ Deaths
 Italy
 </td>
 <td style="text-align:right;">
-13915
+14681
 </td>
 </tr>
 <tr>
@@ -274,7 +344,7 @@ Italy
 Spain
 </td>
 <td style="text-align:right;">
-10348
+11198
 </td>
 </tr>
 <tr>
@@ -282,7 +352,7 @@ Spain
 US
 </td>
 <td style="text-align:right;">
-5926
+7087
 </td>
 </tr>
 <tr>
@@ -290,15 +360,7 @@ US
 France
 </td>
 <td style="text-align:right;">
-5398
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Iran
-</td>
-<td style="text-align:right;">
-3160
+6520
 </td>
 </tr>
 <tr>
@@ -306,7 +368,23 @@ Iran
 United Kingdom
 </td>
 <td style="text-align:right;">
-2926
+3611
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+China
+</td>
+<td style="text-align:right;">
+3326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Iran
+</td>
+<td style="text-align:right;">
+3294
 </td>
 </tr>
 <tr>
@@ -314,7 +392,7 @@ United Kingdom
 Netherlands
 </td>
 <td style="text-align:right;">
-1341
+1490
 </td>
 </tr>
 <tr>
@@ -322,7 +400,7 @@ Netherlands
 Germany
 </td>
 <td style="text-align:right;">
-1107
+1275
 </td>
 </tr>
 <tr>
@@ -330,15 +408,7 @@ Germany
 Belgium
 </td>
 <td style="text-align:right;">
-1011
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Switzerland
-</td>
-<td style="text-align:right;">
-536
+1143
 </td>
 </tr>
 <tr>
@@ -353,35 +423,37 @@ Bangladesh
 </table>
 </div>
 <div id="recovery-death-ratio" class="section level2">
-<h2><span class="header-section-number">1.3</span> Recovery-to-death ratio</h2>
+<h2><span class="header-section-number">1.5</span> Recovery-to-death ratio</h2>
 <p>The recovery to deaths ratio (RDR) is calculated as</p>
 <p><span class="math display">\[
 RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,\, deaths}
 \]</span></p>
 <p><strong>How to interpret</strong>: The ratio of cumulative number of patients recovered divided by the cumulative number of deaths over time can tell the proportion of people recovering compared to dying. An upward trend may indicate more recovery than deaths.</p>
 <p><img src="covid19_files/figure-html/recovery-to-death-ratio-by-country-1.png" width="768" /></p>
-<div id="recovery-to-death-ratio-including-china" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> Recovery-to-death ratio (including China)</h3>
-<p><img src="covid19_files/figure-html/recovery-to-death-ratio-by-country-china-1.png" width="768" /></p>
-</div>
 <div id="recovery-to-death-ratio-south-and-south-east-asia" class="section level3">
-<h3><span class="header-section-number">1.3.2</span> Recovery-to-death ratio (South and South-East Asia)</h3>
+<h3><span class="header-section-number">1.5.1</span> Recovery-to-death ratio (South and South-East Asia)</h3>
 <p><img src="covid19_files/figure-html/recovery-to-death-ratio-south-asia-1.png" width="768" /></p>
 </div>
 <div id="recovery-to-death-ratio-middle-east" class="section level3">
-<h3><span class="header-section-number">1.3.3</span> Recovery-to-death ratio (Middle East)</h3>
+<h3><span class="header-section-number">1.5.2</span> Recovery-to-death ratio (Middle East)</h3>
 <p><img src="covid19_files/figure-html/recovery-to-death-ratio-middle-east-1.png" width="768" /></p>
 </div>
 </div>
 <div id="perc-change-top6" class="section level2">
-<h2><span class="header-section-number">1.4</span> 3-day % changes</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<h2><span class="header-section-number">1.6</span> 3-day % changes</h2>
+<p><img src="covid19_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p>The percent change is calculated as</p>
 <p><span class="math display">\[
 PC = \frac{New - Original}{Original} * 100
 \]</span> where <code>New</code> is the number of cases on a given date, and <code>Original</code> is the number 3 days prior to that.</p>
 <p><strong>How to interpret</strong>: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-cfr_britanica">
+<p>Harrington, Rebecca A. 2020. “Case Fatality Rate.” Encyclopædia Britannica: Encyclopædia Britannica, inc. March 27. <a href="https://www.britannica.com/science/case-fatality-rate" class="uri">https://www.britannica.com/science/case-fatality-rate</a>.</p>
 </div>
 </div>
             </section>
