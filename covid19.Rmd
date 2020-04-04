@@ -1,3 +1,32 @@
+--- 
+title: "COVID-19 Live Report"
+author: "Enayetur Raheem, Ph.D."
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: raheems/covid19
+cover-image: "https://covid19.eraheem.com/images/cover.png"
+description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations. The report is focused on current situation in Bangladesh and the aftermath of COVID-19."
+---
+
+# About this report {-}
+
+Placeholder
+
+
+## Disclaimer {-}
+## Purpose {-}
+## Data sources {-}
+## Volunteering opportunity {-}
+### What skills are useful {-}
+## Found an error? {-}
+
+<!--chapter:end:index.Rmd-->
+
 
 # World {#world}
 
@@ -603,4 +632,49 @@ $$
 where `New` is the number of cases on a given date, and `Original` is the number 3 days prior to that. 
 
 __How to interpret__: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.
+
+
+<!--chapter:end:01-world.Rmd-->
+
+
+# USA {#usa}
+
+Placeholder
+
+
+## Overall trend {#us-overall}
+## Confirmed Cases 
+## Deaths
+
+<!--chapter:end:02-usa.Rmd-->
+
+
+# Bangladesh {#bangladesh}
+
+Placeholder
+
+
+## Bangladesh official data (TBD)
+## Report based on publicly available data
+## Bangladesh in South Asia
+
+<!--chapter:end:03-bangladesh.Rmd-->
+
+
+# Publications {#scipubs}
+
+This section lists major publications with a brief summary. The latest publications are listed first. 
+
+- Estimates of the severity of coronavirus disease 2019: a model-based analysis. https://doi.org/10.1016/S1473-3099(20)30243-7
+
+  Using data on 24 deaths that occurred in mainland China and 165 recoveries outside of China, we estimated the mean duration from onset of symptoms to death to be 17·8 days (95% credible interval [CrI] 16·9–19·2) and to hospital discharge to be 24·7 days (22·9–28·1). In all laboratory confirmed and clinically diagnosed cases from mainland China (n=70 117), we estimated a crude case fatality ratio (adjusted for censoring) of 3·67% (95% CrI 3·56–3·80). However, after further adjusting for demography and under-ascertainment, we obtained a best estimate of the case fatality ratio in China of 1·38% (1·23–1·53), with substantially higher ratios in older age groups (0·32% [0·27–0·38] in those aged <60 years vs 6·4% [5·7–7·2] in those aged ≥60 years), up to 13·4% (11·2–15·9) in those aged 80 years or older. 
+ 
+
+<!--chapter:end:05-publications.Rmd-->
+
+`r if (knitr:::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:06-references.Rmd-->
 
