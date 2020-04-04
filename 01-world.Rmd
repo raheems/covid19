@@ -38,9 +38,9 @@ p <- df %>%
   theme(legend.position="top") +
   ggtitle("GLOBAL daily incidence, recovery, deaths", data_last_refreshed ) +
   xlab("Date") +
-  ylab("Daily cases (log scale)")+
+  ylab("Daily cases")+
   labs(
-    title= "GLOBAL daily incidence, recovery, deaths",
+    title= "GLOBAL daily incidence, recovery, deaths  (log scale)",
     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
     )
 p = p + scale_y_continuous(labels=comma, trans='log10') + 
