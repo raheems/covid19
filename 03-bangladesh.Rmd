@@ -20,9 +20,14 @@ Please note that publicly available data are __not official__ and __MAY BE UNREL
 ```{r, covid19-bangladesh, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 a <- df_ %>% filter(!varname %in% c("cum_tests", "cum_change_deaths_susp",
                                     "cum_change_deaths_govt") )
-
+a <- a %>%
+  arrange(date) %>%
+  mutate(
+   day = row_number()
+  )
+  
 # Plot
-p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
+p <- ggplot(a, aes(x = day, y = cum_cases, color=varname)) +
   geom_line(size=1.1) +
   geom_text_repel(size=5, aes(label=comma_format()(cum_cases)),
                   function(a) a[ymd(a$date) == data_last_refreshed, ])+
@@ -30,7 +35,7 @@ p <- ggplot(a, aes(x = date, y = cum_cases, color=varname)) +
   theme(legend.position="top") +
   ggtitle("Bangladesh: COVID19 cumulative cases\n(SUSPECTED cases are UNOFFICIAL)",
           data_last_refreshed ) +
-  xlab("Date") +
+  xlab("Day since first death") +
   ylab("Cumulative cases") +
   theme(legend.position="top") +
   labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")

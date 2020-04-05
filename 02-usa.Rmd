@@ -64,7 +64,11 @@ us_topn_death <- df %>%
 
 p <- df %>%
   filter(cum_cases >0, state %in% us_topn_death$state) %>%
-  ggplot(aes(x = date, y = cum_cases, color=state)) +
+  group_by(state) %>%
+  mutate(
+   day = row_number()
+  ) %>%
+  ggplot(aes(x = day, y = cum_cases, color=state)) +
   geom_line(size=1.1) +
    geom_text_repel(size=5, aes(label=state),
                   function(us_topn_death) us_topn_death[ymd(us_topn_death$date) == data_last_refreshed, ])+
@@ -105,7 +109,11 @@ us_topn_death <- df %>%
 
 p <- df %>%
   filter(cum_deaths >0, state %in% us_topn_death$state) %>%
-  ggplot(aes(x = date, y = cum_deaths, color=state)) +
+  group_by(state) %>%
+  mutate(
+   day = row_number()
+  ) %>%
+  ggplot(aes(x = day, y = cum_deaths, color=state)) +
   geom_line(size=1.1) +
    geom_text_repel(size=5, aes(label=state),
                   function(us_topn_death) us_topn_death[ymd(us_topn_death$date) == data_last_refreshed, ])+
