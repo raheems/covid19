@@ -1,6 +1,10 @@
 
 # USA {#usa}
 
+__Report last updated:__ `r Sys.Date()`
+
+__Data last refreshed:__ : `r data_last_refreshed`
+
 
 ```{r, echo=FALSE, message=FALSE, cache=FALSE}
 source("covid19_usa.R")
@@ -9,61 +13,75 @@ source("covid19_usa.R")
 
 ## Overall trend {#us-overall}
 
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-# 
-# head(df)
-# dfw <- df %>%
-#   group_by(date) %>%
-#   summarise(
-#     cases = sum(cases)
-#     , deaths = sum(deaths)
-#   ) %>%
-#   mutate(
-#     daily_cases = c(0, diff(cases))
-#     , daily_deaths = c(0, diff(deaths))
-#   )
-#   
-# 
-# change_cases = (dfw$cases - lag(dfw$cases, 1))/lag(dfw$cases, 1) * 100
-# change_cases = as.ts(xts(change_cases, order.by = dfw$date))
-# change_deaths = (dfw$deaths - lag(dfw$deaths, 1))/lag(dfw$deaths, 1) * 100
-# change_deaths = as.ts(xts(change_deaths, order.by = dfw$date))
-# 
-# 
-# autoplot(change_cases, series = 'Cases') +
-#   autolayer(ma(change_cases, 7), series = '5-MA') +
-#   autolayer(change_deaths, series ='Deaths')+
-#   autolayer(ma(change_deaths, 7), series ='5-MA-Deaths')
-# 
+```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+p <- df %>%
+  group_by(date) %>%
+  summarise(
+    cum_cases = sum(cum_cases)
+    , cum_deaths = sum(cum_deaths)
+  ) %>% 
+  gather(metric, n, cum_cases, cum_deaths, factor_key = TRUE) %>%
+  mutate(
+    metric = factor(metric, levels= c("cum_deaths", "cum_cases"))
+  ) %>%
+  ggplot(aes(x = date, y = n, color=metric)) +
+  geom_line(size=1.1) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position="top") +
+  ggtitle("COVID19 USA Overall", data_last_refreshed ) +
+  xlab("Days since first confirmed case") +
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
+
+ p = p + scale_y_continuous(labels=comma_format(), trans = 'log10')
+
+ p = p + scale_color_discrete(name="Metric",
+                         breaks=c("cum_deaths", "cum_cases"),
+                         labels=c("Deaths", "New Cases"))
+ 
+ suppressWarnings(print(p))
+ 
 
 ```
 
 
 ## Confirmed Cases 
 
-__Report last updated:__ `r Sys.Date()`
-
-__Data last refreshed:__ : `r data_last_refreshed`
-
 
 ```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
-ggplot(us_new_cases, aes(x = date, y = n, color=state)) +
+# Top n
+us_topn_death <- df %>%
+  group_by(state) %>%
+  summarise(
+    max_n_cases = sum(cum_deaths)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(6, max_n_cases)
+
+
+p <- df %>%
+  filter(cum_cases >0, state %in% us_topn_death$state) %>%
+  ggplot(aes(x = date, y = cum_cases, color=state)) +
   geom_line(size=1.1) +
-  geom_text_repel(size=5, aes(label=state),
-                  function(us_new_cases) us_new_cases[ymd(us_new_cases$date) == data_last_refreshed, ])+
+   geom_text_repel(size=5, aes(label=state),
+                  function(us_topn_death) us_topn_death[ymd(us_topn_death$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none") +
-  # theme_void() +
-  theme(legend.position="none") +
-  ggtitle("COVID19 Total cases \n(Top 5 US states excluding New York and New Jersey)", data_last_refreshed ) +
+  theme(legend.position="top") +
+  ggtitle("COVID19 USA New Cases by State", data_last_refreshed ) +
   xlab("Days since first confirmed case") +
   ylab("Cumulative cases") +
   labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
-# p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+ p = p + scale_y_continuous(labels=comma_format(), trans = 'log10')
+
+ p = p + scale_color_discrete(name="Metric",
+                         breaks=c("cum_deaths", "cum_cases"),
+                         labels=c("Deaths", "New Cases"))
+ 
+ suppressWarnings(print(p))
 
 
 ```
@@ -72,29 +90,39 @@ ggplot(us_new_cases, aes(x = date, y = n, color=state)) +
 
 ## Deaths
 
-
 ```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
-## NEW DEATHS --------
+# Cumulative Cases since first identified case
 
-us_new_deaths <- df_ %>%
-  filter(n>0, state %in% us_top5_death$state, metric=='cum_deaths') %>%
-  arrange(state, date, n)
+# Top n
+us_topn_death <- df %>%
+  group_by(state) %>%
+  summarise(
+    max_n_cases = sum(cum_deaths)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(6, max_n_cases)
 
-ggplot(us_new_deaths, aes(x = date, y = n, color=state)) +
+
+p <- df %>%
+  filter(cum_deaths >0, state %in% us_topn_death$state) %>%
+  ggplot(aes(x = date, y = cum_deaths, color=state)) +
   geom_line(size=1.1) +
-  geom_text_repel(size=5, aes(label=state),
-                  function(us_new_deaths) us_new_deaths[ymd(us_new_deaths$date) == data_last_refreshed, ])+
+   geom_text_repel(size=5, aes(label=state),
+                  function(us_topn_death) us_topn_death[ymd(us_topn_death$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none") +
-  # theme_void() +
-  theme(legend.position="none") +
-  ggtitle("COVID19 Total deaths \n(Top 5 states in US excluding New York and New Jersey)", data_last_refreshed ) +
-  xlab("Days since first confirmed case") +
+  theme(legend.position="top") +
+  ggtitle("COVID19 USA Deaths by State", data_last_refreshed ) +
+  xlab("Days since first confirmed death") +
   ylab("Cumulative cases") +
   labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
-# p + scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+ p = p + scale_y_continuous(labels=comma_format(), trans = 'log10')
+
+ p = p + scale_color_discrete(name="Metric",
+                         breaks=c("cum_deaths", "cum_cases"),
+                         labels=c("Deaths", "New Cases"))
+ 
+ suppressWarnings(print(p))
 
 
 ```
