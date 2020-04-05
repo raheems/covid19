@@ -139,7 +139,7 @@ p <- ggplot(dfw, aes(x = day, y = cum_deaths, color=state)) +
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
   ggtitle("COVID19 USA Deaths by State", data_last_refreshed ) +
-  xlab("Days since first confirmed death") +
+  xlab("Days since first death") +
   ylab("Cumulative cases") +
   labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 

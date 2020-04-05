@@ -9,6 +9,7 @@ require(lubridate)
 require(knitr)
 require(kableExtra)
 library(gsheet)
+library(scales)
 
 # Wed Apr  1 10:29:15 2020 ------------------------------
 # Recovered to Deaths ratio

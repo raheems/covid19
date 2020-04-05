@@ -43,7 +43,7 @@ p <- df %>%
     title= "GLOBAL daily incidence, recovery, deaths  (log scale)",
     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
     )
-p = p + scale_y_continuous(labels=comma, trans='log10') + 
+p = p + scale_y_continuous(labels=comma_format(), trans='log10') + 
   scale_color_discrete(name="Metric",
                          breaks=c("daily_recov", 
                                   "daily_deaths", 
