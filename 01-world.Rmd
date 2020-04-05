@@ -275,11 +275,6 @@ world_plus_bd %>%
 
 ## Deaths
 
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-# source("covid19_deaths.R")
-```
-
-
 
 ```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
@@ -338,7 +333,7 @@ p <- ggplot(case_summary, aes(x = Day, y = cum_deaths, color=country)) +
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 
 p + scale_color_discrete(name="Country") +
-  scale_y_continuous(labels=comma, trans = 'log10')
+  scale_y_continuous(labels=comma_format(), trans = 'log10')
 
 # +
 #   guides(fill=guides(colour=guide_legend(ncol=1,nrow=1,byrow=TRUE))) +
