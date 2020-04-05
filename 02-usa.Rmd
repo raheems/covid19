@@ -56,7 +56,7 @@ p <- df %>%
 us_topn_death <- df %>%
   group_by(state) %>%
   summarise(
-    max_n_cases = sum(cum_deaths)
+    max_n_cases = max(cum_deaths)
   ) %>%
   arrange(desc(max_n_cases)) %>%
   top_n(6, max_n_cases)
@@ -91,6 +91,24 @@ p <- df %>%
 ```
 
 
+```{r, echo=FALSE}
+
+# USA cases by state
+df %>%
+  group_by(state) %>%
+  summarise(
+    max_n_cases = max(cum_cases)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(10, max_n_cases)%>%
+  transmute(
+    State = state
+    , `Total cases` = max_n_cases
+  ) %>%
+  kable(caption = paste("Totaly cases for top 10 US States as of ", data_last_refreshed))
+```
+
+
 
 ## Deaths
 
@@ -101,22 +119,23 @@ p <- df %>%
 us_topn_death <- df %>%
   group_by(state) %>%
   summarise(
-    max_n_cases = sum(cum_deaths)
+    max_n_cases = max(cum_deaths)
   ) %>%
   arrange(desc(max_n_cases)) %>%
   top_n(6, max_n_cases)
 
 
-p <- df %>%
+dfw <- df %>%
   filter(cum_deaths >0, state %in% us_topn_death$state) %>%
   group_by(state) %>%
   mutate(
    day = row_number()
-  ) %>%
-  ggplot(aes(x = day, y = cum_deaths, color=state)) +
+  )
+
+p <- ggplot(dfw, aes(x = day, y = cum_deaths, color=state)) +
   geom_line(size=1.1) +
-   geom_text_repel(size=5, aes(label=state),
-                  function(us_topn_death) us_topn_death[ymd(us_topn_death$date) == data_last_refreshed, ])+
+  geom_text_repel(size=5, aes(label=cum_deaths),
+                  function(dfw) dfw[ymd(dfw$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
   ggtitle("COVID19 USA Deaths by State", data_last_refreshed ) +
@@ -124,13 +143,23 @@ p <- df %>%
   ylab("Cumulative cases") +
   labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
- p = p + scale_y_continuous(labels=comma_format(), trans = 'log10')
+ p <- p + scale_y_continuous(labels=comma_format(), trans ='log10')
 
- p = p + scale_color_discrete(name="Metric",
-                         breaks=c("cum_deaths", "cum_cases"),
-                         labels=c("Deaths", "New Cases"))
+ # p = p + scale_color_discrete(name="Metric",
+ #                         breaks=c("cum_deaths", "cum_cases"),
+ #                         labels=c("Deaths", "New Cases"))
  
  suppressWarnings(print(p))
 
-
 ```
+
+```{r, echo=FALSE}
+# Death table USA by state
+us_topn_death %>%
+  transmute(
+    State = state
+    , `Total cases` = max_n_cases
+  ) %>%
+  kable(caption = paste("Totaly deaths by State as of ", data_last_refreshed))
+```
+
