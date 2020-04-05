@@ -12,12 +12,11 @@ library(scales)
 library(gsheet)
 
 
-# Update Bangladesh unofficial and official data
-
-
 tryCatch(
   expr ={
+    # Update Bangladesh unofficial and official data
     sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
+
     df_gogle_sheet = gsheet2tbl(sheet_3)
     write_csv(df_gogle_sheet, 'covid19_bd.csv')
 

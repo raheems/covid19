@@ -96,3 +96,47 @@ ggplot(a, aes(x=date, y=n, color=metric))+
   # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) +
   geom_point() +
   geom_smooth()
+
+
+
+
+country_list = c("Bangladesh", "US", "United Kingdom", "Canada", "France",
+                 "Italy", "India", "Pakistan", "")
+
+df <- global %>%
+  filter(country %in% country_list, cum_deaths >0) %>%
+  group_by(country, date) %>%
+  summarise(
+    cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_cases)) * 100
+    , daily_case_fatality_rate = (sum(daily_deaths)/sum(cum_cases)) * 100
+  ) %>%
+  group_by(country) %>%
+  mutate(
+    day = row_number()
+  ) %>%
+  gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE)
+
+
+p <- df %>%
+  ggplot(aes(x=day, y=n, color=metric))+
+  geom_point() +
+  geom_smooth() +
+  theme_minimal(base_size = 14) +
+  theme(legend.position="top") +
+  ggtitle("GLOBAL case fatality rate", data_last_refreshed ) +
+  xlab("Day since first death") +
+  ylab("Case fatality rate (%)")+
+  labs(
+    title= "GLOBAL case fatality rate",
+    caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
+  )
+p = p + scale_y_continuous(labels=comma, expand=c(0.5, 0.5)) +
+  scale_color_discrete(name="Metric",
+                       breaks=c("cum_case_fatality_rate",
+                                "daily_case_fatality_rate"),
+                       labels=c("Cumulative case fatality",
+                                "Daily case fatality")) +
+  guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE))) +
+  facet_wrap( ~ country, ncol = 2)
+
+suppressMessages(print(p))

@@ -90,7 +90,9 @@
 </ul></li>
 <li class="chapter" data-level="1" data-path="world.html"><a href="world.html"><i class="fa fa-check"></i><b>1</b> World</a><ul>
 <li class="chapter" data-level="1.1" data-path="world.html"><a href="world.html#incidence-recovery-death"><i class="fa fa-check"></i><b>1.1</b> Daily Incidence, Recovery, Deaths</a></li>
-<li class="chapter" data-level="1.2" data-path="world.html"><a href="world.html#world-case-fatality"><i class="fa fa-check"></i><b>1.2</b> Case Fatality Rate</a></li>
+<li class="chapter" data-level="1.2" data-path="world.html"><a href="world.html#world-case-fatality"><i class="fa fa-check"></i><b>1.2</b> Case Fatality Rate</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="world.html"><a href="world.html#case-fatality-rate-elect-countries"><i class="fa fa-check"></i><b>1.2.1</b> Case Fatality Rate (elect countries)</a></li>
+</ul></li>
 <li class="chapter" data-level="1.3" data-path="world.html"><a href="world.html#confirmed-cases"><i class="fa fa-check"></i><b>1.3</b> Confirmed Cases</a></li>
 <li class="chapter" data-level="1.4" data-path="world.html"><a href="world.html#deaths"><i class="fa fa-check"></i><b>1.4</b> Deaths</a></li>
 <li class="chapter" data-level="1.5" data-path="world.html"><a href="world.html#recovery-death-ratio"><i class="fa fa-check"></i><b>1.5</b> Recovery-to-death ratio</a><ul>
@@ -138,7 +140,7 @@
 <div id="world" class="section level1">
 <h1><span class="header-section-number">Report 1</span> World</h1>
 <p><strong>Report last updated:</strong> 2020-04-05</p>
-<p><strong>Data last refreshed:</strong> : 2020-04-05</p>
+<p><strong>Data last refreshed:</strong> : 2020-04-04</p>
 <div id="incidence-recovery-death" class="section level2">
 <h2><span class="header-section-number">1.1</span> Daily Incidence, Recovery, Deaths</h2>
 <p><img src="covid19_files/figure-html/global-incidence-recovery-deaths-1.png" width="768" /></p>
@@ -148,72 +150,17 @@
 <p>Case fatality rate is calculated by dividing the number of deaths from a specified disease over a defined period of time by the number of individuals diagnosed with the disease during that time; the resulting ratio is then multiplied by 100 to yield a percentage <span class="citation">(Harrington <a href="#ref-cfr_britanica">2020</a>)</span>.</p>
 <p><span class="math display">\[CFR = \frac{\# Deaths}{\#Infected} \times 100 \,\, per \,\,unit \,\, time\]</span></p>
 <p><img src="covid19_files/figure-html/global-case-fatality-rate-1.png" width="768" /></p>
-<!-- ### Case fatality (top 5) -->
-<!-- ```{r, case-fatality-rate-top5, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE} -->
-<!-- #  -->
-<!-- # # Confirmed for Bangladesh -->
-<!-- # df_bd <- df %>% -->
-<!-- #   filter( -->
-<!-- #     country=='Bangladesh' -->
-<!-- #   )  -->
-<!-- #  -->
-<!-- # # Top 10 countries -->
-<!-- # n_world <- df %>% -->
-<!-- #   group_by(country) %>% -->
-<!-- #   summarise( -->
-<!-- #     max_n_cases = max(cum_deaths) -->
-<!-- #   ) %>% -->
-<!-- #   arrange(desc(max_n_cases)) %>% -->
-<!-- #   top_n(5, max_n_cases) -->
-<!-- #  -->
-<!-- # # Top 10 countries -->
-<!-- # n_bd <- df_bd %>% -->
-<!-- #   group_by(country) %>% -->
-<!-- #   summarise( -->
-<!-- #     max_n_cases = max(cum_deaths) -->
-<!-- #   ) -->
-<!-- #  -->
-<!-- #  -->
-<!-- # # Combined n countries -->
-<!-- # n <- rbind(n_world, n_bd) -->
-<!-- country_list = c("Bangladesh", "India", "Singapore", "Pakistan") -->
-<!-- p <- df %>% filter(country %in% country_list) %>% -->
-<!--   group_by(country, date) %>% -->
-<!--   summarise( -->
-<!--       cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_confirmed))*100 -->
-<!--     , daily_case_fatality_rate = (sum(daily_deaths)/sum(daily_confirmed))*100 -->
-<!--   ) %>% -->
-<!--   gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE) %>% -->
-<!--   ggplot(aes(x=date, y=n, color=metric))+ -->
-<!--   # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth() + -->
-<!--   theme_minimal(base_size = 14) + -->
-<!--   theme(legend.position="top") + -->
-<!--   ggtitle("GLOBAL case fatality rate", data_last_refreshed ) + -->
-<!--   xlab("Date") + -->
-<!--   ylab("Case fatality rate (%)")+ -->
-<!--   labs( -->
-<!--     title= "GLOBAL case fatality rate", -->
-<!--     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center" -->
-<!--     ) -->
-<!-- p = p + scale_y_continuous(labels=comma) + -->
-<!--   scale_color_discrete(name="Metric", -->
-<!--                          breaks=c("cum_case_fatality_rate",  -->
-<!--                                   "daily_case_fatality_rate"), -->
-<!--                          labels=c("Cumulative case fatality",  -->
-<!--                                   "Daily case fatality")) + -->
-<!--   guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE))) + -->
-<!--   facet_wrap(~ country, ncol=2) -->
-<!-- suppressMessages(print(p)) -->
-<!-- ``` -->
+<div id="case-fatality-rate-elect-countries" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Case Fatality Rate (elect countries)</h3>
+<p><img src="covid19_files/figure-html/case-fatality-rate-selected-1.png" width="768" /></p>
+</div>
 </div>
 <div id="confirmed-cases" class="section level2">
 <h2><span class="header-section-number">1.3</span> Confirmed Cases</h2>
 <p><img src="covid19_files/figure-html/global-confirmed-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-9">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-04
+<span id="tab:unnamed-chunk-3">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-04
 </caption>
 <thead>
 <tr>
@@ -319,10 +266,10 @@ Bangladesh
 </div>
 <div id="deaths" class="section level2">
 <h2><span class="header-section-number">1.4</span> Deaths</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/global-deaths-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-11">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-04-04
+<span id="tab:unnamed-chunk-4">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-04-04
 </caption>
 <thead>
 <tr>
@@ -417,6 +364,14 @@ Belgium
 </tr>
 <tr>
 <td style="text-align:left;">
+Bangladesh(unoff)
+</td>
+<td style="text-align:right;">
+74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Bangladesh
 </td>
 <td style="text-align:right;">
@@ -445,7 +400,7 @@ RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,
 </div>
 <div id="perc-change-top6" class="section level2">
 <h2><span class="header-section-number">1.6</span> 3-day % changes</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-14-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/3day-perc-change-1.png" width="768" /></p>
 <p>The percent change is calculated as</p>
 <p><span class="math display">\[
 PC = \frac{New - Original}{Original} * 100

@@ -7,29 +7,28 @@ __Data last refreshed:__ : `r data_last_refreshed`
 
 ## Daily Incidence, Recovery, Deaths {#incidence-recovery-death}
 
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-source("global_incidence_recovery_deaths.R")
+```{r, echo=FALSE, message=FALSE, cache=FALSE, warning=FALSE}
+# source("global_incidence_recovery_deaths.R")
+source("covid19_global.R")
+source("load_functions.R")
 ```
-
 
 
 ```{r global-incidence-recovery-deaths, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
-p <- df %>%
-  # mutate(
-  #   daily_confirmed = c(0, diff(cum_confirmed))
-  #   , daily_recov = c(0, diff(cum_recov))
-  #   , daily_deaths = c(0, diff(cum_deaths))
-  # ) %>%
+p <- global %>%
+  filter(country != 'Bangladesh(unoff)' ) %>%
   group_by(date) %>%
   summarise(
-    daily_confirmed = sum(daily_confirmed)
+    daily_cases = sum(daily_cases)
     , daily_recov = sum(daily_recov)
     , daily_deaths = sum(daily_deaths)
     , daily_recov_death_ratio = (daily_recov/daily_deaths)
-    # , daily_recov_death_ratio = daily_recov/daily_deaths
   ) %>%
-  gather(metric, n, daily_recov, daily_confirmed, daily_deaths, factor_key = TRUE) %>%
+  gather(metric, n, daily_recov, daily_cases, daily_deaths, factor_key = TRUE) %>%
+  mutate(
+    metric = factor(metric, levels = c("daily_deaths", "daily_recov", "daily_cases"))
+  ) %>%
   ggplot(aes(x=date, y=n, color=metric))+
   # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) +
   geom_point() +
@@ -43,15 +42,15 @@ p <- df %>%
     title= "GLOBAL daily incidence, recovery, deaths  (log scale)",
     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
     )
-p = p + scale_y_continuous(labels=comma_format(), trans='log10') + 
-  scale_color_discrete(name="Metric",
-                         breaks=c("daily_recov", 
-                                  "daily_deaths", 
-                                  "daily_confirmed"),
-                         labels=c("Daily recovery", 
-                                  "Daily deaths",
-                                  "Daily new cases")) +
-  guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE)))
+p = p + scale_y_continuous(labels=comma_format(), trans='log10') +
+  scale_color_manual(name="Metric", 
+                   breaks=c("daily_deaths", 
+                                  "daily_recov", "daily_cases"),
+                   labels=c("Daily deaths", 
+                                  "Daily recovery",
+                                  "Daily cases"),
+                   values=ggplotColours(n = 3)) +
+   guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE)))
 
 suppressMessages(print(p))
 
@@ -66,15 +65,11 @@ $$CFR = \frac{\# Deaths}{\#Infected} \times 100 \,\, per \,\,unit \,\, time$$
 
 ```{r, global-case-fatality-rate, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
+con <- global %>% filter(country != 'Bangladesh(unoff)')
+df <- case_fatality(con)
+
 p <- df %>%
-  group_by(date) %>%
-  summarise(
-      cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_confirmed)) * 100
-    , daily_case_fatality_rate = (sum(daily_deaths)/sum(daily_confirmed)) * 100
-  ) %>%
-  gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE) %>%
   ggplot(aes(x=date, y=n, color=metric))+
-  # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) +
   geom_point() +
   geom_smooth() +
   theme_minimal(base_size = 14) +
@@ -85,112 +80,90 @@ p <- df %>%
   labs(
     title= "GLOBAL case fatality rate",
     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
-    )
-p = p + scale_y_continuous(labels=comma) +
+  )
+p = p + scale_y_continuous(labels=comma, expand=c(0.5, 0.5)) +
   scale_color_discrete(name="Metric",
-                         breaks=c("cum_case_fatality_rate", 
-                                  "daily_case_fatality_rate"),
-                         labels=c("Cumulative case fatality", 
-                                  "Daily case fatality")) +
+                       breaks=c("cum_case_fatality_rate",
+                                "daily_case_fatality_rate"),
+                       labels=c("Cumulative case fatality",
+                                "Daily case fatality")) +
   guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE)))
 
 suppressMessages(print(p))
 
 ```
 
-<!-- ### Case fatality (top 5) -->
+### Case Fatality Rate (elect countries)
 
 
-<!-- ```{r, case-fatality-rate-top5, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE} -->
+```{r, case-fatality-rate-selected, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
-<!-- #  -->
-<!-- # # Confirmed for Bangladesh -->
-<!-- # df_bd <- df %>% -->
-<!-- #   filter( -->
-<!-- #     country=='Bangladesh' -->
-<!-- #   )  -->
-<!-- #  -->
-<!-- # # Top 10 countries -->
-<!-- # n_world <- df %>% -->
-<!-- #   group_by(country) %>% -->
-<!-- #   summarise( -->
-<!-- #     max_n_cases = max(cum_deaths) -->
-<!-- #   ) %>% -->
-<!-- #   arrange(desc(max_n_cases)) %>% -->
-<!-- #   top_n(5, max_n_cases) -->
-<!-- #  -->
-<!-- # # Top 10 countries -->
-<!-- # n_bd <- df_bd %>% -->
-<!-- #   group_by(country) %>% -->
-<!-- #   summarise( -->
-<!-- #     max_n_cases = max(cum_deaths) -->
-<!-- #   ) -->
-<!-- #  -->
-<!-- #  -->
-<!-- # # Combined n countries -->
-<!-- # n <- rbind(n_world, n_bd) -->
+country_list = c("Bangladesh", "US", "United Kingdom", "Canada", "France", 
+                 "Italy", "India", "Pakistan", "")
+ 
+df <- global %>%
+  filter(country %in% country_list, cum_deaths >0) %>%
+  group_by(country, date) %>%
+    summarise(
+      cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_cases)) * 100
+      , daily_case_fatality_rate = (sum(daily_deaths)/sum(cum_cases)) * 100
+    ) %>%
+    group_by(country) %>%
+  mutate(
+   day = row_number()
+  ) %>%
+  gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE)
 
-<!-- country_list = c("Bangladesh", "India", "Singapore", "Pakistan") -->
 
-<!-- p <- df %>% filter(country %in% country_list) %>% -->
-<!--   group_by(country, date) %>% -->
-<!--   summarise( -->
-<!--       cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_confirmed))*100 -->
-<!--     , daily_case_fatality_rate = (sum(daily_deaths)/sum(daily_confirmed))*100 -->
-<!--   ) %>% -->
-<!--   gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE) %>% -->
-<!--   ggplot(aes(x=date, y=n, color=metric))+ -->
-<!--   # geom_point(aes(y=rollmean(n, 7, na.pad=TRUE))) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth() + -->
-<!--   theme_minimal(base_size = 14) + -->
-<!--   theme(legend.position="top") + -->
-<!--   ggtitle("GLOBAL case fatality rate", data_last_refreshed ) + -->
-<!--   xlab("Date") + -->
-<!--   ylab("Case fatality rate (%)")+ -->
-<!--   labs( -->
-<!--     title= "GLOBAL case fatality rate", -->
-<!--     caption = "SOURCE: Johns Hopkins Coronavirus Resource Center" -->
-<!--     ) -->
+p <- df %>%
+  ggplot(aes(x=day, y=n, color=metric))+
+  geom_point() +
+  geom_smooth() +
+  theme_minimal(base_size = 14) +
+  theme(legend.position="top") +
+  ggtitle("GLOBAL case fatality rate", data_last_refreshed ) +
+  xlab("Day since first death") +
+  ylab("Case fatality rate (%)")+
+  labs(
+    title= "CASE fatality rate (selected countries)",
+    caption = "SOURCE: Johns Hopkins Coronavirus Resource Center"
+  )
+p = p + scale_y_continuous(labels=comma, expand=c(0.5, 0.5)) +
+  scale_color_discrete(name="Metric",
+                       breaks=c("cum_case_fatality_rate",
+                                "daily_case_fatality_rate"),
+                       labels=c("Cumulative case fatality",
+                                "Daily case fatality")) +
+  guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE))) +
+  facet_wrap( ~ country, ncol = 2)
 
-<!-- p = p + scale_y_continuous(labels=comma) + -->
-<!--   scale_color_discrete(name="Metric", -->
-<!--                          breaks=c("cum_case_fatality_rate",  -->
-<!--                                   "daily_case_fatality_rate"), -->
-<!--                          labels=c("Cumulative case fatality",  -->
-<!--                                   "Daily case fatality")) + -->
-<!--   guides(fill=guides(colour=guide_legend(ncol=3,nrow=1,byrow=TRUE))) + -->
-<!--   facet_wrap(~ country, ncol=2) -->
+suppressMessages(print(p))
 
-<!-- suppressMessages(print(p)) -->
 
-<!-- ``` -->
+```
 
 ## Confirmed Cases 
-
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-# source("covid19_confirmed.R")
-```
 
 
 ```{r, global-confirmed, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
 # Confirmed for Bangladesh
-df_bd <- df %>%
+df_bd <- global %>%
   filter(
-    country=='Bangladesh'
+    country %in% c('Bangladesh')
   ) %>%
-  select(country, date, cum_confirmed) %>%
+  select(country, date, cum_cases) %>%
   arrange(
     country, date
   ) 
 
 # Top 10 countries
-n_world <- df %>%
+n_world <- global %>%
+  filter(country != 'Bangladesh(unoff)' ) %>%
   group_by(country) %>%
   summarise(
-    max_n_cases = max(cum_confirmed)
+    max_n_cases = max(cum_cases)
   ) %>%
   arrange(desc(max_n_cases)) %>%
   top_n(6, max_n_cases)
@@ -199,7 +172,7 @@ n_world <- df %>%
 n_bd <- df_bd %>%
   group_by(country) %>%
   summarise(
-    max_n_cases = max(cum_confirmed)
+    max_n_cases = max(cum_cases)
   )
 
 
@@ -207,20 +180,20 @@ n_bd <- df_bd %>%
 n <- rbind(n_world, n_bd)
 
 # Reset the origin to the first reported cases
-case_summary <- df %>%
-  filter(country %in% n$country, cum_confirmed >0) %>%
-  arrange(country, date, cum_confirmed) %>%
+case_summary <- global %>%
+  filter(country %in% n$country, cum_cases >0) %>%
+  arrange(country, date, cum_cases) %>%
   group_by(country) %>%
   mutate(
-   Day = row_number()
+   day = row_number()
   )
+data_last_refreshed = max(case_summary$date)
 
-
-p <- ggplot(case_summary, aes(x = Day, y = cum_confirmed, color=country)) +
+p <- ggplot(case_summary, aes(x = day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$date)==data_last_refreshed, ],
-             aes(x=Day, y=cum_confirmed), color='red', size=5) +
-  geom_text_repel(size=5, aes(label=comma_format()(cum_confirmed)),
+             aes(x=day, y=cum_cases), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=comma_format()(cum_cases)),
                   function(case_summary) case_summary[ymd(case_summary$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
@@ -244,11 +217,12 @@ p + scale_color_discrete(name="Country") +
 ```{r, echo=FALSE}
 
 # Summary of cases till date by country
-world_summary <- df %>%
+world_summary <- global %>%
+  filter(country != 'Bangladesh(unoff)') %>%
   filter(ymd(date) == data_last_refreshed) %>%
   group_by(country) %>%
   summarise(
-    Confirmed = max(cum_confirmed)
+    Confirmed = max(cum_cases)
   ) %>%
   top_n(10, Confirmed) %>%
   arrange(desc(Confirmed))
@@ -257,7 +231,7 @@ confirmed_bd <- df_bd %>%
   filter(ymd(date) == data_last_refreshed) %>%
   group_by(country) %>%
   summarise(
-    Confirmed = max(cum_confirmed)
+    Confirmed = max(cum_cases)
   ) %>%
   arrange(desc(Confirmed))
 
@@ -276,13 +250,13 @@ world_plus_bd %>%
 ## Deaths
 
 
-```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+```{r, global-deaths, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
 # Deaths for Bangladesh
-df_bd <- df %>%
+df_bd <- global %>%
   filter(
-    country=='Bangladesh'
+    country %in% c('Bangladesh', "Bangladesh(unoff)")
   ) %>%
   select(country, date, cum_deaths) %>%
   arrange(
@@ -290,7 +264,7 @@ df_bd <- df %>%
   ) 
 
 # Top 10 countries
-n_world <- df %>%
+n_world <- global %>%
   group_by(country) %>%
   summarise(
     max_n_cases = max(cum_deaths)
@@ -310,19 +284,19 @@ n_bd <- df_bd %>%
 n <- rbind(n_world, n_bd)
 
 # Reset the origin to the first reported cases
-case_summary <- df %>%
+case_summary <- global %>%
   filter(country %in% n$country, cum_deaths >0) %>%
   arrange(country, date, cum_deaths) %>%
   group_by(country) %>%
   mutate(
-   Day = row_number()
+   day = row_number()
   )
 
 
-p <- ggplot(case_summary, aes(x = Day, y = cum_deaths, color=country)) +
+p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   geom_line(size=1.1) +
   geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$date)==data_last_refreshed, ],
-             aes(x=Day, y=cum_deaths), color='red', size=5) +
+             aes(x=day, y=cum_deaths), color='red', size=5) +
   geom_text_repel(size=5, aes(label=comma_format()(cum_deaths)),
                   function(case_summary) case_summary[ymd(case_summary$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14) +
@@ -349,7 +323,7 @@ p + scale_color_discrete(name="Country") +
 ```{r, echo=FALSE}
 
 # Summary of cases till date by country
-world_summary <- df %>%
+world_summary <- global %>%
   filter(ymd(date) == data_last_refreshed) %>%
   group_by(country) %>%
   summarise(
@@ -391,17 +365,12 @@ $$
 __How to interpret__: The ratio of cumulative number of patients recovered divided by the cumulative number of deaths over time can tell the proportion of people recovering compared to dying. An upward trend may indicate more recovery than deaths. 
 
 
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-# source("global_recovery_death_ratio.R")
-```
-
 ```{r, recovery-to-death-ratio-by-country, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
 # Global top 5 countries by deaths --------------
 
 # Top n countries
-n_world <- df %>%
-  #filter(country != 'China') %>%
+n_world <- global %>%
   group_by(country) %>%
   summarise(
     deaths = max(cum_deaths)
@@ -413,7 +382,7 @@ n_world <- df %>%
 # Combined n countries
 n <- n_world
 
-global <- df %>%
+df <- global %>%
   mutate(
     # cum_recov_death_ratio = cum_recov/cum_deaths
     cum_recov_death_ratio = cum_recov/cum_deaths
@@ -425,10 +394,10 @@ global <- df %>%
   mutate(
     day = row_number()
   )
-   p <- ggplot(global, aes(x = day, y = cum_recov_death_ratio, color=country)) +
+   p <- ggplot(df, aes(x = day, y = cum_recov_death_ratio, color=country)) +
       geom_point(size=1) + geom_smooth() +
      geom_text_repel(size=5, aes(label=country),
-                     function(global) global[ymd(global$date) == data_last_refreshed, ])+
+                     function(df) df[ymd(df$date) == data_last_refreshed, ])+
      theme_minimal(base_size = 14)
 
   p <-  p + ggtitle("Recovery-to-death ratio \n(Top 5 countries by death, excluding China)", data_last_refreshed ) +
@@ -454,7 +423,7 @@ country_list = c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
                    "Indonesia", "Thailand")
 
 # Top n countries
-n_world <- df %>%
+n_world <- global %>%
   filter(country %in% country_list) %>%
   group_by(country) %>%
   summarise(
@@ -467,7 +436,7 @@ n_world <- df %>%
 # Combined n countries
 n <- n_world
 
-global <- df %>%
+df <- global %>%
   mutate(
     cum_recov_death_ratio = cum_recov/cum_deaths
   ) %>%
@@ -480,11 +449,12 @@ global <- df %>%
     day = row_number()
   )
 
+data_last_refreshed = max(df$date)
 # plot
-p <- ggplot(global, aes(x = day, y = cum_recov_death_ratio, color=country)) +
+p <- ggplot(df, aes(x = day, y = cum_recov_death_ratio, color=country)) +
   geom_point(size=1) + geom_smooth() +
   geom_text_repel(size=5, aes(label=country),
-                  function(global) global[ymd(global$date) == data_last_refreshed, ])+
+                  function(df) df[ymd(df$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14)
 
 p <-  p + ggtitle("Recovery-to-death ratio \n(South Asian countries)", data_last_refreshed ) +
@@ -506,7 +476,7 @@ suppressMessages(print(p))
 country_list = c("Saudi Arabia", "Iraq", "Iran", "Israel",  "United Arab Emirates")
 
 # Top n countries
-n_world <- df %>%
+n_world <- global %>%
   filter(country %in% country_list) %>%
   group_by(country) %>%
   summarise(
@@ -519,7 +489,7 @@ n_world <- df %>%
 # Combined n countries
 n <- n_world
 
-global <- df %>%
+df <- global %>%
   mutate(
     cum_recov_death_ratio = cum_recov/cum_deaths
   ) %>%
@@ -533,10 +503,10 @@ global <- df %>%
   )
 
 # plot
-p <- ggplot(global, aes(x = day, y = cum_recov_death_ratio, color=country)) +
+p <- ggplot(df, aes(x = day, y = cum_recov_death_ratio, color=country)) +
   geom_point(size=1) + geom_smooth() +
   geom_text_repel(size=5, aes(label=country),
-                  function(global) global[ymd(global$date) == data_last_refreshed, ])+
+                  function(df) df[ymd(df$date) == data_last_refreshed, ])+
   theme_minimal(base_size = 14)
 
 p <-  p + ggtitle("Recovery-to-death ratio \n(Middle Eastern countries)", data_last_refreshed ) +
@@ -554,11 +524,8 @@ suppressMessages(print(p))
 ## 3-day % changes {#perc-change-top6}
 
 
-```{r, echo=FALSE, message=FALSE, cache=FALSE}
-source("global_incidence_deaths.R")
-```
 
-```{r, fig.width=8, fig.height=9, echo = FALSE, warning=FALSE}
+```{r, 3day-perc-change, fig.width=8, fig.height=9, echo = FALSE, warning=FALSE}
 
 # Global top 6 countries by deaths --------------
 
@@ -580,12 +547,13 @@ p <- p + theme(legend.position="none") +
   theme(legend.position="bottom") +
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center")
 
-p + scale_color_discrete(name="Metric",
+p = p + scale_color_discrete(name="Metric",
                          breaks=c("case_gr_rate", "death_gr_rate"),
                          labels=c("New cases", "Deaths")) +
   guides(fill=guides(colour=guide_legend(ncol=2,nrow=1,byrow=TRUE))) +
   facet_wrap( ~ country, ncol = 2) +
-  ylim(0, 300)
+  ylim(c(-20, 300))
+p
 
 ```
 
