@@ -15,7 +15,7 @@ source("covid19_usa.R")
 
 ```{r, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
-p <- df %>%
+p <- usa %>%
   group_by(date) %>%
   summarise(
     cum_cases = sum(cum_cases)
@@ -53,16 +53,16 @@ p <- df %>%
 # Cumulative Cases since first identified case
 
 # Top n
-us_topn_death <- df %>%
+us_topn_death <- usa %>%
   group_by(state) %>%
   summarise(
     max_n_cases = max(cum_deaths)
   ) %>%
   arrange(desc(max_n_cases)) %>%
-  top_n(6, max_n_cases)
+  top_n(10, max_n_cases)
 
 
-p <- df %>%
+p <- usa %>%
   filter(cum_cases >0, state %in% us_topn_death$state) %>%
   group_by(state) %>%
   mutate(
@@ -91,16 +91,45 @@ p <- df %>%
 ```
 
 
+```{r, cases-by-usa-states, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# Top n
+us_topn_death <- usa %>%
+  group_by(state) %>%
+  summarise(
+    max_n_cases = max(cum_deaths)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(20, max_n_cases)
+
+
+usa %>%
+  filter(cum_cases >0, state %in% us_topn_death$state) %>%
+  group_by(state) %>%
+  summarise(
+   n = max(cum_cases)
+  ) %>%
+  ggplot(aes(x = reorder(state, n), y = n), fill=state) +
+  geom_bar(stat = 'identity') +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  scale_y_continuous(labels = comma_format())+
+  ggtitle("COVID19 USA cases by state", data_last_refreshed ) +
+  xlab("States") +
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
+
+```
+
 ```{r, echo=FALSE}
 
 # USA cases by state
-df %>%
+usa %>%
   group_by(state) %>%
   summarise(
     max_n_cases = max(cum_cases)
   ) %>%
   arrange(desc(max_n_cases)) %>%
-  top_n(10, max_n_cases)%>%
+  top_n(15, max_n_cases)%>%
   transmute(
     State = state
     , `Total cases` = max_n_cases
@@ -116,16 +145,16 @@ df %>%
 # Cumulative Cases since first identified case
 
 # Top n
-us_topn_death <- df %>%
+us_topn_death <- usa %>%
   group_by(state) %>%
   summarise(
     max_n_cases = max(cum_deaths)
   ) %>%
   arrange(desc(max_n_cases)) %>%
-  top_n(6, max_n_cases)
+  top_n(10, max_n_cases)
 
 
-dfw <- df %>%
+dfw <- usa %>%
   filter(cum_deaths >0, state %in% us_topn_death$state) %>%
   group_by(state) %>%
   mutate(
@@ -150,6 +179,37 @@ p <- ggplot(dfw, aes(x = day, y = cum_deaths, color=state)) +
  #                         labels=c("Deaths", "New Cases"))
  
  suppressWarnings(print(p))
+
+```
+
+
+```{r, deaths-by-usa-states, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+# Deaths histogram by state
+
+# Top n
+us_topn_death <- usa %>%
+  group_by(state) %>%
+  summarise(
+    max_n_cases = max(cum_deaths)
+  ) %>%
+  arrange(desc(max_n_cases)) %>%
+  top_n(20, max_n_cases)
+
+
+usa %>%
+  filter(cum_cases >0, state %in% us_topn_death$state) %>%
+  group_by(state) %>%
+  summarise(
+   n = max(cum_deaths)
+  ) %>%
+  ggplot(aes(x = reorder(state, n), y = n), fill=state) +
+  geom_bar(stat = 'identity') +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  scale_y_continuous(labels = comma_format()) +
+  ggtitle("COVID19 USA Deaths by State", data_last_refreshed ) +
+  xlab("States") +
+  ylab("Cumulative cases") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
 
 ```
 
