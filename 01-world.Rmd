@@ -17,7 +17,6 @@ source("load_functions.R")
 ```{r global-incidence-recovery-deaths, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
 p <- global %>%
-  filter(country != 'Bangladesh(unoff)' ) %>%
   group_by(date) %>%
   summarise(
     daily_cases = sum(daily_cases)
@@ -65,8 +64,7 @@ $$CFR = \frac{\# Deaths}{\#Infected} \times 100 \,\, per \,\,unit \,\, time$$
 
 ```{r, global-case-fatality-rate, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
-con <- global %>% filter(country != 'Bangladesh(unoff)')
-df <- case_fatality(con)
+df <- case_fatality(global)
 
 p <- df %>%
   ggplot(aes(x=date, y=n, color=metric))+
@@ -383,6 +381,7 @@ n_world <- global %>%
 n <- n_world
 
 df <- global %>%
+  filter(country != "Bangladesh(unoff)") %>%
   mutate(
     # cum_recov_death_ratio = cum_recov/cum_deaths
     cum_recov_death_ratio = cum_recov/cum_deaths

@@ -189,7 +189,7 @@ head(bd_unoff)
 head(global)
 
 # Global combined data set ----------
-global <- rbind(as.data.frame(global), as.data.frame(bd_unoff))
+# global <- rbind(as.data.frame(global), as.data.frame(bd_unoff))
 
 global <- global %>%
   group_by(country) %>%

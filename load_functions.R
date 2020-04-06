@@ -3,18 +3,6 @@
 
 case_fatality <- function(data){
   data %>%
-    filter(country != 'Bangladesh(unoff)') %>%
-    group_by(date) %>%
-    summarise(
-      cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_cases)) * 100
-      , daily_case_fatality_rate = (sum(daily_deaths)/sum(cum_cases)) * 100
-    ) %>%
-    gather(metric, n, cum_case_fatality_rate, daily_case_fatality_rate, factor_key = TRUE)
-}
-
-case_fatality <- function(data){
-  data %>%
-    filter(country != 'Bangladesh(unoff)') %>%
     group_by(date) %>%
     summarise(
       cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_cases)) * 100
