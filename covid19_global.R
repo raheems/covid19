@@ -88,9 +88,8 @@ tryCatch(
 tryCatch(
   expr ={
     # Update Bangladesh unofficial and official data
-    sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
-
-    df_gogle_sheet = gsheet2tbl(sheet_3)
+    sheet_4 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
+    df_gogle_sheet = gsheet2tbl(sheet_4)
     write_csv(df_gogle_sheet, 'covid19_bd.csv')
 
   },
@@ -103,7 +102,7 @@ tryCatch(
     #print(w)
   },
   finally = {
-    df_bd_unoff <- read_csv('covid19_bd.csv')
+    df_bd_unoff <- read_csv('covid19_bd.csv', skip = 1)
   }
 
 )
@@ -166,7 +165,7 @@ bd_unoff <- df_bd_unoff %>%
     country = "Bangladesh(unoff)"
   ) %>%
   rename(
-    date = "তারিখ"
+    date = Date
     , daily_deaths_govt = "দৈনিক মৃত্যু (সরকারি)"
     , daily_deaths_suspected = "দৈনিক মৃত্যু (বেসরকারি)"
     , total_tests = `Total Tests`
@@ -229,3 +228,6 @@ ggplotColours <- function(n = 6, h = c(0, 360) + 15){
   if ((diff(h) %% 360) < 1) h[2] <- h[2] - 360/n
   hcl(h = (seq(h[1], h[2], length = n)), c = 100, l = 65)
 }
+
+global %>%
+  filter(country == 'Bangladesh(unoff)')

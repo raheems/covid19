@@ -11,13 +11,15 @@ require(kableExtra)
 library(scales)
 library(gsheet)
 
+# sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
 
 tryCatch(
   expr ={
     # Update Bangladesh unofficial and official data
-    sheet_3 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
 
-    df_gogle_sheet = gsheet2tbl(sheet_3)
+    sheet_4 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
+    df_gogle_sheet = gsheet2tbl(sheet_4)
+
     write_csv(df_gogle_sheet, 'covid19_bd.csv')
 
   },
@@ -30,7 +32,7 @@ tryCatch(
     #print(w)
   },
   finally = {
-    df <- read_csv('covid19_bd.csv')
+    df <- read_csv('covid19_bd.csv', skip = 1)
   }
 
 )
@@ -39,7 +41,7 @@ tryCatch(
 
 df <- df %>%
   rename(
-    date = "তারিখ"
+    date = Date
     , daily_deaths_govt = "দৈনিক মৃত্যু (সরকারি)"
     , daily_deaths_suspected = "দৈনিক মৃত্যু (বেসরকারি)"
     , total_tests = `Total Tests`
