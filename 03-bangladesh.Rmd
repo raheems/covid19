@@ -52,6 +52,23 @@ p + scale_y_continuous(labels=comma, trans = "log10")
 ```
 
 
+```{r, echo=FALSE}
+
+bdsummary <- bd %>%
+  filter(date == max(date)) %>% 
+  group_by(country) %>%
+  summarise(
+    `Total Deaths` = max(cum_deaths)
+  ) %>%
+  arrange(desc(`Total Deaths`))
+  
+
+bdsummary %>%
+  kable(format = "html", caption=paste("Total number of deaths as of ", date_data_refreshed)) %>%
+  kable_styling(position = "center")
+
+```
+
 ## Bangladesh in South Asia
 
 ### Infection
