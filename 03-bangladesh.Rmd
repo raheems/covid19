@@ -41,7 +41,7 @@ p <- ggplot(bd, aes(x = day, y = cum_deaths, color=country)) +
   ggtitle("Bangladesh: COVID19 cumulative deaths",
           data_last_refreshed ) +
   xlab("Day since first death") +
-  ylab("Cumulative cases") +
+  ylab("Cumulative deaths") +
   theme(legend.position="top") +
   labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")
 

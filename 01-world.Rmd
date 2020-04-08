@@ -1,9 +1,6 @@
 
 # World {#world}
 
-__Report last updated:__ `r Sys.Date()`
-
-__Data last refreshed:__ : `r data_last_refreshed`
 
 ## Daily Incidence, Recovery, Deaths {#incidence-recovery-death}
 
@@ -13,6 +10,9 @@ source("covid19_global.R")
 source("load_functions.R")
 ```
 
+__Report last updated:__ `r Sys.Date()`
+
+__Data last refreshed:__ : `r data_last_refreshed`
 
 ```{r global-incidence-recovery-deaths, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 
