@@ -64,7 +64,7 @@ bdsummary <- bd %>%
   
 
 bdsummary %>%
-  kable(format = "html", caption=paste("Total number of deaths as of ", date_data_refreshed)) %>%
+  kable(format = "html", caption=paste("Total number of deaths as of ", max(bd$date))) %>%
   kable_styling(position = "center")
 
 ```
