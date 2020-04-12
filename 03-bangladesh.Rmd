@@ -76,17 +76,24 @@ bdsummary %>%
 ```{r, incidences-bd-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 # source("covid19_deaths.R")
 
+# 
+# bd_cases <- bd_unoff %>% filter(country == "Bangladesh(unoff)")
+#   select(country, date, cum_cases)
+
 df_south_asia <- global %>%
   filter(
     country %in% c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
-                   "Bhutan", "Sri Lanka", "Malaysia", "Maldives", 
-                   "Indonesia", "Uganda")
+                   "Bhutan", "Sri Lanka", "Malaysia",
+                   "Indonesia")
   ) %>%
   select(country, date, cum_cases) %>%
   group_by(country, date) %>%
   summarize(
     cum_cases = sum(cum_cases)
   )
+
+# Join with BD data
+# df_south_asia <- bind_rows(df_south_asia, bd_cases)
 
 
 n_south_asia <- df_south_asia %>%
@@ -137,11 +144,14 @@ ggplot(cases_south_asia, aes(x = day, y = cum_cases, color=country)) +
 
 ```{r, southasia-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 
+d <- bd %>%
+  select(country, date, cum_deaths)
+
 df_south_asia <- global %>%
   filter(
-    country %in% c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
-                   "Bhutan", "Sri Lanka", "Malaysia", "Maldives", 
-                   "Indonesia", "Uganda")
+    country %in% c("India", "Singapore", "Nepal", "Pakistan",
+                   "Bhutan", "Sri Lanka", "Malaysia", 
+                   "Indonesia")
   ) %>%
   select(country, date, cum_deaths) %>%
   group_by(country, date) %>%
@@ -149,6 +159,7 @@ df_south_asia <- global %>%
     cum_deaths = sum(cum_deaths)
   )
 
+df_south_asia <- bind_rows(df_south_asia, d)
 
 n_south_asia <- df_south_asia %>%
   group_by(country) %>%
