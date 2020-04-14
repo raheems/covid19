@@ -91,7 +91,7 @@ suppressMessages(print(p))
 
 ```
 
-### Case Fatality Rate (elect countries)
+### Case Fatality Rate (select countries)
 
 
 ```{r, case-fatality-rate-selected, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
@@ -216,7 +216,7 @@ p + scale_color_discrete(name="Country") +
 
 # Summary of cases till date by country
 world_summary <- global %>%
-  filter(country != 'Bangladesh(unoff)') %>%
+  # filter(country != 'Bangladesh(unoff)') %>%
   filter(ymd(date) == data_last_refreshed) %>%
   group_by(country) %>%
   summarise(
@@ -225,7 +225,7 @@ world_summary <- global %>%
   top_n(10, Confirmed) %>%
   arrange(desc(Confirmed))
 
-confirmed_bd <- df_bd %>%
+confirmed_bd <- bd_unoff %>%
   filter(ymd(date) == data_last_refreshed) %>%
   group_by(country) %>%
   summarise(
@@ -248,18 +248,18 @@ world_plus_bd %>%
 ## Deaths
 
 
-```{r, global-deaths, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+```{r, global-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
-# Deaths for Bangladesh
-df_bd <- global %>%
-  filter(
-    country %in% c('Bangladesh', "Bangladesh(unoff)")
-  ) %>%
-  select(country, date, cum_deaths) %>%
-  arrange(
-    country, date
-  ) 
+b <- bd_unoff
+a <- global %>% filter(country %in% "Bangladesh", cum_deaths > 0) %>%
+  select(-c(daily_cases, daily_deaths, daily_recov))
+
+bd <- bind_rows(a,b) %>%
+  arrange(country, date) %>%
+  mutate(
+   day = row_number()
+  )
 
 # Top 10 countries
 n_world <- global %>%
@@ -270,20 +270,17 @@ n_world <- global %>%
   arrange(desc(max_n_cases)) %>%
   top_n(6, max_n_cases)
 
-# Top 10 countries
-n_bd <- df_bd %>%
-  group_by(country) %>%
-  summarise(
-    max_n_cases = max(cum_deaths)
-  )
 
+df_world <- global %>%
+  filter(country %in% n_world$country, cum_deaths >0) %>%
+  select(date, country, cum_cases, cum_deaths, cum_recov)
 
-# Combined n countries
-n <- rbind(n_world, n_bd)
+df_world_bd <- bind_rows(bd, df_world)
+
 
 # Reset the origin to the first reported cases
-case_summary <- global %>%
-  filter(country %in% n$country, cum_deaths >0) %>%
+case_summary <- df_world_bd %>%
+  filter(cum_deaths >0) %>%
   arrange(country, date, cum_deaths) %>%
   group_by(country) %>%
   mutate(
@@ -291,15 +288,25 @@ case_summary <- global %>%
   )
 
 
+max_date_bd_unoff <- case_summary %>%
+  filter(country == "Bangladesh(unoff)") %>% group_by(country) %>%
+  summarise(date=max(date))
+
+max_date_bd_off <- case_summary %>%
+  filter(country == "Bangladesh") %>% group_by(country) %>%
+  summarise(date=max(date))
+
+
 p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   geom_line(size=1.1) +
-  geom_point(data = case_summary[case_summary$country == 'Bangladesh' & ymd(case_summary$date)==data_last_refreshed, ],
-             aes(x=day, y=cum_deaths), color='red', size=5) +
-  geom_text_repel(size=5, aes(label=comma_format()(cum_deaths)),
-                  function(case_summary) case_summary[ymd(case_summary$date) == data_last_refreshed, ])+
+  geom_point(data = case_summary[case_summary$country == 'Bangladesh(unoff)' & case_summary$date==max_date_bd_unoff$date, ], aes(x=day, y=cum_deaths), color='red', size=5) +
+  geom_point(data = case_summary[case_summary$country == 'Bangladesh' & case_summary$date==max_date_bd_off$date, ], aes(x=day, y=cum_deaths), color='red', size=5) +
+  geom_text_repel(size=5, aes(label=country),
+                  function(case_summary) case_summary[case_summary$date == max_date_bd_off$date, ])+
+  
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
-  ggtitle("COVID19 cumulative deaths since first case \n(top 6 countries)", data_last_refreshed ) +
+  ggtitle("COVID19 cumulative deaths since first death", data_last_refreshed ) +
   xlab("Days since first death") +
   ylab("Cumulative deaths")+
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
@@ -307,7 +314,7 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
 p + scale_color_discrete(name="Country") +
   scale_y_continuous(labels=comma_format(), trans = 'log10')
 
-# +
+  # +
 #   guides(fill=guides(colour=guide_legend(ncol=1,nrow=1,byrow=TRUE))) +
 #   scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
 
@@ -330,8 +337,8 @@ world_summary <- global %>%
   top_n(10, Confirmed) %>%
   arrange(desc(Confirmed))
 
-confirmed_bd <- df_bd %>%
-  filter(ymd(date) == data_last_refreshed) %>%
+confirmed_bd <- bd_unoff %>%
+  filter(ymd(date) == max_date_bd_unoff$date) %>%
   group_by(country) %>%
   summarise(
     Confirmed = max(cum_deaths)
