@@ -223,3 +223,59 @@ us_topn_death %>%
   kable(caption = paste("Totaly deaths by State as of ", data_last_refreshed))
 ```
 
+## Daily Deaths {#usa-daily-deaths}
+
+
+```{r, deaths-usa-daily, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# Deaths daily histogram
+
+# Top n
+us_daily_deaths <- usa %>%
+  group_by(date) %>%
+  summarize(
+    total_deaths = max(cum_deaths)
+  ) %>%
+  mutate(
+    daily_deaths = c(0, diff(total_deaths))
+  )
+
+us_daily_deaths %>%
+  ggplot(aes(x=date, y = daily_deaths)) +
+  geom_bar(stat = 'identity') +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  scale_y_continuous(labels = comma_format()) +
+  ggtitle("COVID19 USA daily deaths", data_last_refreshed ) +
+  xlab("Date") +
+  ylab("Daily deaths") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
+
+```
+
+
+```{r, deaths-usa-ny-daily, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# Deaths daily histogram for New York
+
+# Top n
+ny_daily_deaths <- usa %>%
+  filter(state == 'New York') %>%
+  group_by(date) %>%
+  summarize(
+    total_deaths = max(cum_deaths)
+  ) %>%
+  mutate(
+    daily_deaths = c(0, diff(total_deaths))
+  )
+
+ny_daily_deaths %>%
+  ggplot(aes(x=date, y = daily_deaths)) +
+  geom_bar(stat = 'identity') +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  scale_y_continuous(labels = comma_format()) +
+  ggtitle("COVID19 USA daily deaths for New York", data_last_refreshed ) +
+  xlab("Date") +
+  ylab("Daily deaths") +
+  labs(caption = "SOURCE: New York Times Coronavirus Dataset.")
+
+```

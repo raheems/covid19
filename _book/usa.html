@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-684495-5"></script>
     <script>
@@ -105,6 +104,7 @@
 <li class="chapter" data-level="2.1" data-path="usa.html"><a href="usa.html#us-overall"><i class="fa fa-check"></i><b>2.1</b> Overall trend</a></li>
 <li class="chapter" data-level="2.2" data-path="usa.html"><a href="usa.html#confirmed-cases-1"><i class="fa fa-check"></i><b>2.2</b> Confirmed Cases</a></li>
 <li class="chapter" data-level="2.3" data-path="usa.html"><a href="usa.html#deaths-1"><i class="fa fa-check"></i><b>2.3</b> Deaths</a></li>
+<li class="chapter" data-level="2.4" data-path="usa.html"><a href="usa.html#usa-daily-deaths"><i class="fa fa-check"></i><b>2.4</b> Daily Deaths</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="bangladesh.html"><a href="bangladesh.html"><i class="fa fa-check"></i><b>3</b> Bangladesh</a><ul>
 <li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-official-data-tbd"><i class="fa fa-check"></i><b>3.1</b> Bangladesh official data (TBD)</a></li>
@@ -151,15 +151,15 @@
 <p><strong>Data last refreshed:</strong> : 2020-04-13</p>
 <div id="us-overall" class="section level2">
 <h2><span class="header-section-number">2.1</span> Overall trend</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
 </div>
 <div id="confirmed-cases-1" class="section level2">
 <h2><span class="header-section-number">2.2</span> Confirmed Cases</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-13-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
 <p><img src="covid19_files/figure-html/cases-by-usa-states-1.png" width="768" /></p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-14">Table 2.1: </span>Totaly cases for top 10 US States as of 2020-04-13
+<span id="tab:unnamed-chunk-4">Table 2.1: </span>Totaly cases for top 10 US States as of 2020-04-13
 </caption>
 <thead>
 <tr>
@@ -297,11 +297,11 @@ Indiana
 </div>
 <div id="deaths-1" class="section level2">
 <h2><span class="header-section-number">2.3</span> Deaths</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <p><img src="covid19_files/figure-html/deaths-by-usa-states-1.png" width="768" /></p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-16">Table 2.2: </span>Totaly deaths by State as of 2020-04-13
+<span id="tab:unnamed-chunk-6">Table 2.2: </span>Totaly deaths by State as of 2020-04-13
 </caption>
 <thead>
 <tr>
@@ -476,6 +476,11 @@ Missouri
 </tr>
 </tbody>
 </table>
+</div>
+<div id="usa-daily-deaths" class="section level2">
+<h2><span class="header-section-number">2.4</span> Daily Deaths</h2>
+<p><img src="covid19_files/figure-html/deaths-usa-daily-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/deaths-usa-ny-daily-1.png" width="768" /></p>
 
 </div>
 </div>
@@ -535,20 +540,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
