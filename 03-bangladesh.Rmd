@@ -139,6 +139,48 @@ ggplot(cases_south_asia, aes(x = day, y = cum_cases, color=country)) +
 ```
 
 
+```{r, echo=FALSE}
+
+# Summary of Infections till date by country
+
+d <- bd %>%
+  select(country, date, cum_cases)
+
+df_south_asia <- global %>%
+  filter(
+    country %in% c("India", "Singapore", "Nepal", "Pakistan",
+                   "Bhutan", "Sri Lanka", "Malaysia", 
+                   "Indonesia")
+  ) %>%
+  select(country, date, cum_cases) %>%
+  group_by(country, date) %>%
+  summarize(
+    cum_cases = sum(cum_cases)
+  )
+
+df_south_asia <- bind_rows(df_south_asia, d)
+
+n_south_asia <- df_south_asia %>%
+  group_by(country) %>%
+  summarise(
+    max_n = max(cum_cases)
+  ) %>%
+  arrange(desc(max_n)) %>%
+  top_n(20, max_n)
+
+
+sa_summary_cases <- df_south_asia %>%
+  group_by(country) %>%
+  summarise(
+    `Total Cases` = max(cum_cases)
+  ) %>%
+  arrange(desc(`Total Cases`))
+
+sa_summary_cases %>%
+  kable(format = "html", caption=paste("Total number of cases as of ", date_data_refreshed)) %>%
+  kable_styling(position = "center")
+
+```
 
 ### Deaths
 
@@ -191,13 +233,17 @@ max_date_bd_unoff <- deaths_south_asia %>%
   filter(country == "Bangladesh(unoff)") %>% group_by(country) %>%
   summarise(date=max(date))
 
+max_date_bd_off <- deaths_south_asia %>%
+  filter(country == "Bangladesh") %>% group_by(country) %>%
+  summarise(date=max(date))
+
 # Plot
 ggplot(deaths_south_asia, aes(x = day, y = cum_deaths, color=country)) +
   geom_line(size=1.1) +
-  geom_point(data = deaths_south_asia[deaths_south_asia$country == 'Bangladesh' & deaths_south_asia$date==max(deaths_south_asia$date), ], aes(x=day, y=cum_deaths), color='red', size=5) +
+  geom_point(data = deaths_south_asia[deaths_south_asia$country == 'Bangladesh' & deaths_south_asia$date==max_date_bd_off$date, ], aes(x=day, y=cum_deaths), color='red', size=5) +
   geom_point(data = deaths_south_asia[deaths_south_asia$country == 'Bangladesh(unoff)' & deaths_south_asia$date==max_date_bd_unoff$date, ], aes(x=day, y=cum_deaths), color='red', size=5) +
   geom_text_repel(size=5, aes(label=country),
-                  function(deaths_south_asia) deaths_south_asia[deaths_south_asia$date == max_date_bd_unoff$date, ])+
+                  function(deaths_south_asia) deaths_south_asia[deaths_south_asia$date == max_date_bd_off$date, ])+
   theme_minimal(base_size = 14) +
   theme(legend.position = "none") +
   # theme_void() + 

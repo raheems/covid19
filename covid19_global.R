@@ -85,28 +85,12 @@ tryCatch(
 
 # Bangladesh unofficial data ------
 
-
-tryCatch(
-  expr ={
     # Update Bangladesh unofficial and official data
     sheet_4 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
     df_gogle_sheet = gsheet2tbl(sheet_4)
     write_csv(df_gogle_sheet, 'covid19_bd.csv')
 
-  },
-  error = function(e){
-    message('Caught an error!')
-    print(e)
-  },
-  warning = function(w){
-    message('Caught an warning!')
-    #print(w)
-  },
-  finally = {
     df_bd_unoff <- read_csv('covid19_bd.csv', skip = 1)
-  }
-
-)
 
 
 # Confirmed
