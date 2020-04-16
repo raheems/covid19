@@ -1,4 +1,24 @@
 
 # Resources
 
+## Data Sources
+
+- [JHU COVID19 time series data](https://github.com/CSSEGISandData/COVID-19)
+
+- [New York Times COVID time series (USA state and county level data only)](https://github.com/nytimes/covid-19-data)
+
+- [Bangladesh Unofficial deaths data](https://bit.ly/3em6TqO)
+
+## Computational Resources
+
+- R package [EpiModel](http://www.epimodel.org/)
+- [Tim Churches Blog](timchurches.github.io/)
+- [Learning Machines Blog](https://blog.ephorie.de/)
+
+## Dashboards
+
+- [Johns Hopkins Corona Virus Daboard](https://coronavirus.jhu.edu/map.html)
+
 - http://91-divoc.com/pages/covid-visualization/
+
+- [Beautiful Shiny Dashboard by Shubhram Pandey ](https://shubhrampandey.shinyapps.io/coronaVirusViz/_w_6ea524e3/_w_f14b34f2/)

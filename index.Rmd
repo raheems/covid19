@@ -32,14 +32,6 @@ This live report is updated a few times daily. So please check back to get the m
 The goal of this report is to provide up to date summary of the global situation and compare that with __Bangladesh__.
 
 
-## Data sources {-}
-
-- 2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE https://github.com/CSSEGISandData/COVID-19
-
-- নিউ ইয়র্ক টাইমস গিটহাব রিপজিটরি https://github.com/nytimes/covid-19-data
-
-- Bangladesh data (government + suspected cases from newspaper reports) https://cutt.ly/StTIxJQ
-
 ## Volunteering opportunity {-}
 
 If you have experience with R programming, and have interest in contributing to this project, please reach out to me via email: enayetur.raheem@brfbd.org. Please mention specifically how do you want to contribute. Because I receive too many inquiries, I cannot reply to each an every email. I will only respond if your email has sufficient information to spark my interest. Thanks in advance :)

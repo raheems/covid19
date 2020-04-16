@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-684495-5"></script>
     <script>
@@ -82,7 +81,6 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About this report</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i>Disclaimer</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#purpose"><i class="fa fa-check"></i>Purpose</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#data-sources"><i class="fa fa-check"></i>Data sources</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#volunteering-opportunity"><i class="fa fa-check"></i>Volunteering opportunity</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-skills-are-useful"><i class="fa fa-check"></i>What skills are useful</a></li>
 </ul></li>
@@ -126,7 +124,11 @@
 <li class="chapter" data-level="6" data-path="trials.html"><a href="trials.html"><i class="fa fa-check"></i><b>6</b> Trials and Treatments</a><ul>
 <li class="chapter" data-level="6.1" data-path="trials.html"><a href="trials.html#clinical-trials"><i class="fa fa-check"></i><b>6.1</b> Clinical trials</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>7</b> Resources</a></li>
+<li class="chapter" data-level="7" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>7</b> Resources</a><ul>
+<li class="chapter" data-level="7.1" data-path="resources.html"><a href="resources.html#data-sources"><i class="fa fa-check"></i><b>7.1</b> Data Sources</a></li>
+<li class="chapter" data-level="7.2" data-path="resources.html"><a href="resources.html#computational-resources"><i class="fa fa-check"></i><b>7.2</b> Computational Resources</a></li>
+<li class="chapter" data-level="7.3" data-path="resources.html"><a href="resources.html#dashboards"><i class="fa fa-check"></i><b>7.3</b> Dashboards</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/raheems/covid19" target="blank">Published with bookdown</a></li>
@@ -165,14 +167,6 @@
 <div id="purpose" class="section level2 unnumbered">
 <h2>Purpose</h2>
 <p>The goal of this report is to provide up to date summary of the global situation and compare that with <strong>Bangladesh</strong>.</p>
-</div>
-<div id="data-sources" class="section level2 unnumbered">
-<h2>Data sources</h2>
-<ul>
-<li><p>2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE <a href="https://github.com/CSSEGISandData/COVID-19" class="uri">https://github.com/CSSEGISandData/COVID-19</a></p></li>
-<li><p>নিউ ইয়র্ক টাইমস গিটহাব রিপজিটরি <a href="https://github.com/nytimes/covid-19-data" class="uri">https://github.com/nytimes/covid-19-data</a></p></li>
-<li><p>Bangladesh data (government + suspected cases from newspaper reports) <a href="https://cutt.ly/StTIxJQ" class="uri">https://cutt.ly/StTIxJQ</a></p></li>
-</ul>
 </div>
 <div id="volunteering-opportunity" class="section level2 unnumbered">
 <h2>Volunteering opportunity</h2>
@@ -250,20 +244,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
