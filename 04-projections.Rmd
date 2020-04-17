@@ -241,7 +241,7 @@ p4<- a4$fitted_cases %>%
 
 
 grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, 
-             top = textGrob(paste0("COVID-19 observed and 5-day predicted cumulative incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()),
+             top = textGrob(paste0("COVID-19 observed and 5-day predicted cumulative incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()),
              gp=gpar(fontsize=16, font=16)))
 ```
 
