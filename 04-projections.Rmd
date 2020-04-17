@@ -253,7 +253,7 @@ It turns out that the bottom left one fits the current data best. So lets put th
 p3
 ```
 
-### Projections for the next 5 days
+### Projection for the next 5 days
 
 ```{r, echo=FALSE, fig.cap="Actual and Predicted Cumulative Cases using SEIR Model"}
 a3$fitted_cases %>% as.data.frame() %>%
