@@ -215,7 +215,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \frac{\partial R}{\partial t} &amp;= \gamma I
 \end{align}
 \]</span></p>
-<p>Here the parameters <span class="math inline">\(\beta\)</span> controls the transition from susceptible to the Exposed compartment, <span class="math inline">\(\sigma\)</span> controls the transition from E to I, and <span class="math inline">\(\gamma\)</span> controls the transition from I to R.</p>
+<p>Here the parameters <span class="math inline">\(\beta\)</span> controls the transmission rate, which is the product of contact rate and the probability of transmission given contact betwen S and E compartments. <span class="math inline">\(\sigma\)</span> controls the transition from E to I, and <span class="math inline">\(\gamma\)</span> controls the transition from I to R.</p>
 <p>The reproduction rate, <span class="math inline">\(R_0\)</span> can be approximated by <span class="math display">\[R_0 = \frac{\beta}{\gamma}\]</span></p>
 <p>Model was fitted using all but the last two day’s incidences to obtain the estimated <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>. The fitted model was used for prediction. This post was inspired by <span class="citation">Churches (<a href="#ref-churches2020covid19rpart1">2020</a>)</span>, where you will find some details on the computation.</p>
 </div>

@@ -29,7 +29,7 @@ $$
 \end{align}
 $$
 
-Here the parameters $\beta$ controls the transition from susceptible to the Exposed compartment, $\sigma$ controls the transition from E to I, and $\gamma$ controls the transition from I to R. 
+Here the parameters $\beta$ controls the transmission rate, which is the product of contact rate and the probability of transmission given contact betwen S and E compartments. $\sigma$ controls the transition from E to I, and $\gamma$ controls the transition from I to R.
 
 The reproduction rate, $R_0$ can be approximated by 
 $$R_0 = \frac{\beta}{\gamma}$$
