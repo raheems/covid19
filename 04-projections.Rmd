@@ -33,6 +33,7 @@ Here the parameters $\beta$ controls the transmission rate, which is the product
 
 The reproduction rate, $R_0$ can be approximated by 
 $$R_0 = \frac{\beta}{\gamma}$$
+In plain language, $R_0$ tells us how many people are infected from one patient. An $R_0>1$ indicates the epidemic is at the grotwh phase. $R_0<1$ means the epidemic is slowing or decaying. 
 
 Model was fitted using all but the last two day's incidences to obtain the estimated $\beta$ and $\gamma$. The fitted model was used for prediction. This post was inspired by @churches2020covid19rpart1, where you will find some details on the computation.
 
@@ -241,7 +242,7 @@ p4<- a4$fitted_cases %>%
 
 
 grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, 
-             top = textGrob(paste0("COVID-19 observed and 5-day predicted cumulative incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()),
+             top = textGrob(paste0("COVID-19 observed and 5-day projected incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()),
              gp=gpar(fontsize=16, font=16)))
 ```
 
@@ -329,7 +330,7 @@ p4<- a4$fitted_cases %>%
 
 
 grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, 
-             top = textGrob(paste0("COVID-19 observed and 100-day predicted cumulative incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()),
+             top = textGrob(paste0("COVID-19 observed and 100-day projected  incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()),
              gp=gpar(fontsize=16, font=16)))
 
 # grid.arrange(a, b, c, d,ncol=2, 
@@ -480,4 +481,6 @@ fit_seir <- function(country_name='Bangladesh(unoff)',
   
 }
 ```
+
+
 

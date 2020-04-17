@@ -216,7 +216,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{align}
 \]</span></p>
 <p>Here the parameters <span class="math inline">\(\beta\)</span> controls the transmission rate, which is the product of contact rate and the probability of transmission given contact betwen S and E compartments. <span class="math inline">\(\sigma\)</span> controls the transition from E to I, and <span class="math inline">\(\gamma\)</span> controls the transition from I to R.</p>
-<p>The reproduction rate, <span class="math inline">\(R_0\)</span> can be approximated by <span class="math display">\[R_0 = \frac{\beta}{\gamma}\]</span></p>
+<p>The reproduction rate, <span class="math inline">\(R_0\)</span> can be approximated by <span class="math display">\[R_0 = \frac{\beta}{\gamma}\]</span> In plain language, <span class="math inline">\(R_0\)</span> tells us how many people are infected from one patient. An <span class="math inline">\(R_0&gt;1\)</span> indicates the epidemic is at the grotwh phase. <span class="math inline">\(R_0&lt;1\)</span> means the epidemic is slowing or decaying.</p>
 <p>Model was fitted using all but the last two day’s incidences to obtain the estimated <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>. The fitted model was used for prediction. This post was inspired by <span class="citation">Churches (<a href="#ref-churches2020covid19rpart1">2020</a>)</span>, where you will find some details on the computation.</p>
 </div>
 <div id="ascertainment-rate" class="section level3">
@@ -363,13 +363,13 @@ Projected cumulative cases
 2020-04-17
 </td>
 <td style="text-align:right;">
-NA
+266
 </td>
 <td style="text-align:right;">
 359
 </td>
 <td style="text-align:right;">
-NA
+1838
 </td>
 <td style="text-align:right;">
 2123

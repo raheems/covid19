@@ -140,3 +140,21 @@ p = p + scale_y_continuous(labels=comma, expand=c(0.5, 0.5)) +
   facet_wrap( ~ country, ncol = 2)
 
 suppressMessages(print(p))
+
+
+# Fri Apr 17 08:27:36 2020 ------------------------------
+
+# 3.9% ascertainment rate
+
+
+a1 <- fit_seir(country = "Bangladesh(unoff)", af=.04, nfuture = nfuture)
+p1<- a1$fitted_cases %>%
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  # geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") +
+  scale_y_continuous(labels = scales::comma) +
+  labs(y = "Cumulative incidence",
+       title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" ))
+
