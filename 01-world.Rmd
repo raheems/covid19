@@ -391,7 +391,8 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center and other.")
 
 p + scale_color_discrete(name="Country") +
-  scale_y_continuous(labels=comma_format(), trans = 'log10')
+  scale_y_continuous(labels=comma_format(), trans = 'log10') +
+  scale_x_continuous(limits=c(0,max(case_summary$day)+5), breaks=seq(0,max(case_summary$day)+5,10))
 
   # +
 #   guides(fill=guides(colour=guide_legend(ncol=1,nrow=1,byrow=TRUE))) +
