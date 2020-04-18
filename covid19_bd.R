@@ -77,5 +77,12 @@ df_ <- df %>%
 
 data_last_refreshed = max(df_$date)
 
+#############################
+# Second data source
+#############################
+
+source2 = "https://docs.google.com/spreadsheets/d/1irrhpkFxx7zA0DxqYHDYgbwDwFyITbdkLQnyO4P688I/edit#gid=0"
+df2 = gsheet2tbl(source2)
+
 
 
