@@ -100,7 +100,7 @@ country_list = c("Bangladesh", "US", "United Kingdom", "Canada", "France",
                  "Italy", "India", "Pakistan", "")
  
 df <- global %>%
-  filter(country %in% country_list, cum_deaths >0) %>%
+  filter(country %in% country_list, cum_cases >0) %>%
   group_by(country, date) %>%
     summarise(
       cum_case_fatality_rate = (sum(cum_deaths)/sum(cum_cases)) * 100
@@ -120,7 +120,7 @@ p <- df %>%
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
   ggtitle("GLOBAL case fatality rate", data_last_refreshed ) +
-  xlab("Day since first death") +
+  xlab("Day since first case") +
   ylab("Case fatality rate (%)")+
   labs(
     title= "CASE fatality rate (selected countries)",
@@ -306,8 +306,8 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
-  ggtitle("COVID19 cumulative deaths since first death", data_last_refreshed ) +
-  xlab("Days since first death") +
+  ggtitle("COVID19 cumulative deaths since first case", data_last_refreshed ) +
+  xlab("Days since first case") +
   ylab("Cumulative deaths")+
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
 
