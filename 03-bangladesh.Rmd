@@ -254,7 +254,7 @@ ggplot(deaths_south_asia, aes(x = day, y = cum_deaths, color=country)) +
   ggtitle( paste("COVID19 cumulative incidences since first incidence \n(Bangladesh's peers)", date_data_refreshed)) +
   xlab("Days since first incidence") +
   ylab("Cumulative deaths") +
-  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. বাংলা")+
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center")+
   scale_y_continuous(labels=comma, trans = "log10")
 
 ```
@@ -277,4 +277,29 @@ sa_summary %>%
 
 ```
 
+### Deaths compared on a specific day
+
+```{r, echo=FALSE}
+
+# Summary of deaths till date by country on the specific day
+
+bd_day_indicator = deaths_south_asia %>% filter(country == 'Bangladesh', 
+                                                date == max(date)) %>%
+  pull(day)
+
+sa_summary <- deaths_south_asia %>%
+  filter(day == bd_day_indicator) %>%
+  group_by(country) %>%
+  summarise(
+    `Total Deaths` = max(cum_deaths),
+    Country = country
+  ) %>%
+  select(Country, `Total Deaths`) %>%
+  arrange(desc(`Total Deaths`))
+
+sa_summary %>%
+  kable(format = "html", caption=paste0("Total deaths compared on day ", bd_day_indicator)) %>%
+  kable_styling(position = "center")
+
+```
 

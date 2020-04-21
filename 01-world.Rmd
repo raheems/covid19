@@ -437,6 +437,42 @@ world_plus_bd %>%
 ```
 
 
+### Cases and deaths compared on a specific day
+
+```{r, echo=FALSE}
+bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh', 
+                                                date == max(date)) %>%
+  pull(day)
+```
+Bangladesh has entered on day `r bd_day_indicator`.
+
+
+```{r, echo=FALSE}
+
+# Summary of deaths till date by country on the specific day
+
+bd_world_summary <- df_world_bd %>%
+  group_by(country) %>%
+  mutate(
+   day = row_number()
+  ) %>%
+  filter(day == bd_day_indicator) %>%
+  group_by(country) %>%
+  summarise(
+    `Total cases` = max(cum_cases),
+    `Total deaths` = max(cum_deaths),
+    Country = country
+  ) %>%
+  select(Country, `Total cases`, `Total deaths`) %>%
+  arrange(desc(`Total deaths`))
+
+bd_world_summary %>%
+  kable(format = "html", caption=paste0("Total cases and deaths compared on day ", bd_day_indicator)) %>%
+  kable_styling(position = "center") %>%
+  row_spec(which(bd_world_summary$Country %in% c('Bangladesh', 'Bangladesh(unoff)')), bold = T, color = "white", background = "#f49a86")
+
+```
+
 ## Recovery-to-death ratio {#recovery-death-ratio}
 
 
