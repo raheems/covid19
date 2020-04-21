@@ -188,7 +188,7 @@ sa_summary_cases %>%
 ```{r, southasia-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 
 d <- bd %>%
-  select(country, date, cum_deaths)
+  select(country, date, cum_cases, cum_deaths)
 
 df_south_asia <- global %>%
   select(country, date, cum_deaths, cum_cases) %>%
@@ -200,7 +200,8 @@ df_south_asia <- global %>%
   ) %>%
   group_by(country, date) %>%
   summarize(
-    cum_deaths = sum(cum_deaths)
+    cum_deaths = sum(cum_deaths),
+    cum_cases = sum(cum_cases)
   )
 
 df_south_asia <- bind_rows(df_south_asia, d)
@@ -277,29 +278,42 @@ sa_summary %>%
 
 ```
 
-### Deaths compared on a specific day
+
+### Cases and deaths compared on a specific day
+
+```{r, echo=FALSE}
+bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh', 
+                                                date == max(date)) %>%
+  pull(day)
+```
+Bangladesh has entered on day `r bd_day_indicator` since first confirmed case.
+
 
 ```{r, echo=FALSE}
 
 # Summary of deaths till date by country on the specific day
 
-bd_day_indicator = deaths_south_asia %>% filter(country == 'Bangladesh', 
-                                                date == max(date)) %>%
-  pull(day)
 
-sa_summary <- deaths_south_asia %>%
+bd_sa_summary <- df_south_asia %>%
+  group_by(country) %>%
+  mutate(
+   day = row_number()
+  ) %>%
   filter(day == bd_day_indicator) %>%
   group_by(country) %>%
   summarise(
-    `Total Deaths` = max(cum_deaths),
+    `Total cases` = max(cum_cases),
+    `Total deaths` = max(cum_deaths),
     Country = country
   ) %>%
-  select(Country, `Total Deaths`) %>%
-  arrange(desc(`Total Deaths`))
+  select(Country, `Total cases`, `Total deaths`) %>%
+  arrange(desc(`Total deaths`))
 
-sa_summary %>%
-  kable(format = "html", caption=paste0("Total deaths compared on day ", bd_day_indicator)) %>%
-  kable_styling(position = "center")
+bd_sa_summary %>%
+  kable(format = "html", caption=paste0("Total cases and deaths compared on day ", bd_day_indicator)) %>%
+  kable_styling(position = "center") %>%
+  row_spec(which(bd_world_summary$Country %in% c('Bangladesh', 'Bangladesh(unoff)')), bold = T, color = "white", background = "#f49a86")
+
 
 ```
 
