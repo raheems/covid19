@@ -467,7 +467,7 @@ bd_world_summary <- df_world_bd %>%
   arrange(desc(`Total deaths`))
 
 bd_world_summary %>%
-  kable(format = "html", caption=paste0("Bangladesh in the world: Total cases and deaths compared on day ", bd_day_indicator)) %>%
+  kable(format = "html", caption=paste0("Bangladesh in the world: total cases and deaths compared on day ", bd_day_indicator)) %>%
   kable_styling(position = "center") %>%
   row_spec(which(bd_world_summary$Country %in% c('Bangladesh', 'Bangladesh(unoff)')), bold = T, color = "white", background = "#f49a86")
 
