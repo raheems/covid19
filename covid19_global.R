@@ -85,12 +85,12 @@ tryCatch(
 
 # Bangladesh unofficial data ------
 
-    # Update Bangladesh unofficial and official data
-    sheet_4 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
-    df_gogle_sheet = gsheet2tbl(sheet_4)
-    write_csv(df_gogle_sheet, 'covid19_bd.csv')
-
-    df_bd_unoff <- read_csv('covid19_bd.csv', skip = 1)
+# # Update Bangladesh unofficial and official data
+# sheet_4 = 'https://docs.google.com/spreadsheets/d/1nlAQffAvqChLtvGiJvJPnNOJJKBu_uzmnKdpAJXuPwM/edit#gid=336445634'
+# df_gogle_sheet = gsheet2tbl(sheet_4)
+# write_csv(df_gogle_sheet, 'covid19_bd.csv')
+#
+# df_bd_unoff <- read_csv('covid19_bd.csv', skip = 1)
 
 
 # Confirmed
@@ -143,31 +143,90 @@ global_recov <- jhu_recovered_global %>%
 global <- left_join(global_deaths, global_confirmed, by = c("country", "date"))
 global <- left_join(global, global_recov, by = c("country", "date"))
 
-# Join Bangladesh (Unoff) data to it
 
-bd_unoff <- df_bd_unoff %>%
-  mutate(
-    country = "Bangladesh(unoff)"
-  ) %>%
+
+####################
+# Bangladesh new data sheet -- unofficial
+# Starting April 21, 2020
+####################
+
+sheet_death = "https://docs.google.com/spreadsheets/d/1irrhpkFxx7zA0DxqYHDYgbwDwFyITbdkLQnyO4P688I/edit#gid=0"
+sheet_govt = "https://docs.google.com/spreadsheets/d/1irrhpkFxx7zA0DxqYHDYgbwDwFyITbdkLQnyO4P688I/edit#gid=1821342015"
+
+df_gogle_sheet_death = gsheet2tbl(sheet_death)
+write_csv(df_gogle_sheet_death, 'covid19_bd_unoff_deaths.csv')
+
+df_gogle_sheet_govt = gsheet2tbl(sheet_govt)
+write_csv(df_gogle_sheet_govt, 'covid19_bd_unoff_cases.csv')
+
+df_gogle_sheet_death_working = read_csv('covid19_bd_unoff_deaths.csv')
+df_gogle_sheet_govt_working = read_csv('covid19_bd_unoff_cases.csv', skip=1)
+
+# BD unofficial cases
+bd_unoff_cases <- df_gogle_sheet_govt_working %>%
   rename(
     date = Date
-    , daily_deaths_govt = "দৈনিক মৃত্যু (সরকারি)"
-    , daily_deaths_suspected = "দৈনিক মৃত্যু (বেসরকারি)"
-    , total_tests = `Total Tests`
-    , daily_cases = `Daily new cases`
+    , cum_cases = `Total Cases`
   ) %>%
-  select(
-    country, date, daily_deaths_suspected, daily_cases
+  mutate(
+    country = "Bangladesh(unoff)"
+    , date = as.Date(date, "%d/%m/%Y")
   ) %>%
-  drop_na(date) %>%
+  select(date, country, cum_cases)
+
+# BD Unofficial deaths
+bd_unoff_deaths <- df_gogle_sheet_death_working %>%
+  rename(
+    date = "তারিখ"
+  ) %>%
   mutate(
     date = as.Date(date, "%d/%m/%Y")
-    , daily_deaths_suspected = replace_na(as.numeric(daily_deaths_suspected), 0)
-    , cum_deaths = cumsum(daily_deaths_suspected)
-    , cum_cases = cumsum(daily_cases)
+    , cnt_deaths = 1
+  ) %>% drop_na(date) %>% group_by(date) %>%
+  summarise(
+    daily_deaths = n()
+  ) %>%
+  mutate(
+    country = "Bangladesh(unoff)"
+    ) %>%
+  select(date, country, daily_deaths)
+
+# Create bd unofficial data set
+
+bd_unoff <- left_join(bd_unoff_cases, bd_unoff_deaths) %>%
+  mutate(
+    daily_deaths = ifelse(is.na(daily_deaths), 0, daily_deaths)
+    , cum_deaths = cumsum(daily_deaths)
     , cum_recov = NA
   ) %>%
-  select(country, date, cum_deaths, cum_cases, cum_recov)
+    select(country, date, cum_deaths, cum_cases, cum_recov)
+
+
+# # Join Bangladesh (Unoff) data to it
+#
+# bd_unoff <- df_bd_unoff %>%
+#   mutate(
+#     country = "Bangladesh(unoff)"
+#   ) %>%
+#   rename(
+#     date = `তারিখ`
+#     , daily_deaths_govt = "দৈনিক মৃত্যু (সরকারি)"
+#     , daily_deaths_suspected = "দৈনিক মৃত্যু (বেসরকারি)"
+#     , total_tests = `Total Tests`
+#     , daily_cases = `Daily new cases`
+#   ) %>%
+#   select(
+#     country, date, daily_deaths_suspected, daily_cases
+#   ) %>%
+#   drop_na(date) %>%
+#   mutate(
+#     date = as.Date(date, "%d/%m/%Y")
+#     , daily_deaths_suspected = replace_na(as.numeric(daily_deaths_suspected), 0)
+#     , cum_deaths = cumsum(daily_deaths_suspected)
+#     , cum_cases = cumsum(daily_cases)
+#     , cum_recov = NA
+#   ) %>%
+#   select(country, date, cum_deaths, cum_cases, cum_recov)
 
 head(bd_unoff)
 head(global)
@@ -208,11 +267,11 @@ data_last_refreshed =  max(ymd(global$date))
 
 # Additional custom function
 # To print the default color pallette
-
-ggplotColours <- function(n = 6, h = c(0, 360) + 15){
-  if ((diff(h) %% 360) < 1) h[2] <- h[2] - 360/n
-  hcl(h = (seq(h[1], h[2], length = n)), c = 100, l = 65)
-}
-
-global %>%
-  filter(country == 'Bangladesh(unoff)')
+#
+# ggplotColours <- function(n = 6, h = c(0, 360) + 15){
+#   if ((diff(h) %% 360) < 1) h[2] <- h[2] - 360/n
+#   hcl(h = (seq(h[1], h[2], length = n)), c = 100, l = 65)
+# }
+#
+# global %>%
+#   filter(country == 'Bangladesh')
