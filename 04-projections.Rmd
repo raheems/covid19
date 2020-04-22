@@ -7,9 +7,9 @@
 ```
 
 
-## Projection for Bangladesh (unofficial) {#projection-bangladesh}
+## Projection for Bangladesh (unofficial) Run1  {#projection-bangladesh-run1}
 
-__Last updated:__ `r today()`
+__Run date__: 17 April 2020
 
 This is a dynamic document and will be updated frequently. Please check back for latest projection. This projection is based on unofficial Bangladesh incidence data.
 
@@ -44,9 +44,9 @@ Not all the cases are reported or tested. Usually a fraction of the actual cases
 
 Simply, the incidences are inflated by the inverse of the ascertainment rate.
 
+Please let me know if you find any error in it. The code was adapted from @churches2020covid19rpart1
 
-
-```{r, projection-bangladesh-fn,  echo = FALSE, warning=FALSE}
+```{r, projection-bangladesh-fn,  echo = TRUE, warning=FALSE}
 
 library(deSolve)
 library(grid)
@@ -65,16 +65,20 @@ library(gridExtra)
 # I = Initial infected population
 # R = Recovered population
 
-fit_seir <- function(country_name='Bangladesh(unoff)', N=170000000, af=0.5, npast=2, nfuture=10){
+fit_seir <- function(country_name='Bangladesh(unoff)', 
+                     N=170000000, 
+                     af=0.5, npast=2, nfuture=5, 
+                     run_date = today()){
   # country = Country name
   # N = population size of the country
   # af = ascertainment factor, default = 0.5
   # country = "Bangladesh(unoff)"
   # npast = number of days in the past to exclude when fitting the model
-  # default is npast = 5
+  # default is npast = 2
   # nfuture = number of days in the future the algorithm to predict to
-  # default is nfuture=10
-  
+  # default is nfuture=5
+  # run_date: set the cut off date so that the later runs do not overrite
+  # previous runs.
   
   SEIR <- function(time, state, parameters) {
     par <- as.list(c(state, parameters))
@@ -86,8 +90,7 @@ fit_seir <- function(country_name='Bangladesh(unoff)', N=170000000, af=0.5, npas
       list(c(dS, dE, dI, dR))
     })
   }
-  
-  
+
   # define a function to calculate the residual sum of squares
   # (RSS), passing in parameters beta and gamma that are to be
   # optimised for the best fit to the incidence data
@@ -99,10 +102,9 @@ fit_seir <- function(country_name='Bangladesh(unoff)', N=170000000, af=0.5, npas
     sum((infected - fit)^2)
   }
   
-  
   country = enquo(country_name)
-  run0_date = ymd("2020-04-17")
-  df <- bd_unoff %>% filter(country == !!country, cum_cases>0, date <= run0_date)
+  
+  df <- bd_unoff %>% filter(country == !!country, cum_cases>0, date <= run_date)
   infected <- df %>% filter(date >= min(date), date <= today() - 1 - npast) %>% 
     pull(cum_cases)
   
@@ -112,7 +114,6 @@ fit_seir <- function(country_name='Bangladesh(unoff)', N=170000000, af=0.5, npas
   
   # Ascertainment factor
   infected = infected * 1/af
-
   
   # Create an incrementing Day vector the same length as our
   # cases vector
@@ -153,7 +154,6 @@ fit_seir <- function(country_name='Bangladesh(unoff)', N=170000000, af=0.5, npas
     mutate(date = seir_start_date + days(t - 1)) %>% 
     left_join(df %>% filter(cum_cases>0) %>% ungroup() %>%
                 select(date, cum_cases))
-  
   
   # Return
   list(country=country_name, infected = infected,
@@ -311,126 +311,161 @@ grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2,
 
 ```
 
-### R code for fitting SEIR
 
-Please let me know if you find any error in it. The code was adapted from @churches2020covid19rpart1
+## Projection for Bangladesh (unofficial) Run 2 {#projection-bangladesh-run2}
 
-```{r,  echo = TRUE, warning=FALSE, eval=FALSE}
-
-library(deSolve)
-library(grid)
-library(gridExtra)
+__Run date__: 21 April 2020
 
 
-######################################
-## SIER Modeling -------
-######################################
-# Parameters
-# beta = rate of expusore from susceptible infected contact 
-# sigma = rate at which exposed person becomes infected
-# gamma = rate at which infected person recovers
-# S = Initial susceptible population
-# E = Initial exposed population
-# I = Initial infected population
-# R = Recovered population
+This is the second projection. For the initial project, please scroll up. The methodology is discussed above.
 
 
-fit_seir <- function(country_name='Bangladesh(unoff)', 
-                     N=170000000, af=0.5, npast=2, nfuture=10){
-  # country = Country name
-  # N = population size of the country
-  # af = ascertainment factor, default = 0.5
-  # country = "Bangladesh(unoff)"
-  # npast = number of days in the past to exclude when fitting the model
-  # default is npast = 5
-  # nfuture = number of days in the future the algorithm to predict to
-  # default is nfuture=10
-  
-  
-  SEIR <- function(time, state, parameters) {
-    par <- as.list(c(state, parameters))
-    with(par, {
-      dS <- -beta * I * S/N
-      dE <- beta * I * S/N - sigma * E
-      dI <- sigma * E - gamma * I
-      dR <- gamma * I
-      list(c(dS, dE, dI, dR))
-    })
-  }
-  
-  # define a function to calculate the residual sum of squares
-  # (RSS), passing in parameters beta, sigma, and gamma that are to be
-  # optimised for the best fit to the incidence data
-  
-  RSS <- function(parameters) {
-    names(parameters) <- c("beta", "sigma", "gamma")
-    out <- ode(y = init, times = Day, func = SEIR, parms = parameters)
-    fit <- out[, 4]
-    sum((infected - fit)^2)
-  }
-  
-  country = enquo(country_name)
-  df <- bd_unoff %>% filter(country == !!country, cum_cases>0)
-  infected <- df %>% filter(date >= min(date), date <= today() - 1 - npast) %>%
-    pull(cum_cases)
-  
-  R = 0; E=0; I = infected[1]; S = N - E - I - R
-  
-  seir_start_date <- df %>% pull(date) %>% min()
-  
-  # Ascertainment factor
-  infected = infected * 1/af
+```{r, projection-bangladesh-graph-run2, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE}
 
-  # Create an incrementing Day vector the same length as our
-  # cases vector
-  Day <- 1:(length(infected))
-  
-  # now specify initial values for S, I and R
-  init <- c(S = S, E=E, I=I, R=R)
-  
-  # now find the values of beta, sigma. and gamma that give the
-  # smallest RSS, which represents the best fit to the data.
-  # We perform a constrined optimization with initial parameters
-  # set as .5. We bound the params within 0.01 and 0.999 (I've made 
-  # the choice). Feel free to change it to c(0, 1). But you may face
-  # issues with convergence
-  
-  opt <- optim(c(.5, .5, .5), RSS, method = "L-BFGS-B", 
-               lower = c(0.01,0.01,0.01), upper = c(.999, .999, .999), 
-               control=list(maxit = 1000))
-  
-  # check for convergence
-  opt_msg = opt$message
-  opt_par <- setNames(opt$par, c("beta", "sigma", "gamma"))
+run_date = ymd("2020-04-21")
+a1 <- fit_seir(country = "Bangladesh(unoff)",  af=.25, nfuture = 5, 
+               run_date = run_date)
+p1<- a1$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" ))
 
-  beta = opt_par["beta"]
-  gamma = opt_par["gamma"]
-  sigma = opt_par["sigma"]
-  R0 = as.numeric(beta/gamma) # there is a more complex formula 
-  
-  
-  # time in days for predictions
-  t <- 1:(as.integer(today() - seir_start_date)  + nfuture)
-  
-  # get the fitted values from our SEIR model
-  
-  odefit = ode(y = init, times = t, func = SEIR, parms = opt_par)
-  fitted_cases <- data.frame(odefit)
-  
-  # add a Date column and join the observed incidence data
-  fitted_cases <- fitted_cases %>% 
-    mutate(date = seir_start_date + days(t - 1)) %>% 
-    left_join(df %>% filter(cum_cases>0) %>% ungroup() %>%
-                select(date, cum_cases))
-  
-  
-  # Return
-  list(country=country_name, infected = infected,
-       opt_msg=opt_msg, opt_par = opt_par, R0=R0, opt_msg=opt_msg, 
-       fitted_cases=fitted_cases, N=N, af=af)
-  
-}
+a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = 5, 
+               run_date = run_date)
+p2<- a2$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" ))
+
+a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = 5,
+               run_date = run_date)
+p3<- a3$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" ))
+
+
+a4 <- fit_seir(country = "Bangladesh(unoff)", af=.9, nfuture = 5, run_date = run_date)
+p4<- a4$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" ))
+
+
+
+grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, 
+             top = textGrob(paste0("COVID-19 observed and 5-day projected incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()),
+             gp=gpar(fontsize=16, font=16)))
 ```
 
+It turns out that the bottom right one fits the current data best. So lets put that figure on a bigger canvas. Please note that in Run 1, we used a similar $R_0$ but a lower ascertainment rate. This time, a higher ascertainment rate is associated with a similar $R_0$.
 
 
+```{r, projection-bangladesh-graph-best-run2, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE}
+# Plotting the best fit
+p4
+```
+
+### Projection for the next 5 days
+
+```{r, echo=FALSE, fig.cap="Actual and Predicted Cumulative Cases using SEIR Model"}
+a4$fitted_cases %>% as.data.frame() %>%
+  mutate(
+    Date = date,
+    `Actual daily cases` = c(0, diff(cum_cases)),
+    `Actual cumulative cases` = cum_cases,
+    `Projected cumulative cases` = round(I, digits = 0),
+    `Projected daily cases` = c(0, diff(`Projected cumulative cases`))
+  ) %>%
+  select(Date, `Actual daily cases`, `Projected daily cases`,
+         `Actual cumulative cases`,
+          `Projected cumulative cases` ) %>%
+  tail(12) %>%
+  kable(format = "html", 
+        caption=paste("Predicted new cases for the next 5 days")) %>%
+          kable_styling(position = "center")
+```
+
+### Projection for 100 days into the future
+
+Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August. 
+
+```{r, projection-bangladesh-graph-100-run2, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE}
+
+nfuture=100
+
+a1 <- fit_seir(country = "Bangladesh(unoff)", af=.25, nfuture = nfuture, run_date = run_date)
+p1<- a1$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  # geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" ))
+
+a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = nfuture)
+p2<- a2$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  # geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" ))
+
+a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = nfuture)
+p3<- a3$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  # geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" ))
+
+
+a4 <- fit_seir(country = "Bangladesh(unoff)", af=.9, nfuture = nfuture)
+p4<- a4$fitted_cases %>% 
+  ggplot(aes(x = date)) + 
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = E), colour = "blue") +
+  # geom_line(aes(y = R), colour = "darkgreen") +
+  geom_point(aes(y = cum_cases), colour = "orange") + 
+  scale_y_continuous(labels = scales::comma) +
+  # scale_y_continuous(labels = scales::comma, trans = 'log') + 
+  labs(y = "Cumulative incidence", 
+       title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" ))
+
+
+grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, 
+             top = textGrob(paste0("COVID-19 observed and 100-day projected  incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()),
+             gp=gpar(fontsize=16, font=16)))
+
+# grid.arrange(a, b, c, d,ncol=2, 
+#      nrow=2, top=textGrob("Title", gp=gpar(fontsize=15,font=8)))
+
+```

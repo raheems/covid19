@@ -156,12 +156,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="projection.html"><a href="projection.html"><i class="fa fa-check"></i><b>4</b> Projections</a><ul>
-<li class="chapter" data-level="4.1" data-path="projection.html"><a href="projection.html#projection-bangladesh"><i class="fa fa-check"></i><b>4.1</b> Projection for Bangladesh (unofficial)</a><ul>
+<li class="chapter" data-level="4.1" data-path="projection.html"><a href="projection.html#projection-bangladesh-run1"><i class="fa fa-check"></i><b>4.1</b> Projection for Bangladesh (unofficial) Run1</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="projection.html"><a href="projection.html#methodology"><i class="fa fa-check"></i><b>4.1.1</b> Methodology</a></li>
 <li class="chapter" data-level="4.1.2" data-path="projection.html"><a href="projection.html#ascertainment-rate"><i class="fa fa-check"></i><b>4.1.2</b> Ascertainment Rate</a></li>
 <li class="chapter" data-level="4.1.3" data-path="projection.html"><a href="projection.html#projection-for-the-next-5-days"><i class="fa fa-check"></i><b>4.1.3</b> Projection for the next 5 days</a></li>
 <li class="chapter" data-level="4.1.4" data-path="projection.html"><a href="projection.html#projection-for-100-days-into-the-future"><i class="fa fa-check"></i><b>4.1.4</b> Projection for 100 days into the future</a></li>
-<li class="chapter" data-level="4.1.5" data-path="projection.html"><a href="projection.html#r-code-for-fitting-seir"><i class="fa fa-check"></i><b>4.1.5</b> R code for fitting SEIR</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="projection.html"><a href="projection.html#projection-bangladesh-run2"><i class="fa fa-check"></i><b>4.2</b> Projection for Bangladesh (unofficial) Run 2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="projection.html"><a href="projection.html#projection-for-the-next-5-days-1"><i class="fa fa-check"></i><b>4.2.1</b> Projection for the next 5 days</a></li>
+<li class="chapter" data-level="4.2.2" data-path="projection.html"><a href="projection.html#projection-for-100-days-into-the-future-1"><i class="fa fa-check"></i><b>4.2.2</b> Projection for 100 days into the future</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scipubs.html"><a href="scipubs.html"><i class="fa fa-check"></i><b>5</b> Publications</a><ul>
@@ -204,9 +207,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="projection" class="section level1">
 <h1><span class="header-section-number">Report 4</span> Projections</h1>
-<div id="projection-bangladesh" class="section level2">
-<h2><span class="header-section-number">4.1</span> Projection for Bangladesh (unofficial)</h2>
-<p><strong>Last updated:</strong> 2020-04-21</p>
+<div id="projection-bangladesh-run1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Projection for Bangladesh (unofficial) Run1</h2>
+<p><strong>Run date</strong>: 17 April 2020</p>
 <p>This is a dynamic document and will be updated frequently. Please check back for latest projection. This projection is based on unofficial Bangladesh incidence data.</p>
 <div id="methodology" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Methodology</h3>
@@ -228,6 +231,120 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">4.1.2</span> Ascertainment Rate</h3>
 <p>Not all the cases are reported or tested. Usually a fraction of the actual cases are detected. This is known as ascertainment rate. We consider 25%, 50%, 75% amd 90% ascertainment rate when fitting the model.</p>
 <p>Simply, the incidences are inflated by the inverse of the ascertainment rate.</p>
+<p>Please let me know if you find any error in it. The code was adapted from <span class="citation">Churches (<a href="#ref-churches2020covid19rpart1">2020</a>)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(deSolve)
+<span class="kw">library</span>(grid)
+<span class="kw">library</span>(gridExtra)
+
+
+######################################
+## SIER Modeling -------
+######################################
+<span class="co"># Parameters</span>
+<span class="co"># beta = rate of expusore from susceptible infected contact </span>
+<span class="co"># sigma = rate at which exposed person becomes infected</span>
+<span class="co"># gamma = rate at which infected person recovers</span>
+<span class="co"># S = Initial susceptible population</span>
+<span class="co"># E = Initial exposed population</span>
+<span class="co"># I = Initial infected population</span>
+<span class="co"># R = Recovered population</span>
+
+fit_seir &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">country_name=</span><span class="st">&#39;Bangladesh(unoff)&#39;</span>, 
+                     <span class="dt">N=</span><span class="dv">170000000</span>, 
+                     <span class="dt">af=</span><span class="fl">0.5</span>, <span class="dt">npast=</span><span class="dv">2</span>, <span class="dt">nfuture=</span><span class="dv">5</span>, 
+                     <span class="dt">run_date =</span> <span class="kw">today</span>()){
+  <span class="co"># country = Country name</span>
+  <span class="co"># N = population size of the country</span>
+  <span class="co"># af = ascertainment factor, default = 0.5</span>
+  <span class="co"># country = &quot;Bangladesh(unoff)&quot;</span>
+  <span class="co"># npast = number of days in the past to exclude when fitting the model</span>
+  <span class="co"># default is npast = 2</span>
+  <span class="co"># nfuture = number of days in the future the algorithm to predict to</span>
+  <span class="co"># default is nfuture=5</span>
+  <span class="co"># run_date: set the cut off date so that the later runs do not overrite</span>
+  <span class="co"># previous runs.</span>
+  
+  SEIR &lt;-<span class="st"> </span><span class="cf">function</span>(time, state, parameters) {
+    par &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">c</span>(state, parameters))
+    <span class="kw">with</span>(par, {
+      dS &lt;-<span class="st"> </span><span class="op">-</span>beta <span class="op">*</span><span class="st"> </span>I <span class="op">*</span><span class="st"> </span>S<span class="op">/</span>N
+      dE &lt;-<span class="st"> </span>beta <span class="op">*</span><span class="st"> </span>I <span class="op">*</span><span class="st"> </span>S<span class="op">/</span>N <span class="op">-</span><span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>E
+      dI &lt;-<span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>E <span class="op">-</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>I
+      dR &lt;-<span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>I
+      <span class="kw">list</span>(<span class="kw">c</span>(dS, dE, dI, dR))
+    })
+  }
+
+  <span class="co"># define a function to calculate the residual sum of squares</span>
+  <span class="co"># (RSS), passing in parameters beta and gamma that are to be</span>
+  <span class="co"># optimised for the best fit to the incidence data</span>
+  
+  RSS &lt;-<span class="st"> </span><span class="cf">function</span>(parameters) {
+    <span class="kw">names</span>(parameters) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>)
+    out &lt;-<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> init, <span class="dt">times =</span> Day, <span class="dt">func =</span> SEIR, <span class="dt">parms =</span> parameters)
+    fit &lt;-<span class="st"> </span>out[, <span class="dv">4</span>]
+    <span class="kw">sum</span>((infected <span class="op">-</span><span class="st"> </span>fit)<span class="op">^</span><span class="dv">2</span>)
+  }
+  
+  country =<span class="st"> </span><span class="kw">enquo</span>(country_name)
+  
+  df &lt;-<span class="st"> </span>bd_unoff <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span><span class="op">!!</span>country, cum_cases<span class="op">&gt;</span><span class="dv">0</span>, date <span class="op">&lt;=</span><span class="st"> </span>run_date)
+  infected &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">min</span>(date), date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">today</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>npast) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">pull</span>(cum_cases)
+  
+  R =<span class="st"> </span><span class="dv">0</span>; E=<span class="dv">0</span>; I =<span class="st"> </span>infected[<span class="dv">1</span>]; S =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span>E <span class="op">-</span><span class="st"> </span>I <span class="op">-</span><span class="st"> </span>R
+  
+  seir_start_date &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">min</span>()
+  
+  <span class="co"># Ascertainment factor</span>
+  infected =<span class="st"> </span>infected <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>af
+  
+  <span class="co"># Create an incrementing Day vector the same length as our</span>
+  <span class="co"># cases vector</span>
+  Day &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(infected))
+  
+  <span class="co"># now specify initial values for S, I and R</span>
+  init &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">S =</span> S, <span class="dt">E=</span>E, <span class="dt">I=</span>I, <span class="dt">R=</span>R)
+  
+  <span class="co"># now find the values of beta and gamma that give the</span>
+  <span class="co"># smallest RSS, which represents the best fit to the data.</span>
+  <span class="co"># Start with values of 0.5 for each, and constrain them to</span>
+  <span class="co"># the interval 0 to 1.0</span>
+  
+  opt &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">5</span>, .<span class="dv">5</span>), RSS, <span class="dt">method =</span> <span class="st">&quot;L-BFGS-B&quot;</span>, 
+               <span class="dt">lower =</span> <span class="kw">c</span>(<span class="fl">0.01</span>,<span class="fl">0.01</span>,<span class="fl">0.01</span>), <span class="dt">upper =</span> <span class="kw">c</span>(.<span class="dv">999</span>, .<span class="dv">999</span>, .<span class="dv">999</span>), 
+               <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">1000</span>))
+  
+  <span class="co"># check for convergence</span>
+  opt_msg =<span class="st"> </span>opt<span class="op">$</span>message
+  opt_par &lt;-<span class="st"> </span><span class="kw">setNames</span>(opt<span class="op">$</span>par, <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>))
+
+  beta =<span class="st"> </span>opt_par[<span class="st">&quot;beta&quot;</span>]
+  gamma =<span class="st"> </span>opt_par[<span class="st">&quot;gamma&quot;</span>]
+  sigma =<span class="st"> </span>opt_par[<span class="st">&quot;sigma&quot;</span>]
+  R0 =<span class="st"> </span><span class="kw">as.numeric</span>(beta<span class="op">/</span>gamma)
+  
+  
+  <span class="co"># time in days for predictions</span>
+  t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">as.integer</span>(<span class="kw">today</span>() <span class="op">-</span><span class="st"> </span>seir_start_date)  <span class="op">+</span><span class="st"> </span>nfuture)
+  
+  <span class="co"># get the fitted values from our SEIR model</span>
+  
+  odefit =<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> init, <span class="dt">times =</span> t, <span class="dt">func =</span> SEIR, <span class="dt">parms =</span> opt_par)
+  fitted_cases &lt;-<span class="st"> </span><span class="kw">data.frame</span>(odefit)
+  
+  <span class="co"># add a Date column and join the observed incidence data</span>
+  fitted_cases &lt;-<span class="st"> </span>fitted_cases <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">date =</span> seir_start_date <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(t <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">left_join</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(cum_cases<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">select</span>(date, cum_cases))
+  
+  <span class="co"># Return</span>
+  <span class="kw">list</span>(<span class="dt">country=</span>country_name, <span class="dt">infected =</span> infected,
+       <span class="dt">opt_msg=</span>opt_msg, <span class="dt">opt_par =</span> opt_par, <span class="dt">R0=</span>R0, <span class="dt">opt_msg=</span>opt_msg, 
+       <span class="dt">fitted_cases=</span>fitted_cases, <span class="dt">N=</span>N, <span class="dt">af=</span>af)
+  
+}</code></pre></div>
 <p><img src="covid19_files/figure-html/projection-bangladesh-graph-1.png" width="960" /></p>
 <p>It turns out that the bottom left one fits the current data best. So lets put that figure on a bigger canvas.</p>
 <p><img src="covid19_files/figure-html/projection-bangladesh-graph-best-1.png" width="960" /></p>
@@ -236,7 +353,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">4.1.3</span> Projection for the next 5 days</h3>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-22">Table 4.1: </span>Predicted new cases for the next 5 days
+<span id="tab:unnamed-chunk-2">Table 4.1: </span>Predicted new cases for the next 5 days
 </caption>
 <thead>
 <tr>
@@ -468,122 +585,289 @@ NA
 <p>Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August.</p>
 <p><img src="covid19_files/figure-html/projection-bangladesh-graph-100-1.png" width="960" /></p>
 </div>
-<div id="r-code-for-fitting-seir" class="section level3">
-<h3><span class="header-section-number">4.1.5</span> R code for fitting SEIR</h3>
-<p>Please let me know if you find any error in it. The code was adapted from <span class="citation">Churches (<a href="#ref-churches2020covid19rpart1">2020</a>)</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(deSolve)
-<span class="kw">library</span>(grid)
-<span class="kw">library</span>(gridExtra)
-
-
-######################################
-## SIER Modeling -------
-######################################
-<span class="co"># Parameters</span>
-<span class="co"># beta = rate of expusore from susceptible infected contact </span>
-<span class="co"># sigma = rate at which exposed person becomes infected</span>
-<span class="co"># gamma = rate at which infected person recovers</span>
-<span class="co"># S = Initial susceptible population</span>
-<span class="co"># E = Initial exposed population</span>
-<span class="co"># I = Initial infected population</span>
-<span class="co"># R = Recovered population</span>
-
-
-fit_seir &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">country_name=</span><span class="st">&#39;Bangladesh(unoff)&#39;</span>, 
-                     <span class="dt">N=</span><span class="dv">170000000</span>, <span class="dt">af=</span><span class="fl">0.5</span>, <span class="dt">npast=</span><span class="dv">2</span>, <span class="dt">nfuture=</span><span class="dv">10</span>){
-  <span class="co"># country = Country name</span>
-  <span class="co"># N = population size of the country</span>
-  <span class="co"># af = ascertainment factor, default = 0.5</span>
-  <span class="co"># country = &quot;Bangladesh(unoff)&quot;</span>
-  <span class="co"># npast = number of days in the past to exclude when fitting the model</span>
-  <span class="co"># default is npast = 5</span>
-  <span class="co"># nfuture = number of days in the future the algorithm to predict to</span>
-  <span class="co"># default is nfuture=10</span>
-  
-  
-  SEIR &lt;-<span class="st"> </span><span class="cf">function</span>(time, state, parameters) {
-    par &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">c</span>(state, parameters))
-    <span class="kw">with</span>(par, {
-      dS &lt;-<span class="st"> </span><span class="op">-</span>beta <span class="op">*</span><span class="st"> </span>I <span class="op">*</span><span class="st"> </span>S<span class="op">/</span>N
-      dE &lt;-<span class="st"> </span>beta <span class="op">*</span><span class="st"> </span>I <span class="op">*</span><span class="st"> </span>S<span class="op">/</span>N <span class="op">-</span><span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>E
-      dI &lt;-<span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>E <span class="op">-</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>I
-      dR &lt;-<span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>I
-      <span class="kw">list</span>(<span class="kw">c</span>(dS, dE, dI, dR))
-    })
-  }
-  
-  <span class="co"># define a function to calculate the residual sum of squares</span>
-  <span class="co"># (RSS), passing in parameters beta, sigma, and gamma that are to be</span>
-  <span class="co"># optimised for the best fit to the incidence data</span>
-  
-  RSS &lt;-<span class="st"> </span><span class="cf">function</span>(parameters) {
-    <span class="kw">names</span>(parameters) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>)
-    out &lt;-<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> init, <span class="dt">times =</span> Day, <span class="dt">func =</span> SEIR, <span class="dt">parms =</span> parameters)
-    fit &lt;-<span class="st"> </span>out[, <span class="dv">4</span>]
-    <span class="kw">sum</span>((infected <span class="op">-</span><span class="st"> </span>fit)<span class="op">^</span><span class="dv">2</span>)
-  }
-  
-  country =<span class="st"> </span><span class="kw">enquo</span>(country_name)
-  df &lt;-<span class="st"> </span>bd_unoff <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span><span class="op">!!</span>country, cum_cases<span class="op">&gt;</span><span class="dv">0</span>)
-  infected &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">min</span>(date), date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">today</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>npast) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">pull</span>(cum_cases)
-  
-  R =<span class="st"> </span><span class="dv">0</span>; E=<span class="dv">0</span>; I =<span class="st"> </span>infected[<span class="dv">1</span>]; S =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span>E <span class="op">-</span><span class="st"> </span>I <span class="op">-</span><span class="st"> </span>R
-  
-  seir_start_date &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">min</span>()
-  
-  <span class="co"># Ascertainment factor</span>
-  infected =<span class="st"> </span>infected <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>af
-
-  <span class="co"># Create an incrementing Day vector the same length as our</span>
-  <span class="co"># cases vector</span>
-  Day &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(infected))
-  
-  <span class="co"># now specify initial values for S, I and R</span>
-  init &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">S =</span> S, <span class="dt">E=</span>E, <span class="dt">I=</span>I, <span class="dt">R=</span>R)
-  
-  <span class="co"># now find the values of beta, sigma. and gamma that give the</span>
-  <span class="co"># smallest RSS, which represents the best fit to the data.</span>
-  <span class="co"># We perform a constrined optimization with initial parameters</span>
-  <span class="co"># set as .5. We bound the params within 0.01 and 0.999 (I&#39;ve made </span>
-  <span class="co"># the choice). Feel free to change it to c(0, 1). But you may face</span>
-  <span class="co"># issues with convergence</span>
-  
-  opt &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">5</span>, .<span class="dv">5</span>), RSS, <span class="dt">method =</span> <span class="st">&quot;L-BFGS-B&quot;</span>, 
-               <span class="dt">lower =</span> <span class="kw">c</span>(<span class="fl">0.01</span>,<span class="fl">0.01</span>,<span class="fl">0.01</span>), <span class="dt">upper =</span> <span class="kw">c</span>(.<span class="dv">999</span>, .<span class="dv">999</span>, .<span class="dv">999</span>), 
-               <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">1000</span>))
-  
-  <span class="co"># check for convergence</span>
-  opt_msg =<span class="st"> </span>opt<span class="op">$</span>message
-  opt_par &lt;-<span class="st"> </span><span class="kw">setNames</span>(opt<span class="op">$</span>par, <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>))
-
-  beta =<span class="st"> </span>opt_par[<span class="st">&quot;beta&quot;</span>]
-  gamma =<span class="st"> </span>opt_par[<span class="st">&quot;gamma&quot;</span>]
-  sigma =<span class="st"> </span>opt_par[<span class="st">&quot;sigma&quot;</span>]
-  R0 =<span class="st"> </span><span class="kw">as.numeric</span>(beta<span class="op">/</span>gamma) <span class="co"># there is a more complex formula </span>
-  
-  
-  <span class="co"># time in days for predictions</span>
-  t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">as.integer</span>(<span class="kw">today</span>() <span class="op">-</span><span class="st"> </span>seir_start_date)  <span class="op">+</span><span class="st"> </span>nfuture)
-  
-  <span class="co"># get the fitted values from our SEIR model</span>
-  
-  odefit =<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> init, <span class="dt">times =</span> t, <span class="dt">func =</span> SEIR, <span class="dt">parms =</span> opt_par)
-  fitted_cases &lt;-<span class="st"> </span><span class="kw">data.frame</span>(odefit)
-  
-  <span class="co"># add a Date column and join the observed incidence data</span>
-  fitted_cases &lt;-<span class="st"> </span>fitted_cases <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">date =</span> seir_start_date <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(t <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">left_join</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(cum_cases<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">select</span>(date, cum_cases))
-  
-  
-  <span class="co"># Return</span>
-  <span class="kw">list</span>(<span class="dt">country=</span>country_name, <span class="dt">infected =</span> infected,
-       <span class="dt">opt_msg=</span>opt_msg, <span class="dt">opt_par =</span> opt_par, <span class="dt">R0=</span>R0, <span class="dt">opt_msg=</span>opt_msg, 
-       <span class="dt">fitted_cases=</span>fitted_cases, <span class="dt">N=</span>N, <span class="dt">af=</span>af)
-  
-}</code></pre></div>
+</div>
+<div id="projection-bangladesh-run2" class="section level2">
+<h2><span class="header-section-number">4.2</span> Projection for Bangladesh (unofficial) Run 2</h2>
+<p><strong>Run date</strong>: 21 April 2020</p>
+<p>This is the second projection. For the initial project, please scroll up. The methodology is discussed above.</p>
+<p><img src="covid19_files/figure-html/projection-bangladesh-graph-run2-1.png" width="960" /></p>
+<p>It turns out that the bottom right one fits the current data best. So lets put that figure on a bigger canvas. Please note that in Run 1, we used a similar <span class="math inline">\(R_0\)</span> but a lower ascertainment rate. This time, a higher ascertainment rate is associated with a similar <span class="math inline">\(R_0\)</span>.</p>
+<p><img src="covid19_files/figure-html/projection-bangladesh-graph-best-run2-1.png" width="960" /></p>
+<div id="projection-for-the-next-5-days-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Projection for the next 5 days</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-3">Table 4.2: </span>Predicted new cases for the next 5 days
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:right;">
+Actual daily cases
+</th>
+<th style="text-align:right;">
+Projected daily cases
+</th>
+<th style="text-align:right;">
+Actual cumulative cases
+</th>
+<th style="text-align:right;">
+Projected cumulative cases
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+2020-04-14
+</td>
+<td style="text-align:right;">
+209
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+1012
+</td>
+<td style="text-align:right;">
+1132
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+39
+</td>
+<td style="text-align:left;">
+2020-04-15
+</td>
+<td style="text-align:right;">
+219
+</td>
+<td style="text-align:right;">
+228
+</td>
+<td style="text-align:right;">
+1231
+</td>
+<td style="text-align:right;">
+1360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+2020-04-16
+</td>
+<td style="text-align:right;">
+341
+</td>
+<td style="text-align:right;">
+274
+</td>
+<td style="text-align:right;">
+1572
+</td>
+<td style="text-align:right;">
+1634
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41
+</td>
+<td style="text-align:left;">
+2020-04-17
+</td>
+<td style="text-align:right;">
+266
+</td>
+<td style="text-align:right;">
+329
+</td>
+<td style="text-align:right;">
+1838
+</td>
+<td style="text-align:right;">
+1963
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:left;">
+2020-04-18
+</td>
+<td style="text-align:right;">
+306
+</td>
+<td style="text-align:right;">
+396
+</td>
+<td style="text-align:right;">
+2144
+</td>
+<td style="text-align:right;">
+2359
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+43
+</td>
+<td style="text-align:left;">
+2020-04-19
+</td>
+<td style="text-align:right;">
+312
+</td>
+<td style="text-align:right;">
+475
+</td>
+<td style="text-align:right;">
+2456
+</td>
+<td style="text-align:right;">
+2834
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:left;">
+2020-04-20
+</td>
+<td style="text-align:right;">
+492
+</td>
+<td style="text-align:right;">
+571
+</td>
+<td style="text-align:right;">
+2948
+</td>
+<td style="text-align:right;">
+3405
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+45
+</td>
+<td style="text-align:left;">
+2020-04-21
+</td>
+<td style="text-align:right;">
+434
+</td>
+<td style="text-align:right;">
+686
+</td>
+<td style="text-align:right;">
+3382
+</td>
+<td style="text-align:right;">
+4091
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+46
+</td>
+<td style="text-align:left;">
+2020-04-22
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+825
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+4916
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+47
+</td>
+<td style="text-align:left;">
+2020-04-23
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+990
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+5906
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+2020-04-24
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1190
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+7096
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+2020-04-25
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1429
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+8525
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="projection-for-100-days-into-the-future-1" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Projection for 100 days into the future</h3>
+<p>Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August.</p>
+<p><img src="covid19_files/figure-html/projection-bangladesh-graph-100-run2-1.png" width="960" /></p>
 
 </div>
 </div>
