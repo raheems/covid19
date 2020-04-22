@@ -383,7 +383,11 @@ It turns out that the bottom right one fits the current data best. So lets put t
 
 ```{r, projection-bangladesh-graph-best-run2, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE}
 # Plotting the best fit
-p4
+# p4 + ggtitle(paste0("Best fit model\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)", " ", run_date))
+
+p4 + ggtitle(paste0("Best fit model as of ", run_date, "\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n", " ","R0 =", format(a4$R0, digit=3)," and ", "assumsed reporting= ", a4$af*100,"%"))
+       
+
 ```
 
 ### Projection for the next 5 days
