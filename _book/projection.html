@@ -207,6 +207,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="projection" class="section level1">
 <h1><span class="header-section-number">Report 4</span> Projections</h1>
+<p><strong>Report last updated:</strong> 2020-04-21</p>
+<ul>
+<li><p>In this udpate, second round of prjections (Run 2) have been added. Please scroll down to find the projections. As usual, the last two current values were not used for fitting the model. Also, the model is conservative/pessimistic i.e., it slightly overestimates new cases.</p></li>
+<li><p>In addition to that, a new paramter to control the <code>run_date</code> was added to the <code>fit_seir()</code> function. See the code for more details.</p></li>
+</ul>
 <div id="projection-bangladesh-run1" class="section level2">
 <h2><span class="header-section-number">4.1</span> Projection for Bangladesh (unofficial) Run1</h2>
 <p><strong>Run date</strong>: 17 April 2020</p>
@@ -261,8 +266,8 @@ fit_seir &lt;-<span class="st"> </span><span class="cf">function</span>(<span cl
   <span class="co"># default is npast = 2</span>
   <span class="co"># nfuture = number of days in the future the algorithm to predict to</span>
   <span class="co"># default is nfuture=5</span>
-  <span class="co"># run_date: set the cut off date so that the later runs do not overrite</span>
-  <span class="co"># previous runs.</span>
+  <span class="co"># run_date = sets the cutoff date so that the later runs do not overrite</span>
+  <span class="co"># previous runs. Default is today()</span>
   
   SEIR &lt;-<span class="st"> </span><span class="cf">function</span>(time, state, parameters) {
     par &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">c</span>(state, parameters))

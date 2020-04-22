@@ -6,6 +6,12 @@
 # source("covid19_global.R")
 ```
 
+__Report last updated:__ `r Sys.Date()`
+
+
+- In this udpate, second round of prjections (Run 2) have been added. Please scroll down to find the projections. As usual, the last two current values were not used for fitting the model. Also, the model is conservative/pessimistic i.e., it slightly overestimates new cases. 
+
+- In addition to that, a new paramter to control the `run_date` was added to the `fit_seir()` function. See the code for more details.
 
 ## Projection for Bangladesh (unofficial) Run1  {#projection-bangladesh-run1}
 
@@ -77,8 +83,8 @@ fit_seir <- function(country_name='Bangladesh(unoff)',
   # default is npast = 2
   # nfuture = number of days in the future the algorithm to predict to
   # default is nfuture=5
-  # run_date: set the cut off date so that the later runs do not overrite
-  # previous runs.
+  # run_date = sets the cutoff date so that the later runs do not overrite
+  # previous runs. Default is today()
   
   SEIR <- function(time, state, parameters) {
     par <- as.list(c(state, parameters))
