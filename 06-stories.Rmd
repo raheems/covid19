@@ -6,6 +6,45 @@ __Report last updated:__ `r Sys.Date()`
 
 ## Rumi Ahmed
 
+### April 7, 2020 (via Facebook)
+
+I lived through the swine flu (2009 H1N1) pandemic which infected 60 million (1 in 6 American) and killed about 12000 Americans. Global death toll was around 300000.
+
+Then we lived through Bird Flu (50% mortality), Ebola (70% mortality), MERS(40% mortality), Zika (airborne and. It this defect) scare and cattle call.
+
+So when COVID-19 started ravaging Wuhan, China and Lombardy, Italy - me and many of my frontline, more informed physician colleague were like the mythical shepherd boys. We Have been dismissive!
+
+Dismissive because, with R0 of 2.5-2.9, SARS-COV-2 was less contagious than SARS-1 of 2002 and definitely much less fatal than SARS-1, MERS, Bird Flu, Ebola etc. We knew that SARS-1, MERS, Avian influenza blazed for a few months in a few localities then stoped abruptly. R0 became <1, the epidemic died down.
+
+And SARS-COV-2 was a petty coronavirus! It was a mere coronavirus!! It was not the feared shifted- drifted influenza virus causing Flu pandemic we have been fearing half of the last century.
+
+Despite SARS -1 and MERS experience - we didn’t give this bat coronavirus due respects it deserved. It was not the feared white walker, it was not the novel influenza pandemic we always have been fearful about.
+
+But this novel coronavirus SARA-COV-2 turned out to be the cause of first coronavirus pandemic, to be more precise , the first non-influenza pandemic in history of mankind.
+
+So what went wrong with this Novel coronavirus? Biologically less contagious and less fatal than SARS-1, instead of behaving like SARS-1 or MERS, why this novel coronavirus is blazing like a catastrophic forest fire?
+
+The answer is in one protein. Remember this name. It’s a protein called Exonuclease.
+Exonuclease!
+
+We are still inside the deep fog of war, at the center of a bloody- muddy battle field, we are wielding swords blindly! We don’t have the clarity of a bird eye view or the luxury of a time lapse retrospect! Hazy view through early data says the following about this new enemy - this virus-
+
+1. It is a bat virus, and thorough perpetual mixing and mutation inside the bat reservoir, this bat virus mutated and developed as a new virus sometimes between 1948 and 1972. Chinese horseshoe bats are carrying this virus for the last several decades!
+2. Like tornado chasers - there are a group of scientists knows as virus chasers who are skimming wild bat habitants in search of viruses that they call pre-pandemic viruses. They are isolating bat viruses which in the future has the potential to transmit to human and cause a new pandemic. They are pre-preparing for the next pandemic by sequencing them and trying to see vaccine potential. This new SARS-COV-2 was not in that pre-pandemic bat virus database. In fact this virus was never known to us despite it was circulating inside horseshoe bats for the last several decades. It says that our limited search efforts with lackluster funding was not enough to capture many bat viruses.
+3. This horseshoe Chinese cave bats are not fruit bats- they have teeth and may infect human / other animals by any close contact.
+4. Somehow humans got this SARS-COV-2 bat virus and stated getting sick. Did this jump ( virus changing host from bat to human) happen last fall? Did similar COVID-19 disease clusters happen before 2019 but we didn’t notice? Very possible.
+5. Remember AIDS. We always thought that HIV virus came to Human from Chimpanzee in 1983. But we now know that the jump probably happened in 1929! Since 1929, there have been undetected local epidemics AIDS.
+6. So SARS-COV-2 virus found this new host in human species which is abundant in planet earth.
+7. This virus, in this new host, has only one job in life- propagate!
+8. Remember the evolutionary theory of selection. This virus came this far- and so far winning against the most powerful species ever lived in this planet, Homo sapiens - this virus is the fittest. Genetically and biochemically, this virus is the chosen one, the selected one to survive and propagate. Millions / billions of other weaker viral species got defeated / lost out - this one didn’t! This is pure simple theory of selection!
+
+Why this virus has been selected to come this far and win over a complex new host? There are many factors and explanations! But one factor is that it has a protein called Exonuclease in its arsenal!
+
+Exonuclease is a protein this virus generates for a job called genetic proof-reading! Viruses are constantly replicating into new viruses. That’s how they propagate. Usually viral spreads die down after an initially blaze because the progeny keeps getting weaker and weaker due to constant mutations. Usually viruses don’t have a quality control officer in its payroll!
+
+But this virus has a powerful quality control officer. This Exonuclease protein is ensuring that every single progeny this virus is producing is a healthy progeny. It’s not allowing heavily mutated viruses which usually terminated the chain of transmission. And because of this Exonuclease, unlike SARS-1, MERS, this virus is not suddenly disappearing from the horizon; rather with Alexander the Great vigor, this virus is marching - conquering country after country, sacking city after city!
+
+
 ### April 16, 2020 - Bats (via Facebook)
 
 Of bats and viruses!
@@ -52,41 +91,52 @@ We talked about the bat lady Dr Shi Zheng-Li of Wuhan institution of Virology th
 — In the second part I’ll discuss more about the viruses. Stay tuned!
 Part 2 will be about viruses!
 
-### April 7, 2020 (via Facebook)
 
-I lived through the swine flu (2009 H1N1) pandemic which infected 60 million (1 in 6 American) and killed about 12000 Americans. Global death toll was around 300000.
 
-Then we lived through Bird Flu (50% mortality), Ebola (70% mortality), MERS(40% mortality), Zika (airborne and. It this defect) scare and cattle call.
+### April 21, 2020 - Bats (Part 2 and 3)
 
-So when COVID-19 started ravaging Wuhan, China and Lombardy, Italy - me and many of my frontline, more informed physician colleague were like the mythical shepherd boys. We Have been dismissive!
+1. Talking about viruses means throwing in a lot of large mathematical values and big numbers - the extent of which most of our minds are unable to fathom.
 
-Dismissive because, with R0 of 2.5-2.9, SARS-COV-2 was less contagious than SARS-1 of 2002 and definitely much less fatal than SARS-1, MERS, Bird Flu, Ebola etc. We knew that SARS-1, MERS, Avian influenza blazed for a few months in a few localities then stoped abruptly. R0 became <1, the epidemic died down.
+2. We know quiet a bit about people being infected with coronavirus. We we also see that while some are becoming sick,
+a lot more who are invaded / infected by the virus but are not getting sick.
 
-And SARS-COV-2 was a petty coronavirus! It was a mere coronavirus!! It was not the feared shifted- drifted influenza virus causing Flu pandemic we have been fearing half of the last century.
+3. Viruses probably doesn’t want to kill us. Killing the new host is not in the best interest for ￼the virus also. These virus are here today after 3 million years of evolution and selection. And they are genetically and proteomically fittest, hence very apt at surviving and spreading in current zoonome.
 
-Despite SARS -1 and MERS experience - we didn’t give this bat coronavirus due respects it deserved. It was not the feared white walker, it was not the novel influenza pandemic we always have been fearful about.
+4. Only thing they want is to make our body their home and live without harming us much. We are great hosts for them - because there are seven billion of us and we live a social life - in close congregation - so if needed they can jump from one to another. We are their dream home!
 
-But this novel coronavirus SARA-COV-2 turned out to be the cause of first coronavirus pandemic, to be more precise , the first non-influenza pandemic in history of mankind.
+5. Once they can safely reside in us - we are so many in number - they won’t have to look for new home- their only job will be to keep propagating - for millions of years!
 
-So what went wrong with this Novel coronavirus? Biologically less contagious and less fatal than SARS-1, instead of behaving like SARS-1 or MERS, why this novel coronavirus is blazing like a catastrophic forest fire?
+6. Naturally and understandably, our body is home to innumerable viruses. A good count or number is impossible to deduct. We have 40 trillion bacteria in our body and usually we know that there are ten times more viruses in nature than bacteria. Hence it is assumed that there are 400 trillion viruses who call out body their home.
 
-The answer is in one protein. Remember this name. It’s a protein called Exonuclease.
-Exonuclease!
+7. We have a peace treaty with these viruses, there is a longstanding ceasefire. We don’t fight each other. Many, if not most, viruses are helpful for us.
 
-We are still inside the deep fog of war, at the center of a bloody- muddy battle field, we are wielding swords blindly! We don’t have the clarity of a bird eye view or the luxury of a time lapse retrospect! Hazy view through early data says the following about this new enemy - this virus-
+8. But how can a virus be helpful? Before we discuss that let’s first talk about virus biodiversity in our body. We are still learning and our knowledge of human virome is still very incomplete.
 
-1. It is a bat virus, and thorough perpetual mixing and mutation inside the bat reservoir, this bat virus mutated and developed as a new virus sometimes between 1948 and 1972. Chinese horseshoe bats are carrying this virus for the last several decades!
-2. Like tornado chasers - there are a group of scientists knows as virus chasers who are skimming wild bat habitants in search of viruses that they call pre-pandemic viruses. They are isolating bat viruses which in the future has the potential to transmit to human and cause a new pandemic. They are pre-preparing for the next pandemic by sequencing them and trying to see vaccine potential. This new SARS-COV-2 was not in that pre-pandemic bat virus database. In fact this virus was never known to us despite it was circulating inside horseshoe bats for the last several decades. It says that our limited search efforts with lackluster funding was not enough to capture many bat viruses.
-3. This horseshoe Chinese cave bats are not fruit bats- they have teeth and may infect human / other animals by any close contact.
-4. Somehow humans got this SARS-COV-2 bat virus and stated getting sick. Did this jump ( virus changing host from bat to human) happen last fall? Did similar COVID-19 disease clusters happen before 2019 but we didn’t notice? Very possible.
-5. Remember AIDS. We always thought that HIV virus came to Human from Chimpanzee in 1983. But we now know that the jump probably happened in 1929! Since 1929, there have been undetected local epidemics AIDS.
-6. So SARS-COV-2 virus found this new host in human species which is abundant in planet earth.
-7. This virus, in this new host, has only one job in life- propagate!
-8. Remember the evolutionary theory of selection. This virus came this far- and so far winning against the most powerful species ever lived in this planet, Homo sapiens - this virus is the fittest. Genetically and biochemically, this virus is the chosen one, the selected one to survive and propagate. Millions / billions of other weaker viral species got defeated / lost out - this one didn’t! This is pure simple theory of selection!
+9. So far what we have identified - there are 53 different types of human viruses in our body and about 53000 types of viruses which are the viruses living inside the bacteria that live inside our body. We know this from gene sequencing study - really isolating them in culture has been an impossible job.
 
-Why this virus has been selected to come this far and win over a complex new host? There are many factors and explanations! But one factor is that it has a protein called Exonuclease in its arsenal!
+10. Those viruses in bacteria keeps bacteria population in our body under check and don’t let bacteria overwhelm us/ take over us!
 
-Exonuclease is a protein this virus generates for a job called genetic proof-reading! Viruses are constantly replicating into new viruses. That’s how they propagate. Usually viral spreads die down after an initially blaze because the progeny keeps getting weaker and weaker due to constant mutations. Usually viruses don’t have a quality control officer in its payroll!
 
-But this virus has a powerful quality control officer. This Exonuclease protein is ensuring that every single progeny this virus is producing is a healthy progeny. It’s not allowing heavily mutated viruses which usually terminated the chain of transmission. And because of this Exonuclease, unlike SARS-1, MERS, this virus is not suddenly disappearing from the horizon; rather with Alexander the Great vigor, this virus is marching - conquering country after country, sacking city after city!
+11. Humans are mammals. Roughly there are about 6000 species of mammals. How many virus species each mammal carry? So far there has been one real study. A big group of scientists led by world top emerging infection scientist - Dr. Ian Lipkin went to Bangladesh - randomly selected a site - collected flying fox ( fruit bats) for throat swabs, collected urine and stool specimen. A total of -1800 samples! On average they found 58 viruses per bat. Almost all the viruses they identified were new to us. They isolated few bat coronaviruses and most other types of knows virus types. Based on that model we think that mammals have about 400000 different types of viruses, the number rises to 100 million types of we count all vertebrates!
+
+12. But our land based virus is nothing compared to the viruses found in our oceans. Canadian virologist Curtis Suttle always use colorful / sensational allegories when he tries to describe the amount of viruses that reside in our ocean waters.
+
+13. There are 10 to the power 30 number of viruses in our oceans. What does the number 10 to the power 30 mean? It’s a number that normal human brain like mine can’t process. Let me try to explain- if we line up all these marine viruses (100 micron in length on average) side by side that will stretch 10 to the power 28 Kilometers. Believe me that’s a very long distance - about 100 million light years long! Our galaxy is about 150,000 light years across! This line of viruses will span 60 galaxies! How far is the closest star system from earth? Proxima Centauri it is and it’s only about 4.2 light years away!!
+
+14. How much all these ocean virus weight? Their collective weight is equal to the weight of 75 million blue whales!
+
+15. About 10 to power 23 infections are happening every second in our oceans! Virus is the major determinant in the delicate echo balance and marine life cycle and are responsible of 50 % of planet’s oxygen production!
+
+16. In every liter of coastal water there are 10 million viruses. Overall in oceans there are 10 million times more viruses than stars in the galaxy!
+
+17. So that’s about water / sea / river! What about the sky?
+
+Well, about 9000 feet above ground, in the sphere called troposphere, there is transcontinental air current above our weather system! Billions of viral and bacterial particles fly all the way to that high and do transcontinental travel for thousands of miles! And then they shower on us in billions! A single square meter of the planet's surface could be showered with hundreds of millions of viruses — and tens of millions of bacteria — in a single day. These viruses are all over in the air around us. Luckily they are not the types of viruses that are pathogenic to us! Most can’t enter our cells!
+
+18. Measles is a type of virus that may remain air suspended and travel to the far corner of the room staying suspended in air and may infect everyone breathing that air. So are Zoaster! They can fly in air and infect people. As far as we known the current SARS-COV-2 doesn’t have that ability! Luckily Most virus doesn’t have that capacity.
+
+19. Viruses need receptors/ window or door in the cell to enter the cell. Without that they can’t enter. Once virus enters cells - it depends on the Virus how long it will take to start the symptom. Influenza virus symptom starts only on one to two days day after infection! On the other had it may take AIDS virus upto 18 years to start the symptoms!
+
+20. Typically thousands or tens of thousands of coronaviruses need to enter the cells of nose / throats of a person to infect him/ her! But that number is nothing because a hundred million coronavirus particles could fit on the head of a pin. And although we read, worry, talk, discuss about how many days this virus can stay alive on what surface, we need to know that infection window is highest in the first ten minutes.
+
 
