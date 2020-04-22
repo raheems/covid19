@@ -444,7 +444,7 @@ bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh',
                                                 date == max(date)) %>%
   pull(day)
 ```
-Bangladesh has entered on day `r bd_day_indicator` since first confirmed case.
+Bangladesh has entered into day `r bd_day_indicator` since first confirmed case.
 
 
 ```{r, echo=FALSE}
