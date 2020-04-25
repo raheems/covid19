@@ -8,11 +8,6 @@ source("covid19_global.R")
 
 This report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
 
-
-## Bangladesh official data (TBD)
-
-Please see the graph below.
-
 ## Report based on publicly available data
 
 Please note that publicly available data are __not official__ and __MAY BE UNRELIABLE__. I personally did not verify them. I am using them for educational purposes. Use at your discretion.
@@ -44,7 +39,7 @@ p <- ggplot(bd , aes(x = day, y = cum_deaths, color=country)) +
   xlab("Day since first confirmed case") +
   ylab("Cumulative deaths") +
   theme(legend.position="top") +
-  labs(caption = "SOURCE: https://cutt.ly/StTIxJQ")
+  labs(caption = "SOURCE: Bangladesh(unofficial) data compiled from newspaper reports")
 
 p + scale_y_continuous(labels=comma, trans = "log10") 
 
@@ -255,7 +250,7 @@ ggplot(deaths_south_asia, aes(x = day, y = cum_deaths, color=country)) +
   ggtitle( paste("COVID19 cumulative incidences since first incidence \n(Bangladesh's peers)", date_data_refreshed)) +
   xlab("Days since first incidence") +
   ylab("Cumulative deaths") +
-  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center")+
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. Bangladesh(unoff) data compiled from news reports")+
   scale_y_continuous(labels=comma, trans = "log10")
 
 ```

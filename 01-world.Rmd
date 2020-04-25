@@ -309,7 +309,7 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   ggtitle("COVID19 cumulative deaths since first case", data_last_refreshed ) +
   xlab("Days since first case") +
   ylab("Cumulative deaths")+
-  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center.")
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. Bangladesh(unofficial) data compiled from newspaper reports.")
 
 p + scale_color_discrete(name="Country") +
   scale_y_continuous(labels=comma_format(), trans = 'log10')
@@ -388,7 +388,7 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   ggtitle("COVID19 cumulative deaths since first confirmed case", data_last_refreshed ) +
   xlab("Days since first confirmed case") +
   ylab("Cumulative deaths")+
-  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center and other.")
+  labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. Bangladesh(unofficial) data compiled from newspaper reports")
 
 p + scale_color_discrete(name="Country") +
   scale_y_continuous(labels=comma_format(), trans = 'log10') +

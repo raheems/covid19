@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-04-24" />
+<meta name="date" content="2020-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,41 +63,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -147,12 +172,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.4" data-path="usa.html"><a href="usa.html#usa-daily-deaths"><i class="fa fa-check"></i><b>2.4</b> Daily Deaths</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="bangladesh.html"><a href="bangladesh.html"><i class="fa fa-check"></i><b>3</b> Bangladesh</a><ul>
-<li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-official-data-tbd"><i class="fa fa-check"></i><b>3.1</b> Bangladesh official data (TBD)</a></li>
-<li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#report-based-on-publicly-available-data"><i class="fa fa-check"></i><b>3.2</b> Report based on publicly available data</a></li>
-<li class="chapter" data-level="3.3" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.3</b> Bangladesh in South Asia</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="bangladesh.html"><a href="bangladesh.html#infection"><i class="fa fa-check"></i><b>3.3.1</b> Infection</a></li>
-<li class="chapter" data-level="3.3.2" data-path="bangladesh.html"><a href="bangladesh.html#deaths-1"><i class="fa fa-check"></i><b>3.3.2</b> Deaths</a></li>
-<li class="chapter" data-level="3.3.3" data-path="bangladesh.html"><a href="bangladesh.html#cases-and-deaths-compared-on-a-specific-day-1"><i class="fa fa-check"></i><b>3.3.3</b> Cases and deaths compared on a specific day</a></li>
+<li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#report-based-on-publicly-available-data"><i class="fa fa-check"></i><b>3.1</b> Report based on publicly available data</a></li>
+<li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.2</b> Bangladesh in South Asia</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="bangladesh.html"><a href="bangladesh.html#infection"><i class="fa fa-check"></i><b>3.2.1</b> Infection</a></li>
+<li class="chapter" data-level="3.2.2" data-path="bangladesh.html"><a href="bangladesh.html#deaths-1"><i class="fa fa-check"></i><b>3.2.2</b> Deaths</a></li>
+<li class="chapter" data-level="3.2.3" data-path="bangladesh.html"><a href="bangladesh.html#cases-and-deaths-compared-on-a-specific-day-1"><i class="fa fa-check"></i><b>3.2.3</b> Cases and deaths compared on a specific day</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="projection.html"><a href="projection.html"><i class="fa fa-check"></i><b>4</b> Projections</a><ul>
@@ -210,13 +234,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Report 1</span> World</h1>
 <div id="incidence-recovery-death" class="section level2">
 <h2><span class="header-section-number">1.1</span> Daily Incidence, Recovery, Deaths</h2>
-<p><strong>Report last updated:</strong> 2020-04-24</p>
-<p><strong>Data last refreshed:</strong> : 2020-04-23</p>
+<p><strong>Report last updated:</strong> 2020-04-25</p>
+<p><strong>Data last refreshed:</strong> : 2020-04-24</p>
 <p><img src="covid19_files/figure-html/global-incidence-recovery-deaths-1.png" width="768" /></p>
 </div>
 <div id="world-case-fatality" class="section level2">
 <h2><span class="header-section-number">1.2</span> Case Fatality Rate</h2>
-<p>Case fatality rate is calculated by dividing the number of deaths from a specified disease over a defined period of time by the number of individuals diagnosed with the disease during that time; the resulting ratio is then multiplied by 100 to yield a percentage <span class="citation">(Harrington <a href="#ref-cfr_britanica">2020</a>)</span>.</p>
+<p>Case fatality rate is calculated by dividing the number of deaths from a specified disease over a defined period of time by the number of individuals diagnosed with the disease during that time; the resulting ratio is then multiplied by 100 to yield a percentage <span class="citation">(Harrington, <a href="#ref-cfr_britanica">n.d.</a>)</span>.</p>
 <p><span class="math display">\[CFR = \frac{\# Deaths}{\#Infected} \times 100 \,\, per \,\,unit \,\, time\]</span></p>
 <p><img src="covid19_files/figure-html/global-case-fatality-rate-1.png" width="768" /></p>
 <div id="case-fatality-rate-select-countries" class="section level3">
@@ -229,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/global-confirmed-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-9">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-23
+<span id="tab:unnamed-chunk-3">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-04-24
 </caption>
 <thead>
 <tr>
@@ -247,7 +271,7 @@ Confirmed
 US
 </td>
 <td style="text-align:right;">
-869170
+905358
 </td>
 </tr>
 <tr>
@@ -255,7 +279,7 @@ US
 Spain
 </td>
 <td style="text-align:right;">
-213024
+219764
 </td>
 </tr>
 <tr>
@@ -263,7 +287,7 @@ Spain
 Italy
 </td>
 <td style="text-align:right;">
-189973
+192994
 </td>
 </tr>
 <tr>
@@ -271,7 +295,7 @@ Italy
 France
 </td>
 <td style="text-align:right;">
-158303
+159952
 </td>
 </tr>
 <tr>
@@ -279,7 +303,7 @@ France
 Germany
 </td>
 <td style="text-align:right;">
-153129
+154999
 </td>
 </tr>
 <tr>
@@ -287,7 +311,7 @@ Germany
 United Kingdom
 </td>
 <td style="text-align:right;">
-139246
+144640
 </td>
 </tr>
 <tr>
@@ -295,7 +319,7 @@ United Kingdom
 Turkey
 </td>
 <td style="text-align:right;">
-101790
+104912
 </td>
 </tr>
 <tr>
@@ -303,7 +327,7 @@ Turkey
 Iran
 </td>
 <td style="text-align:right;">
-87026
+88194
 </td>
 </tr>
 <tr>
@@ -311,7 +335,7 @@ Iran
 China
 </td>
 <td style="text-align:right;">
-83884
+83899
 </td>
 </tr>
 <tr>
@@ -319,7 +343,7 @@ China
 Russia
 </td>
 <td style="text-align:right;">
-62773
+68622
 </td>
 </tr>
 <tr>
@@ -327,7 +351,7 @@ Russia
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-4186
+4689
 </td>
 </tr>
 </tbody>
@@ -342,7 +366,7 @@ Bangladesh(unoff)
 <p><img src="covid19_files/figure-html/global-deaths-since-first-case-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-10">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-04-23
+<span id="tab:unnamed-chunk-4">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-04-24
 </caption>
 <thead>
 <tr>
@@ -360,7 +384,7 @@ Confirmed
 US
 </td>
 <td style="text-align:right;">
-49954
+51949
 </td>
 </tr>
 <tr>
@@ -368,7 +392,7 @@ US
 Italy
 </td>
 <td style="text-align:right;">
-25549
+25969
 </td>
 </tr>
 <tr>
@@ -376,7 +400,7 @@ Italy
 Spain
 </td>
 <td style="text-align:right;">
-22157
+22524
 </td>
 </tr>
 <tr>
@@ -384,7 +408,7 @@ Spain
 France
 </td>
 <td style="text-align:right;">
-21889
+22279
 </td>
 </tr>
 <tr>
@@ -392,7 +416,7 @@ France
 United Kingdom
 </td>
 <td style="text-align:right;">
-18791
+19567
 </td>
 </tr>
 <tr>
@@ -400,7 +424,7 @@ United Kingdom
 Belgium
 </td>
 <td style="text-align:right;">
-6490
+6679
 </td>
 </tr>
 <tr>
@@ -408,7 +432,7 @@ Belgium
 Germany
 </td>
 <td style="text-align:right;">
-5575
+5760
 </td>
 </tr>
 <tr>
@@ -416,7 +440,7 @@ Germany
 Iran
 </td>
 <td style="text-align:right;">
-5481
+5574
 </td>
 </tr>
 <tr>
@@ -432,7 +456,7 @@ China
 Netherlands
 </td>
 <td style="text-align:right;">
-4192
+4304
 </td>
 </tr>
 <tr>
@@ -447,10 +471,10 @@ Bangladesh(unoff)
 </table>
 <div id="cases-and-deaths-compared-on-a-specific-day" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Cases and deaths compared on a specific day</h3>
-<p>Bangladesh has entered into day 47 since first confirmed case.</p>
+<p>Bangladesh has entered into day 48 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-12">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 47
+<span id="tab:unnamed-chunk-6">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 48
 </caption>
 <thead>
 <tr>
@@ -471,10 +495,10 @@ Total deaths
 Italy
 </td>
 <td style="text-align:right;">
-31506
+35713
 </td>
 <td style="text-align:right;">
-2503
+2978
 </td>
 </tr>
 <tr>
@@ -482,10 +506,10 @@ Italy
 Spain
 </td>
 <td style="text-align:right;">
-13910
+17963
 </td>
 <td style="text-align:right;">
-623
+830
 </td>
 </tr>
 <tr>
@@ -493,10 +517,10 @@ Spain
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-4186
+4689
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-330
+331
 </td>
 </tr>
 <tr>
@@ -504,10 +528,10 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-4186
+4689
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-127
+131
 </td>
 </tr>
 <tr>
@@ -515,10 +539,10 @@ Bangladesh
 Belgium
 </td>
 <td style="text-align:right;">
-2815
+3401
 </td>
 <td style="text-align:right;">
-67
+75
 </td>
 </tr>
 <tr>
@@ -526,10 +550,10 @@ Belgium
 United Kingdom
 </td>
 <td style="text-align:right;">
-1960
+2642
 </td>
 <td style="text-align:right;">
-56
+72
 </td>
 </tr>
 <tr>
@@ -537,10 +561,10 @@ United Kingdom
 France
 </td>
 <td style="text-align:right;">
-1794
+2293
 </td>
 <td style="text-align:right;">
-33
+48
 </td>
 </tr>
 <tr>
@@ -548,10 +572,10 @@ France
 US
 </td>
 <td style="text-align:right;">
-518
+583
 </td>
 <td style="text-align:right;">
-21
+22
 </td>
 </tr>
 </tbody>
@@ -581,7 +605,8 @@ RDR = \frac{\# Cumulative \,\, daily \,\, recovered}{\# Cumulative \,\, daily \,
 <p>The percent change is calculated as</p>
 <p><span class="math display">\[
 PC = \frac{New - Original}{Original} * 100
-\]</span> where <code>New</code> is the number of cases on a given date, and <code>Original</code> is the number 3 days prior to that.</p>
+\]</span>
+where <code>New</code> is the number of cases on a given date, and <code>Original</code> is the number 3 days prior to that.</p>
 <p><strong>How to interpret</strong>: The 3-day percent change tells how much does a metric have changed (%) compared to what it was 3-days ago. A downward trending line suggests a slow growth.</p>
 
 </div>
@@ -589,7 +614,7 @@ PC = \frac{New - Original}{Original} * 100
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-cfr_britanica">
-<p>Harrington, Rebecca A. 2020. “Case Fatality Rate.” Encyclopædia Britannica: Encyclopædia Britannica, inc. March 27. <a href="https://www.britannica.com/science/case-fatality-rate" class="uri">https://www.britannica.com/science/case-fatality-rate</a>.</p>
+<p>Harrington, Rebecca A. n.d. “Case Fatality Rate.” Encyclopædia Britannica: Encyclopædia Britannica, inc. <a href="https://www.britannica.com/science/case-fatality-rate" class="uri">https://www.britannica.com/science/case-fatality-rate</a>.</p>
 </div>
 </div>
             </section>
@@ -653,7 +678,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
