@@ -479,3 +479,184 @@ grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2,
 #      nrow=2, top=textGrob("Title", gp=gpar(fontsize=15,font=8)))
 
 ```
+
+
+
+<!-- ## Projection for Bangladesh (unofficial) Run 3 {#projection-bangladesh-run2} -->
+
+<!-- __Run date__: 26 April 2020 -->
+
+
+<!-- This is the third projection. For the initial project, please scroll up. The methodology is discussed above. -->
+
+
+<!-- ```{r, projection-bangladesh-graph-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE} -->
+
+<!-- run_date = ymd("2020-04-26") -->
+<!-- a1 <- fit_seir(country = "Bangladesh(unoff)",  af=.25, nfuture = 5,  -->
+<!--                run_date = run_date) -->
+<!-- p1<- a1$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" )) -->
+
+<!-- a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = 5,  -->
+<!--                run_date = run_date) -->
+<!-- p2<- a2$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" )) -->
+
+<!-- a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = 5, -->
+<!--                run_date = run_date) -->
+<!-- p3<- a3$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" )) -->
+
+
+<!-- a4 <- fit_seir(country = "Bangladesh(unoff)", af=.9, nfuture = 5, run_date = run_date) -->
+<!-- p4<- a4$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" )) -->
+
+
+
+<!-- grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2,  -->
+<!--              top = textGrob(paste0("COVID-19 observed and 5-day projected incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()), -->
+<!--              gp=gpar(fontsize=16, font=16))) -->
+<!-- ``` -->
+
+<!-- It turns out that the bottom right one fits the current data best. So lets put that figure on a bigger canvas. Please note that in Run 1, we used a similar $R_0$ but a lower ascertainment rate. This time, a higher ascertainment rate is associated with a similar $R_0$. -->
+
+
+<!-- ```{r, projection-bangladesh-graph-best-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE} -->
+<!-- # Plotting the best fit -->
+<!-- # p4 + ggtitle(paste0("Best fit model\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)", " ", run_date)) -->
+
+<!-- p4 + ggtitle(paste0("Best fit model as of ", run_date, "\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n", " ","R0 =", format(a4$R0, digit=3)," and ", "assumsed reporting= ", a4$af*100,"%")) -->
+
+
+
+<!-- a5 <- fit_seir(country = "Bangladesh(unoff)", af=.96, npast = 0, nfuture = 5, run_date = run_date) -->
+<!-- p5<- a5$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a5$R0, digit=3),"and","assumsed reporting =", a5$af*100,"%" )) -->
+
+<!-- p5 -->
+
+<!-- ``` -->
+
+<!-- ### Projection for the next 5 days -->
+
+<!-- ```{r, echo=FALSE, fig.cap="Actual and Predicted Cumulative Cases using SEIR Model"} -->
+
+<!-- a5 <- fit_seir(country = "Bangladesh(unoff)", af=1.1, npast = 0, nfuture = 5, run_date = run_date) -->
+<!-- a5$fitted_cases %>% as.data.frame() %>% -->
+<!--   mutate( -->
+<!--     Date = date, -->
+<!--     `Actual daily cases` = c(0, diff(cum_cases)), -->
+<!--     `Actual cumulative cases` = cum_cases, -->
+<!--     `Projected cumulative cases` = round(I, digits = 0), -->
+<!--     `Projected daily cases` = c(0, diff(`Projected cumulative cases`)) -->
+<!--   ) %>% -->
+<!--   select(Date, `Actual daily cases`, `Projected daily cases`, -->
+<!--          `Actual cumulative cases`, -->
+<!--           `Projected cumulative cases` ) %>% -->
+<!--   tail(12) %>% -->
+<!--   kable(format = "html",  -->
+<!--         caption=paste("Predicted new cases for the next 5 days")) %>% -->
+<!--           kable_styling(position = "center") -->
+<!-- ``` -->
+
+<!-- ### Projection for 100 days into the future -->
+
+<!-- Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August.  -->
+
+<!-- ```{r, projection-bangladesh-graph-100-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE} -->
+
+<!-- nfuture=100 -->
+
+<!-- a1 <- fit_seir(country = "Bangladesh(unoff)", af=.25, nfuture = nfuture, run_date = run_date) -->
+<!-- p1<- a1$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" )) -->
+
+<!-- a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = nfuture) -->
+<!-- p2<- a2$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" )) -->
+
+<!-- a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = nfuture) -->
+<!-- p3<- a3$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" )) -->
+
+
+<!-- a4 <- fit_seir(country = "Bangladesh(unoff)", af=1.1, nfuture = nfuture) -->
+<!-- p4<- a4$fitted_cases %>%  -->
+<!--   ggplot(aes(x = date)) +  -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") +  -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   # scale_y_continuous(labels = scales::comma, trans = 'log') +  -->
+<!--   labs(y = "Cumulative incidence",  -->
+<!--        title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" )) -->
+
+
+<!-- grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2,  -->
+<!--              top = textGrob(paste0("COVID-19 observed and 100-day projected  incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()), -->
+<!--              gp=gpar(fontsize=16, font=16))) -->
+
+<!-- # grid.arrange(a, b, c, d,ncol=2,  -->
+<!-- #      nrow=2, top=textGrob("Title", gp=gpar(fontsize=15,font=8))) -->
+
+<!-- ``` -->
+
