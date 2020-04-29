@@ -4,14 +4,70 @@
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # source("covid19_bd.R")
 source("covid19_global.R")
+library(incidence)
 ```
 
 This report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. 
-
-## Report based on publicly available data
-
 Please note that publicly available data are __not official__ and __MAY BE UNRELIABLE__. I personally did not verify them. I am using them for educational purposes. Use at your discretion.
 
+## Epidemic curve and search for peak
+
+The epidemic curve for Bangladesh and a tentative peak. The red line in the plot indicates a potential peak based on available data. IF the peak (red line) is at the far right, then we may not have reached a peak yet. We must have sustained decrease of incidences to be sure about any peak. 
+
+
+```{r, covid19-bangladesh-epidemic-curve-peak, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# BD unofficial cases
+date_cut_off = ymd("2020-04-28")
+bd_unoff_cases <- bd_unoff %>%
+  mutate(
+    country = "Bangladesh(unoff)"
+    , date = as.Date(date, "%d/%m/%Y")
+    , daily_cases = c(0, diff(cum_cases))
+  ) %>%
+  # filter(date <= date_cut_off) %>%
+  select(date, country, cum_cases, daily_cases)
+
+bd_incidence_object <- bd_unoff_cases %>% uncount(daily_cases)
+
+# Crate incidence object using incidence package
+bd_incidence_object <- incidence::incidence(bd_incidence_object$date)
+
+# Finding peak
+bd_incidence_peak <- incidence::find_peak(bd_incidence_object)
+
+plot(bd_incidence_object) + 
+  geom_vline(xintercept = bd_incidence_peak, col = "red", 
+             lty = 2, size=1) +  
+  labs(title = "Daily unofficial new infections in Bangladesh ", 
+       subtitle = "(Red dashed line indicates date of peak infections)") + theme(text = element_text(size = 12))
+
+
+```
+
+
+We fit a log linear model to estimate the doubling time (growh phase) and halving time (decline phase, when that happens). The estimated fitted line (solid line) with 95\% confidence interval (dotten lines) are superimposed on the epidemic curve below.
+
+
+```{r, covid19-bangladesh-epidemic-curve-fitted, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
+
+# Fitting the log-linear models to the growth section and the decay section
+
+# bd_incidence_fit <- incidence::fit(bd_incidence_object, split = bd_incidence_peak)
+bd_incidence_fit <- incidence::fit(bd_incidence_object)
+
+# plot the incidence data and the model fit
+plot(bd_incidence_object) %>% add_incidence_fit(bd_incidence_fit) + 
+  labs(title = "Observed and fitted incidence of COVID-19", 
+       subtitle = "Bangladesh, 2020") + 
+  theme(text = element_text(size = 12))
+
+```
+
+The current doubling time as of `r today()` is `r round(get_info(bd_incidence_fit, "doubling"), 1)` days with a 95% confidence interval of (`r round(get_info(bd_incidence_fit, "doubling.conf"), 1)`) days. 
+
+
+### Cumulative deaths (official and unofficial)
 
 ```{r, covid19-bangladesh-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
 
@@ -277,7 +333,7 @@ sa_summary %>%
 ### Cases and deaths compared on a specific day
 
 ```{r, echo=FALSE}
-bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh', 
+bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh(unoff)', 
                                                 date == max(date)) %>%
   pull(day)
 ```
