@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2020-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,7 +147,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.4" data-path="usa.html"><a href="usa.html#usa-daily-deaths"><i class="fa fa-check"></i><b>2.4</b> Daily Deaths</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="bangladesh.html"><a href="bangladesh.html"><i class="fa fa-check"></i><b>3</b> Bangladesh</a><ul>
-<li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#report-based-on-publicly-available-data"><i class="fa fa-check"></i><b>3.1</b> Report based on publicly available data</a></li>
+<li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#epidemic-curve-and-search-for-peak"><i class="fa fa-check"></i><b>3.1</b> Epidemic curve and search for peak</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="bangladesh.html"><a href="bangladesh.html#cumulative-deaths-official-and-unofficial"><i class="fa fa-check"></i><b>3.1.1</b> Cumulative deaths (official and unofficial)</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.2</b> Bangladesh in South Asia</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="bangladesh.html"><a href="bangladesh.html#infection"><i class="fa fa-check"></i><b>3.2.1</b> Infection</a></li>
 <li class="chapter" data-level="3.2.2" data-path="bangladesh.html"><a href="bangladesh.html#deaths-1"><i class="fa fa-check"></i><b>3.2.2</b> Deaths</a></li>
@@ -207,19 +209,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="usa" class="section level1">
 <h1><span class="header-section-number">Report 2</span> USA</h1>
-<p><strong>Report last updated:</strong> 2020-04-28</p>
-<p><strong>Data last refreshed:</strong> : 2020-04-27</p>
+<p><strong>Report last updated:</strong> 2020-04-30</p>
+<p><strong>Data last refreshed:</strong> : 2020-04-29</p>
 <div id="us-overall" class="section level2">
 <h2><span class="header-section-number">2.1</span> Overall trend</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
 </div>
 <div id="confirmed-cases-1" class="section level2">
 <h2><span class="header-section-number">2.2</span> Confirmed Cases</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p><img src="covid19_files/figure-html/cases-by-usa-states-1.png" width="768" /></p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-12">Table 2.1: </span>Totaly cases for top 10 US States as of 2020-04-27
+<span id="tab:unnamed-chunk-10">Table 2.1: </span>Totaly cases for top 10 US States as of 2020-04-28
 </caption>
 <thead>
 <tr>
@@ -237,7 +239,7 @@ Total cases
 New York
 </td>
 <td style="text-align:right;">
-292027
+295137
 </td>
 </tr>
 <tr>
@@ -245,7 +247,7 @@ New York
 New Jersey
 </td>
 <td style="text-align:right;">
-111188
+113856
 </td>
 </tr>
 <tr>
@@ -253,7 +255,7 @@ New Jersey
 Massachusetts
 </td>
 <td style="text-align:right;">
-56462
+58302
 </td>
 </tr>
 <tr>
@@ -261,7 +263,7 @@ Massachusetts
 Illinois
 </td>
 <td style="text-align:right;">
-45883
+48102
 </td>
 </tr>
 <tr>
@@ -269,7 +271,7 @@ Illinois
 California
 </td>
 <td style="text-align:right;">
-45187
+46570
 </td>
 </tr>
 <tr>
@@ -277,7 +279,7 @@ California
 Pennsylvania
 </td>
 <td style="text-align:right;">
-43189
+45323
 </td>
 </tr>
 <tr>
@@ -285,7 +287,7 @@ Pennsylvania
 Michigan
 </td>
 <td style="text-align:right;">
-38190
+39234
 </td>
 </tr>
 <tr>
@@ -293,7 +295,7 @@ Michigan
 Florida
 </td>
 <td style="text-align:right;">
-32130
+32838
 </td>
 </tr>
 <tr>
@@ -301,15 +303,7 @@ Florida
 Louisiana
 </td>
 <td style="text-align:right;">
-27068
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Connecticut
-</td>
-<td style="text-align:right;">
-25997
+27286
 </td>
 </tr>
 <tr>
@@ -317,7 +311,15 @@ Connecticut
 Texas
 </td>
 <td style="text-align:right;">
-25960
+26865
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Connecticut
+</td>
+<td style="text-align:right;">
+26312
 </td>
 </tr>
 <tr>
@@ -325,7 +327,7 @@ Texas
 Georgia
 </td>
 <td style="text-align:right;">
-23229
+23607
 </td>
 </tr>
 <tr>
@@ -333,7 +335,7 @@ Georgia
 Maryland
 </td>
 <td style="text-align:right;">
-19487
+20113
 </td>
 </tr>
 <tr>
@@ -341,7 +343,7 @@ Maryland
 Ohio
 </td>
 <td style="text-align:right;">
-16325
+16769
 </td>
 </tr>
 <tr>
@@ -349,7 +351,7 @@ Ohio
 Indiana
 </td>
 <td style="text-align:right;">
-15961
+16588
 </td>
 </tr>
 </tbody>
@@ -357,11 +359,11 @@ Indiana
 </div>
 <div id="deaths" class="section level2">
 <h2><span class="header-section-number">2.3</span> Deaths</h2>
-<p><img src="covid19_files/figure-html/unnamed-chunk-13-1.png" width="768" /></p>
+<p><img src="covid19_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
 <p><img src="covid19_files/figure-html/deaths-by-usa-states-1.png" width="768" /></p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-14">Table 2.2: </span>Totaly deaths by State as of 2020-04-27
+<span id="tab:unnamed-chunk-12">Table 2.2: </span>Totaly deaths by State as of 2020-04-28
 </caption>
 <thead>
 <tr>
@@ -379,7 +381,7 @@ Total cases
 New York
 </td>
 <td style="text-align:right;">
-17303
+17638
 </td>
 </tr>
 <tr>
@@ -387,7 +389,7 @@ New York
 New Jersey
 </td>
 <td style="text-align:right;">
-6044
+6442
 </td>
 </tr>
 <tr>
@@ -395,7 +397,7 @@ New Jersey
 Michigan
 </td>
 <td style="text-align:right;">
-3406
+3566
 </td>
 </tr>
 <tr>
@@ -403,15 +405,7 @@ Michigan
 Massachusetts
 </td>
 <td style="text-align:right;">
-3003
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Connecticut
-</td>
-<td style="text-align:right;">
-2012
+3153
 </td>
 </tr>
 <tr>
@@ -419,7 +413,7 @@ Connecticut
 Illinois
 </td>
 <td style="text-align:right;">
-1992
+2132
 </td>
 </tr>
 <tr>
@@ -427,7 +421,15 @@ Illinois
 Pennsylvania
 </td>
 <td style="text-align:right;">
-1946
+2092
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Connecticut
+</td>
+<td style="text-align:right;">
+2089
 </td>
 </tr>
 <tr>
@@ -435,7 +437,7 @@ Pennsylvania
 California
 </td>
 <td style="text-align:right;">
-1800
+1884
 </td>
 </tr>
 <tr>
@@ -443,7 +445,7 @@ California
 Louisiana
 </td>
 <td style="text-align:right;">
-1697
+1758
 </td>
 </tr>
 <tr>
@@ -451,7 +453,7 @@ Louisiana
 Florida
 </td>
 <td style="text-align:right;">
-1087
+1170
 </td>
 </tr>
 <tr>
@@ -459,7 +461,7 @@ Florida
 Georgia
 </td>
 <td style="text-align:right;">
-981
+1022
 </td>
 </tr>
 <tr>
@@ -467,7 +469,7 @@ Georgia
 Maryland
 </td>
 <td style="text-align:right;">
-858
+929
 </td>
 </tr>
 <tr>
@@ -475,15 +477,7 @@ Maryland
 Indiana
 </td>
 <td style="text-align:right;">
-844
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Washington
-</td>
-<td style="text-align:right;">
-771
+901
 </td>
 </tr>
 <tr>
@@ -491,15 +485,15 @@ Washington
 Ohio
 </td>
 <td style="text-align:right;">
-753
+799
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Colorado
+Washington
 </td>
 <td style="text-align:right;">
-705
+792
 </td>
 </tr>
 <tr>
@@ -507,7 +501,15 @@ Colorado
 Texas
 </td>
 <td style="text-align:right;">
-699
+738
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colorado
+</td>
+<td style="text-align:right;">
+734
 </td>
 </tr>
 <tr>
@@ -515,7 +517,7 @@ Texas
 Virginia
 </td>
 <td style="text-align:right;">
-458
+492
 </td>
 </tr>
 <tr>
@@ -523,7 +525,7 @@ Virginia
 North Carolina
 </td>
 <td style="text-align:right;">
-331
+353
 </td>
 </tr>
 <tr>
@@ -531,7 +533,7 @@ North Carolina
 Missouri
 </td>
 <td style="text-align:right;">
-296
+324
 </td>
 </tr>
 </tbody>
