@@ -306,8 +306,8 @@ p <- ggplot(case_summary, aes(x = day, y = cum_deaths, color=country)) +
   
   theme_minimal(base_size = 14) +
   theme(legend.position="top") +
-  ggtitle("COVID19 cumulative deaths since first case", data_last_refreshed ) +
-  xlab("Days since first case") +
+  ggtitle("COVID19 cumulative deaths since first death", data_last_refreshed ) +
+  xlab("Days since first death") +
   ylab("Cumulative deaths")+
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. Bangladesh(unofficial) data compiled from newspaper reports.")
 
