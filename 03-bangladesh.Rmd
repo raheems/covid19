@@ -333,7 +333,7 @@ sa_summary %>%
 ### Cases and deaths compared on a specific day
 
 ```{r, echo=FALSE}
-bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh(unoff)', 
+bd_day_indicator = df_world_bd %>% filter(country == 'Bangladesh', 
                                                 date == max(date)) %>%
   pull(day)
 ```
