@@ -326,7 +326,7 @@ p + scale_color_discrete(name="Country") +
 
 
 
-```{r, global-deaths-since-first-case, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
+```{r, global-deaths-since-first-case, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
 # Cumulative Cases since first identified case
 
 b <- bd_unoff
