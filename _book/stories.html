@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2020-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,41 +63,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -209,7 +234,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="stories" class="section level1">
 <h1><span class="header-section-number">Report 6</span> Stories</h1>
-<p><strong>Report last updated:</strong> 2020-05-05</p>
+<p><strong>Report last updated:</strong> 2020-05-06</p>
 <div id="rumi-ahmed" class="section level2">
 <h2><span class="header-section-number">6.1</span> Rumi Ahmed</h2>
 <div id="april-7-2020-via-facebook" class="section level3">
@@ -222,7 +247,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Despite SARS -1 and MERS experience - we didn’t give this bat coronavirus due respects it deserved. It was not the feared white walker, it was not the novel influenza pandemic we always have been fearful about.</p>
 <p>But this novel coronavirus SARA-COV-2 turned out to be the cause of first coronavirus pandemic, to be more precise , the first non-influenza pandemic in history of mankind.</p>
 <p>So what went wrong with this Novel coronavirus? Biologically less contagious and less fatal than SARS-1, instead of behaving like SARS-1 or MERS, why this novel coronavirus is blazing like a catastrophic forest fire?</p>
-<p>The answer is in one protein. Remember this name. It’s a protein called Exonuclease. Exonuclease!</p>
+<p>The answer is in one protein. Remember this name. It’s a protein called Exonuclease.
+Exonuclease!</p>
 <p>We are still inside the deep fog of war, at the center of a bloody- muddy battle field, we are wielding swords blindly! We don’t have the clarity of a bird eye view or the luxury of a time lapse retrospect! Hazy view through early data says the following about this new enemy - this virus-</p>
 <ol style="list-style-type: decimal">
 <li>It is a bat virus, and thorough perpetual mixing and mutation inside the bat reservoir, this bat virus mutated and developed as a new virus sometimes between 1948 and 1972. Chinese horseshoe bats are carrying this virus for the last several decades!</li>
@@ -245,7 +271,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>I am jealous of bats.</p>
 <p>Bat is a mammal, I am also a mammal; and I am definitely a bigger mammal. I can’t fly while bats can! But I am jealous of bats not only because bats can fly I can’t!</p>
 <p>There are many more thing about bats that makes us look at this species of mammals with awe! Although we don’t have a clear bat census - bats, as well as rodents, are the two mammals who probably outnumber humans. Of all the mammals in this planet, 20% are bats.</p>
-<p>We humans are children compared to bats physical capability. A bat flies 5-6 hours nonstop nightly. Their maneuvering capacity is even better than birds. When bats fly they can increase their metabolism so high that their heart beats over one thousand times a minute. Compared to that if our heart beats 300 times a minute for a few minute - it stops!</p>
+<p>We humans are children compared to bats physical capability. A bat flies 5-6 hours nonstop nightly.
+Their maneuvering capacity is even better than birds. When bats fly they can increase their metabolism so high that their heart beats over one thousand times a minute. Compared to that if our heart beats 300 times a minute for a few minute - it stops!</p>
 <p>During flying bats body temperature peaks as high as 108F / 42C. A bat body can easily tolerate that high temperature. If that happened in human - the brain would have been fried leading to seizure!</p>
 <p>To process all that much metabolism, bats have a pair of super kidneys that’s like 20 pair of human kidneys to remove all these metabolites!</p>
 <p>Bats immune system is another nature’s wonder. If bat’s immune system is equivalent to Windows 10, our immune system may be like MS DOS!</p>
@@ -260,13 +287,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Current SARS-COV-2 virus is presumed to be a bat virus. But we’ll never be certain about it unless until some day we’ll be able to collect, culture and isolate this virus in a bat.</p>
 <p>That’s what Dr. Linfa Wang did. SARS outbreak happened in 2002-2003. We had a genetic sequence suggesting it’s bat origin. But that was not enough. We have to find it in a bat! Dr. Linfa wang of Duke Global Health Institute at Duke National University of Singapore did exactly that thing. He spent ten years time searching / crawling / climbing cave to cave in remote rural China. He would collect bat droplet and real bat sample swab and look for a genetic match! And after ten years search he finally found the SARS virus in a bat!</p>
 <p>We talked about the bat lady Dr Shi Zheng-Li of Wuhan institution of Virology that day . She is doing the same thing. As are two agencies in USA, PREDICT -1 and PREDICT -2. Unbeknownst to all of us -there is an active search for bat viruses, the virus that can attack us at some point in future!</p>
-<p>— In the second part I’ll discuss more about the viruses. Stay tuned! Part 2 will be about viruses!</p>
+<p>— In the second part I’ll discuss more about the viruses. Stay tuned!
+Part 2 will be about viruses!</p>
 </div>
 <div id="april-21-2020---bats-part-2-and-3" class="section level3">
 <h3><span class="header-section-number">6.1.3</span> April 21, 2020 - Bats (Part 2 and 3)</h3>
 <ol style="list-style-type: decimal">
 <li><p>Talking about viruses means throwing in a lot of large mathematical values and big numbers - the extent of which most of our minds are unable to fathom.</p></li>
-<li><p>We know quiet a bit about people being infected with coronavirus. We we also see that while some are becoming sick, a lot more who are invaded / infected by the virus but are not getting sick.</p></li>
+<li><p>We know quiet a bit about people being infected with coronavirus. We we also see that while some are becoming sick,
+a lot more who are invaded / infected by the virus but are not getting sick.</p></li>
 <li><p>Viruses probably doesn’t want to kill us. Killing the new host is not in the best interest for ￼the virus also. These virus are here today after 3 million years of evolution and selection. And they are genetically and proteomically fittest, hence very apt at surviving and spreading in current zoonome.</p></li>
 <li><p>Only thing they want is to make our body their home and live without harming us much. We are great hosts for them - because there are seven billion of us and we live a social life - in close congregation - so if needed they can jump from one to another. We are their dream home!</p></li>
 <li><p>Once they can safely reside in us - we are so many in number - they won’t have to look for new home- their only job will be to keep propagating - for millions of years!</p></li>
@@ -354,7 +383,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

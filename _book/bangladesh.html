@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2020-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,41 +63,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -209,20 +234,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="bangladesh" class="section level1">
 <h1><span class="header-section-number">Report 3</span> Bangladesh</h1>
-<p>This report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link. Please note that publicly available data are <strong>not official</strong> and <strong>MAY BE UNRELIABLE</strong>. I personally did not verify them. I am using them for educational purposes. Use at your discretion.</p>
+<p>This report is created based on a publicly available data. The data are available on a Google Sheet. Please see the Data Source section for link.
+Please note that publicly available data are <strong>not official</strong> and <strong>MAY BE UNRELIABLE</strong>. I personally did not verify them. I am using them for educational purposes. Use at your discretion.</p>
 <div id="epidemic-curve-and-search-for-peak" class="section level2">
 <h2><span class="header-section-number">3.1</span> Epidemic curve and search for peak</h2>
 <p>The epidemic curve for Bangladesh and a tentative peak. The red line in the plot indicates a potential peak based on available data. IF the peak (red line) is at the far right, then we may not have reached a peak yet. We must have sustained decrease of incidences to be sure about any peak.</p>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-peak-1.png" width="768" /></p>
 <p>We fit a log linear model to estimate the doubling time (growh phase) and halving time (decline phase, when that happens). The estimated fitted line (solid line) with 95% confidence interval (dotten lines) are superimposed on the epidemic curve below.</p>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-fitted-1.png" width="768" /></p>
-<p>The current doubling time as of 2020-05-05 is 5 days with a 95% confidence interval of (4.5, 5.6) days.</p>
+<p>The current doubling time as of 2020-05-06 is 5 days with a 95% confidence interval of (4.5, 5.6) days.</p>
 <div id="cumulative-deaths-official-and-unofficial" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Cumulative deaths (official and unofficial)</h3>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-deaths-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-14">Table 3.1: </span>Total number of deaths as of 2020-05-05
+<span id="tab:unnamed-chunk-14">Table 3.1: </span>Total number of deaths as of 2020-05-06
 </caption>
 <thead>
 <tr>
@@ -240,7 +266,7 @@ Total Deaths
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-401
+414
 </td>
 </tr>
 <tr>
@@ -248,7 +274,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-182
+183
 </td>
 </tr>
 </tbody>
@@ -262,7 +288,7 @@ Bangladesh
 <p><img src="covid19_files/figure-html/covid19-cases-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-15">Table 3.2: </span>Total number of cases as of 2020-05-04
+<span id="tab:unnamed-chunk-15">Table 3.2: </span>Total number of cases as of 2020-05-05
 </caption>
 <thead>
 <tr>
@@ -280,7 +306,7 @@ Total Cases
 India
 </td>
 <td style="text-align:right;">
-46437
+49400
 </td>
 </tr>
 <tr>
@@ -288,7 +314,7 @@ India
 Pakistan
 </td>
 <td style="text-align:right;">
-20941
+22049
 </td>
 </tr>
 <tr>
@@ -296,7 +322,7 @@ Pakistan
 Singapore
 </td>
 <td style="text-align:right;">
-18778
+19410
 </td>
 </tr>
 <tr>
@@ -304,7 +330,7 @@ Singapore
 Indonesia
 </td>
 <td style="text-align:right;">
-11587
+12071
 </td>
 </tr>
 <tr>
@@ -312,7 +338,7 @@ Indonesia
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-10929
+11719
 </td>
 </tr>
 <tr>
@@ -320,7 +346,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-10143
+10929
 </td>
 </tr>
 <tr>
@@ -328,7 +354,7 @@ Bangladesh
 Malaysia
 </td>
 <td style="text-align:right;">
-6353
+6383
 </td>
 </tr>
 <tr>
@@ -336,7 +362,7 @@ Malaysia
 Sri Lanka
 </td>
 <td style="text-align:right;">
-751
+771
 </td>
 </tr>
 <tr>
@@ -344,7 +370,7 @@ Sri Lanka
 Nepal
 </td>
 <td style="text-align:right;">
-75
+82
 </td>
 </tr>
 <tr>
@@ -363,7 +389,7 @@ Bhutan
 <p><img src="covid19_files/figure-html/covid19-death-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-16">Table 3.3: </span>Total number of deaths as of 2020-05-04
+<span id="tab:unnamed-chunk-16">Table 3.3: </span>Total number of deaths as of 2020-05-05
 </caption>
 <thead>
 <tr>
@@ -381,7 +407,7 @@ Total Deaths
 India
 </td>
 <td style="text-align:right;">
-1566
+1693
 </td>
 </tr>
 <tr>
@@ -389,7 +415,7 @@ India
 Indonesia
 </td>
 <td style="text-align:right;">
-864
+872
 </td>
 </tr>
 <tr>
@@ -397,7 +423,7 @@ Indonesia
 Pakistan
 </td>
 <td style="text-align:right;">
-476
+514
 </td>
 </tr>
 <tr>
@@ -405,7 +431,7 @@ Pakistan
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-401
+414
 </td>
 </tr>
 <tr>
@@ -413,7 +439,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-182
+183
 </td>
 </tr>
 <tr>
@@ -421,7 +447,7 @@ Bangladesh
 Malaysia
 </td>
 <td style="text-align:right;">
-105
+106
 </td>
 </tr>
 <tr>
@@ -437,7 +463,7 @@ Singapore
 Sri Lanka
 </td>
 <td style="text-align:right;">
-8
+9
 </td>
 </tr>
 <tr>
@@ -461,10 +487,10 @@ Nepal
 </div>
 <div id="cases-and-deaths-compared-on-a-specific-day-1" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Cases and deaths compared on a specific day</h3>
-<p>Bangladesh has entered into day 58 since first confirmed case.</p>
+<p>Bangladesh has entered into day 59 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-18">Table 3.4: </span>Bangladesh and its peers: total cases and deaths compared on day 58
+<span id="tab:unnamed-chunk-18">Table 3.4: </span>Bangladesh and its peers: total cases and deaths compared on day 59
 </caption>
 <thead>
 <tr>
@@ -485,10 +511,10 @@ Total deaths
 Indonesia
 </td>
 <td style="text-align:right;">
-9511
+9771
 </td>
 <td style="text-align:right;">
-773
+784
 </td>
 </tr>
 <tr>
@@ -496,10 +522,10 @@ Indonesia
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-10143
+10929
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-399
+414
 </td>
 </tr>
 <tr>
@@ -507,10 +533,10 @@ Bangladesh(unoff)
 Pakistan
 </td>
 <td style="text-align:right;">
-11155
+11940
 </td>
 <td style="text-align:right;">
-237
+253
 </td>
 </tr>
 <tr>
@@ -518,10 +544,10 @@ Pakistan
 Bangladesh
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-10143
+10929
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-182
+183
 </td>
 </tr>
 <tr>
@@ -529,10 +555,10 @@ Bangladesh
 India
 </td>
 <td style="text-align:right;">
-887
+987
 </td>
 <td style="text-align:right;">
-20
+24
 </td>
 </tr>
 <tr>
@@ -540,10 +566,21 @@ India
 Malaysia
 </td>
 <td style="text-align:right;">
-1306
+1518
 </td>
 <td style="text-align:right;">
-10
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Singapore
+</td>
+<td style="text-align:right;">
+432
+</td>
+<td style="text-align:right;">
+2
 </td>
 </tr>
 <tr>
@@ -562,18 +599,7 @@ Bhutan
 Nepal
 </td>
 <td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Singapore
-</td>
-<td style="text-align:right;">
-385
+2
 </td>
 <td style="text-align:right;">
 0
@@ -657,7 +683,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
