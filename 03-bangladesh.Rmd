@@ -1,4 +1,3 @@
-
 # Bangladesh {#bangladesh}
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -16,9 +15,9 @@ The epidemic curve for Bangladesh and a tentative peak. The red line in the plot
 
 
 ```{r, covid19-bangladesh-epidemic-curve-peak, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
-
 # BD unofficial cases
-date_cut_off = ymd("2020-04-28")
+date_cut_off = ymd("2020-05-10")
+
 bd_unoff_cases <- bd_unoff %>%
   mutate(
     country = "Bangladesh(unoff)"
@@ -27,22 +26,16 @@ bd_unoff_cases <- bd_unoff %>%
   ) %>%
   # filter(date <= date_cut_off) %>%
   select(date, country, cum_cases, daily_cases)
-
 bd_incidence_object <- bd_unoff_cases %>% uncount(daily_cases)
-
 # Crate incidence object using incidence package
 bd_incidence_object <- incidence::incidence(bd_incidence_object$date)
-
 # Finding peak
 bd_incidence_peak <- incidence::find_peak(bd_incidence_object)
-
 plot(bd_incidence_object) + 
   geom_vline(xintercept = bd_incidence_peak, col = "red", 
              lty = 2, size=1) +  
   labs(title = "Daily unofficial new infections in Bangladesh ", 
        subtitle = "(Red dashed line indicates date of peak infections)") + theme(text = element_text(size = 12))
-
-
 ```
 
 
@@ -50,31 +43,124 @@ We fit a log linear model to estimate the doubling time (growh phase) and halvin
 
 
 ```{r, covid19-bangladesh-epidemic-curve-fitted, fig.width=8, fig.height=6, echo = FALSE, warning=FALSE}
-
 # Fitting the log-linear models to the growth section and the decay section
-
 # bd_incidence_fit <- incidence::fit(bd_incidence_object, split = bd_incidence_peak)
 bd_incidence_fit <- incidence::fit(bd_incidence_object)
-
 # plot the incidence data and the model fit
 plot(bd_incidence_object) %>% add_incidence_fit(bd_incidence_fit) + 
   labs(title = "Observed and fitted incidence of COVID-19", 
        subtitle = "Bangladesh, 2020") + 
   theme(text = element_text(size = 12))
-
 ```
 
 The current doubling time as of `r today()` is `r round(get_info(bd_incidence_fit, "doubling"), 1)` days with a 95% confidence interval of (`r round(get_info(bd_incidence_fit, "doubling.conf"), 1)`) days. 
 
+### Estimating the Overall Reproduction Number 
 
-### Cumulative deaths (official and unofficial)
+The log-linear model estimates the $R_0$ as follows:
+
+```{r, echo=FALSE}
+
+# Getting the R0 from log-linear model ----
+
+library(distcrete)
+library(epitrix)
+
+mu <- 7.5  # days
+sigma <- 3.4  # days
+param <- gamma_mucv2shapescale(mu, sigma/mu)
+
+w <- distcrete("gamma", interval = 1, shape = param$shape, scale = param$scale, w = 0)
+
+# growth_R0 <- lm2R0_sample(bd_incidence_fit$before$model, w)
+growth_R0 <- lm2R0_sample(bd_incidence_fit$model, w)
+```
+
+```{r, echo=FALSE}
+
+hist(growth_R0, col = "grey", border = "white", main = "Distribution of R0")
+summary(growth_R0)
+
+```
+
+
+### Estimating the Instantaneous Reproduction Number ($R_e$)
+
+The estimation of effective reproduction number involves the distribution of serial interval (SI). Based on the literature (REF to be added), a gamma distribution with mean 7.5 and standard deviation 3.5
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(EpiEstim)
+
+# custom results plotting function to avoid the ugly
+# TableGrob messages returned by the plotting function in the
+# EpiEstim package
+plot_Ri <- function(estimate_R_obj) {
+  p_I <- plot(estimate_R_obj, "incid", add_imported_cases = TRUE)  # plots the incidence
+  p_SI <- plot(estimate_R_obj, "SI")  # plots the serial interval distribution
+  p_Ri <- plot(estimate_R_obj, "R")
+  return(gridExtra::grid.arrange(p_I, p_SI, p_Ri, ncol = 2))
+}
+
+bd_confirmed_cases <- bd_unoff_cases %>%
+  mutate(
+    daily_cases = c(0, diff(cum_cases))
+  )
+  
+  
+bd_res_parametric_si <- 
+  estimate_R(bd_confirmed_cases$daily_cases, 
+             method = "parametric_si", 
+             config = make_config(list(mean_si = 7.5, std_si = 3.5))
+)
+
+plot_Ri(bd_res_parametric_si)
+```
+
+
+### Simulating the $R_e$
+
+Now we perform a simulation of different SI distribution to obtain the $R_e$. For this, we vary the parameters of gamma distribution and obtain the following.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+# Recalculating with varying SI distribution parameters 
+# we get these results:
+
+config = make_config(list(mean_si = 7.5, std_mean_si = 3, 
+                                       min_mean_si = 2, max_mean_si =10.0,
+                                       std_si = 3.5, std_std_si = 1,
+                                       min_std_si = 0.5, max_std_si = 4))
+bd_res_uncertain_si <- 
+  estimate_R(bd_confirmed_cases$daily_cases, method = "uncertain_si", 
+             config = config)
+
+plot_Ri(bd_res_uncertain_si)
+
+```
+
+```{r, echo=FALSE}
+# print the last 7 days of data
+bd_res_uncertain_si$R %>%
+  tail(7) %>%
+  select(t_start, t_end, `Mean(R)`, `Std(R)`,  `Quantile.0.025(R)`, `Quantile.0.975(R)`) %>%
+  kable(format = "html", caption=paste("Instantaneous Effective Reproduction Number by Week as of ", date_data_refreshed)) %>%
+  kable_styling(position = "center")
+
+R_CI = tail(bd_res_uncertain_si$R, 1)
+R_mean = round(as.numeric(R_CI["Mean(R)"]), 2)
+R_LCI = round(as.numeric(R_CI["Quantile.0.025(R)"]), 2)
+R_UCI = round(as.numeric(R_CI["Quantile.0.975(R)"]), 2)
+```
+
+The effective reproduction number based on the last week's incidences show an average of `r R_mean` with a 95\% confidence interval (`r R_LCI`, `r R_UCI`).
+
+### Cumulative Deaths (official and unofficial)
 
 ```{r, covid19-bangladesh-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE}
-
 b <- bd_unoff
 a <- global %>% filter(country %in% "Bangladesh") %>%
   select(-c(daily_cases, daily_deaths, daily_recov), cum_cases)
-
 bd <- bind_rows(a,b) %>%
   filter(cum_cases >0 ) %>%
   arrange(country, date) %>%
@@ -83,7 +169,6 @@ bd <- bind_rows(a,b) %>%
   )
   
 # Plot
-
 p <- ggplot(bd , aes(x = day, y = cum_deaths, color=country)) +
   geom_line(size=1.1) +
   # geom_text_repel(size=5, aes(label=country),
@@ -96,16 +181,12 @@ p <- ggplot(bd , aes(x = day, y = cum_deaths, color=country)) +
   ylab("Cumulative deaths") +
   theme(legend.position="top") +
   labs(caption = "SOURCE: Bangladesh(unofficial) data compiled from newspaper reports")
-
 p + scale_y_continuous(labels=comma, trans = "log10") 
-
   # guides(fill=guides(colour=guide_legend(ncol=2,nrow=1,byrow=TRUE)))
-
 ```
 
 
 ```{r, echo=FALSE}
-
 bdsummary <- bd %>%
   filter(date == max(date)) %>% 
   group_by(country) %>%
@@ -114,11 +195,9 @@ bdsummary <- bd %>%
   ) %>%
   arrange(desc(`Total Deaths`))
   
-
 bdsummary %>%
   kable(format = "html", caption=paste("Total number of deaths as of ", max(bd$date))) %>%
   kable_styling(position = "center")
-
 ```
 
 ## Bangladesh in South Asia
@@ -127,11 +206,9 @@ bdsummary %>%
 
 ```{r, incidences-bd-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 # source("covid19_deaths.R")
-
 # 
 # bd_cases <- bd_unoff %>% filter(country == "Bangladesh(unoff)")
 #   select(country, date, cum_cases)
-
 df_south_asia <- global %>%
   filter(
     country %in% c("Bangladesh", "India", "Singapore", "Nepal", "Pakistan",
@@ -143,11 +220,8 @@ df_south_asia <- global %>%
   summarize(
     cum_cases = sum(cum_cases)
   )
-
 # Join with BD data
 # df_south_asia <- bind_rows(df_south_asia, bd_cases)
-
-
 n_south_asia <- df_south_asia %>%
   group_by(country) %>%
   summarise(
@@ -155,11 +229,8 @@ n_south_asia <- df_south_asia %>%
   ) %>%
   arrange(desc(max_n)) %>%
   top_n(10, max_n)
-
-
 # Combined n countries
 # n_south_ais <- rbind(n_world, n_bd)
-
 cases_south_asia <- df_south_asia %>%
   filter(country %in% n_south_asia$country, cum_cases >0) %>%
   arrange(country, cum_cases) %>%
@@ -167,12 +238,10 @@ cases_south_asia <- df_south_asia %>%
   mutate(
     day = row_number()
   )
-
 ```
 
 ```{r, covid19-cases-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
 date_data_refreshed = max(cases_south_asia$date)
-
 # Plot
 ggplot(cases_south_asia, aes(x = day, y = cum_cases, color=country)) +
   geom_line(size=1.1) +
@@ -192,12 +261,9 @@ ggplot(cases_south_asia, aes(x = day, y = cum_cases, color=country)) +
 
 
 ```{r, echo=FALSE}
-
 # Summary of Infections till date by country
-
 d <- bd %>%
   select(country, date, cum_cases)
-
 df_south_asia <- global %>%
   filter(
     country %in% c("India", "Singapore", "Nepal", "Pakistan",
@@ -209,9 +275,7 @@ df_south_asia <- global %>%
   summarize(
     cum_cases = sum(cum_cases)
   )
-
 df_south_asia <- bind_rows(df_south_asia, d)
-
 n_south_asia <- df_south_asia %>%
   group_by(country) %>%
   summarise(
@@ -219,28 +283,22 @@ n_south_asia <- df_south_asia %>%
   ) %>%
   arrange(desc(max_n)) %>%
   top_n(20, max_n)
-
-
 sa_summary_cases <- df_south_asia %>%
   group_by(country) %>%
   summarise(
     `Total Cases` = max(cum_cases)
   ) %>%
   arrange(desc(`Total Cases`))
-
 sa_summary_cases %>%
   kable(format = "html", caption=paste("Total number of cases as of ", date_data_refreshed)) %>%
   kable_styling(position = "center")
-
 ```
 
 ### Deaths
 
 ```{r, southasia-deaths, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
-
 d <- bd %>%
   select(country, date, cum_cases, cum_deaths)
-
 df_south_asia <- global %>%
   select(country, date, cum_deaths, cum_cases) %>%
   filter(
@@ -254,9 +312,7 @@ df_south_asia <- global %>%
     cum_deaths = sum(cum_deaths),
     cum_cases = sum(cum_cases)
   )
-
 df_south_asia <- bind_rows(df_south_asia, d)
-
 n_south_asia <- df_south_asia %>%
   group_by(country) %>%
   summarise(
@@ -264,11 +320,8 @@ n_south_asia <- df_south_asia %>%
   ) %>%
   arrange(desc(max_n)) %>%
   top_n(10, max_n)
-
-
 # Combined n countries
 # n_south_ais <- rbind(n_world, n_bd)
-
 deaths_south_asia <- df_south_asia %>%
   filter(country %in% n_south_asia$country) %>%
   arrange(country, cum_deaths) %>%
@@ -276,21 +329,16 @@ deaths_south_asia <- df_south_asia %>%
   mutate(
     day = row_number()
   )
-
-
 ```
 
 
 ```{r, covid19-death-south-asia, fig.width=8, fig.height=7, echo = FALSE, warning=FALSE, message=FALSE}
-
 max_date_bd_unoff <- deaths_south_asia %>%
   filter(country == "Bangladesh(unoff)") %>% group_by(country) %>%
   summarise(date=max(date))
-
 max_date_bd_off <- deaths_south_asia %>%
   filter(country == "Bangladesh") %>% group_by(country) %>%
   summarise(date=max(date))
-
 # Plot
 ggplot(deaths_south_asia, aes(x = day, y = cum_deaths, color=country)) +
   geom_line(size=1.1) +
@@ -308,12 +356,10 @@ ggplot(deaths_south_asia, aes(x = day, y = cum_deaths, color=country)) +
   ylab("Cumulative deaths") +
   labs(caption = "SOURCE: Johns Hopkins Coronavirus Resource Center. Bangladesh(unoff) data compiled from news reports")+
   scale_y_continuous(labels=comma, trans = "log10")
-
 ```
 
 
 ```{r, echo=FALSE}
-
 # Summary of deaths till date by country
 sa_summary <- deaths_south_asia %>%
   filter(date == max(date)) %>%
@@ -322,11 +368,9 @@ sa_summary <- deaths_south_asia %>%
     `Total Deaths` = max(cum_deaths)
   ) %>%
   arrange(desc(`Total Deaths`))
-
 sa_summary %>%
   kable(format = "html", caption=paste("Total number of deaths as of ", date_data_refreshed)) %>%
   kable_styling(position = "center")
-
 ```
 
 
@@ -341,10 +385,7 @@ Bangladesh has entered into day `r bd_day_indicator` since first confirmed case.
 
 
 ```{r, echo=FALSE}
-
 # Summary of deaths till date by country on the specific day
-
-
 bd_sa_summary <- df_south_asia %>%
   group_by(country) %>%
   mutate(
@@ -359,12 +400,8 @@ bd_sa_summary <- df_south_asia %>%
   ) %>%
   select(Country, `Total cases`, `Total deaths`) %>%
   arrange(desc(`Total deaths`))
-
 bd_sa_summary %>%
   kable(format = "html", caption=paste0("Bangladesh and its peers: total cases and deaths compared on day ", bd_day_indicator)) %>%
   kable_styling(position = "center") %>%
   row_spec(which(bd_sa_summary$Country %in% c('Bangladesh', 'Bangladesh(unoff)')), bold = T, color = "white", background = "#f49a86")
-
-
 ```
-
