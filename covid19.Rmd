@@ -1,3 +1,65 @@
+--- 
+title: "COVID-19 Live Report"
+author: "Enayetur Raheem, Ph.D."
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: raheems/covid19
+cover-image: "https://covid19.eraheem.com/images/cover.png"
+description: "Live report on COVID-19  pandemic a.k.a. SARS-CoV2 with emphasis on data visualizations and interpretations. The report is focused on current situation in Bangladesh and the aftermath of COVID-19."
+---
+
+# About this report {-}
+
+Placeholder
+
+
+## Disclaimer {-}
+## Purpose {-}
+## Volunteering opportunity {-}
+### What skills are useful {-}
+## Found an error? {-}
+
+<!--chapter:end:index.Rmd-->
+
+
+# World {#world}
+
+Placeholder
+
+
+## Daily Incidence, Recovery, Deaths {#incidence-recovery-death}
+## Case Fatality Rate {#world-case-fatality}
+### Case Fatality Rate (select countries)
+## Confirmed Cases 
+## Deaths since first death
+## Deaths since first confirmed case
+### Cases and deaths compared on a specific day
+## Recovery-to-death ratio {#recovery-death-ratio}
+### Recovery-to-death ratio (South and South-East Asia)
+### Recovery-to-death ratio (Middle East)
+## 3-day % changes {#perc-change-top6}
+
+<!--chapter:end:01-world.Rmd-->
+
+
+# USA {#usa}
+
+Placeholder
+
+
+## Overall trend {#us-overall}
+## Confirmed Cases 
+## Deaths
+## Daily Deaths {#usa-daily-deaths}
+## Daily Deaths excluding NY {#usa-daily-deaths-excl-ny}
+
+<!--chapter:end:02-usa.Rmd-->
+
 # Bangladesh {#bangladesh}
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -406,3 +468,108 @@ bd_sa_summary %>%
   kable_styling(position = "center") %>%
   row_spec(which(bd_sa_summary$Country %in% c('Bangladesh', 'Bangladesh(unoff)')), bold = T, color = "white", background = "#f49a86")
 ```
+
+<!--chapter:end:03-bangladesh.Rmd-->
+
+
+# Projections {#projection}
+
+Placeholder
+
+
+## Projection for Bangladesh (unofficial) Run1  {#projection-bangladesh-run1}
+### Methodology
+### Ascertainment Rate
+### Projection for the next 5 days
+### Projection for 100 days into the future
+## Projection for Bangladesh (unofficial) Run 2 {#projection-bangladesh-run2}
+### Projection for the next 5 days
+### Projection for 100 days into the future
+## Projection for Bangladesh (unofficial) Run 3 {#projection-bangladesh-run3}
+### Projection for the next 5 days
+### Projection for 100 days into the future
+
+<!--chapter:end:04-projections.Rmd-->
+
+
+# Publications {#scipubs}
+
+This section lists major publications with a brief summary. The latest publications are listed first. 
+
+- Estimates of the severity of coronavirus disease 2019: a model-based analysis. https://doi.org/10.1016/S1473-3099(20)30243-7
+
+  Using data on 24 deaths that occurred in mainland China and 165 recoveries outside of China, we estimated the mean duration from onset of symptoms to death to be 17·8 days (95% credible interval [CrI] 16·9–19·2) and to hospital discharge to be 24·7 days (22·9–28·1). In all laboratory confirmed and clinically diagnosed cases from mainland China (n=70 117), we estimated a crude case fatality ratio (adjusted for censoring) of 3·67% (95% CrI 3·56–3·80). However, after further adjusting for demography and under-ascertainment, we obtained a best estimate of the case fatality ratio in China of 1·38% (1·23–1·53), with substantially higher ratios in older age groups (0·32% [0·27–0·38] in those aged <60 years vs 6·4% [5·7–7·2] in those aged ≥60 years), up to 13·4% (11·2–15·9) in those aged 80 years or older. 
+ 
+## Other articles
+
+- [Why COVID19 can't be compared with flu by Ruth Etzioni](https://timmermanreport.com/2020/04/why-covid-19-cant-be-directly-compared-with-the-flu/) 
+
+<!--chapter:end:05-publications.Rmd-->
+
+
+# Stories
+
+Placeholder
+
+
+## Rumi Ahmed
+### April 7, 2020 (via Facebook)
+### April 16, 2020 - Bats (via Facebook)
+### April 21, 2020 - Bats (Part 2 and 3)
+
+<!--chapter:end:06-stories.Rmd-->
+
+
+# Trials and Treatments {#trials}
+
+
+## Clinical trials
+
+
+**April 7, 2020**
+
+- [Canada begins clinical trial of experimental COVID-19 treatment using plasma from recovered individuals](https://www.theglobeandmail.com/canada/article-canada-begins-clinical-trial-of-experimental-covid-19-treatment-using/?utm_source=Nature+Briefing&utm_campaign=97ef9daa48-briefing-dy-20200407&utm_medium=email&utm_term=0_c9dfd39373-97ef9daa48-44480057) 
+
+> All patients who are hospitalized and need oxygen will be able to sign up for the trial.
+
+> “It’s a flip of a coin – two-thirds of patients will get the antibody-rich blood, with the other third being a control group,” Dr. Arnold said. The control group would receive standard care.
+
+> The trial could be completed in as little as three months. Dr. Arnold said they are realistically looking at six to 10 months before they have definitive results.
+
+> “The challenge is to get to an answer as quickly as possible so that we can start using this product if it’s truly effective, or realize it’s not and stop using it,” Dr. Arnold said.
+
+<!--chapter:end:07-clinicaltrials.Rmd-->
+
+
+# Resources
+
+## Data Sources
+
+- [JHU COVID19 time series data](https://github.com/CSSEGISandData/COVID-19)
+
+- [New York Times COVID time series (USA state and county level data only)](https://github.com/nytimes/covid-19-data)
+
+- [Bangladesh Unofficial deaths data](https://bit.ly/3em6TqO)
+
+## Computational Resources
+
+- R package [EpiModel](http://www.epimodel.org/)
+- [Tim Churches Blog](timchurches.github.io/)
+- [Learning Machines Blog](https://blog.ephorie.de/)
+
+## Dashboards
+
+- [Johns Hopkins Corona Virus Daboard](https://coronavirus.jhu.edu/map.html)
+
+- http://91-divoc.com/pages/covid-visualization/
+
+- [Beautiful Shiny Dashboard by Shubhram Pandey ](https://shubhrampandey.shinyapps.io/coronaVirusViz/_w_6ea524e3/_w_f14b34f2/)
+
+<!--chapter:end:20-resources.Rmd-->
+
+`r if (knitr:::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:30-references.Rmd-->
+
