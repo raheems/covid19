@@ -224,13 +224,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-peak-1.png" width="768" /></p>
 <p>We fit a log linear model to estimate the doubling time (growh phase) and halving time (decline phase, when that happens). The estimated fitted line (solid line) with 95% confidence interval (dotten lines) are superimposed on the epidemic curve below.</p>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-fitted-1.png" width="768" /></p>
-<p>The current doubling time as of 2020-05-13 is 5.5 days with a 95% confidence interval of (5, 6.1) days.</p>
+<p>The current doubling time as of 2020-05-13 is 5.6 days with a 95% confidence interval of (5, 6.2) days.</p>
 <div id="estimating-the-overall-reproduction-number" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Estimating the Overall Reproduction Number</h3>
 <p>The log-linear model estimates the <span class="math inline">\(R_0\)</span> as follows:</p>
 <p><img src="covid19_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   2.027   2.172   2.225   2.229   2.278   2.432</code></pre>
+##   2.014   2.155   2.206   2.210   2.257   2.407</code></pre>
 </div>
 <div id="estimating-the-instantaneous-reproduction-number-r_e" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Estimating the Instantaneous Reproduction Number (<span class="math inline">\(R_e\)</span>)</h3>
@@ -255,7 +255,7 @@ bd_res_uncertain_si &lt;-<span class="st"> </span>
 <p><img src="covid19_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-18">Table 3.1: </span>Instantaneous Effective Reproduction Number by Week as of 2020-05-12
+<span id="tab:unnamed-chunk-18">Table 3.1: </span>Instantaneous Effective Reproduction Number by Week as of 2020-05-13
 </caption>
 <thead>
 <tr>
@@ -284,29 +284,6 @@ Quantile.0.975(R)
 <tbody>
 <tr>
 <td style="text-align:left;">
-53
-</td>
-<td style="text-align:right;">
-54
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-1.359271
-</td>
-<td style="text-align:right;">
-0.1288631
-</td>
-<td style="text-align:right;">
-1.117971
-</td>
-<td style="text-align:right;">
-1.570640
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 54
 </td>
 <td style="text-align:right;">
@@ -316,16 +293,16 @@ Quantile.0.975(R)
 61
 </td>
 <td style="text-align:right;">
-1.337753
+1.337730
 </td>
 <td style="text-align:right;">
-0.1291260
+0.1290006
 </td>
 <td style="text-align:right;">
-1.103849
+1.103474
 </td>
 <td style="text-align:right;">
-1.553284
+1.552398
 </td>
 </tr>
 <tr>
@@ -339,16 +316,16 @@ Quantile.0.975(R)
 62
 </td>
 <td style="text-align:right;">
-1.314568
+1.314534
 </td>
 <td style="text-align:right;">
-0.1259016
+0.1258997
 </td>
 <td style="text-align:right;">
-1.093907
+1.094186
 </td>
 <td style="text-align:right;">
-1.529392
+1.529500
 </td>
 </tr>
 <tr>
@@ -362,16 +339,16 @@ Quantile.0.975(R)
 63
 </td>
 <td style="text-align:right;">
-1.277930
+1.277916
 </td>
 <td style="text-align:right;">
-0.1186297
+0.1186747
 </td>
 <td style="text-align:right;">
-1.075949
+1.076485
 </td>
 <td style="text-align:right;">
-1.487008
+1.486458
 </td>
 </tr>
 <tr>
@@ -385,16 +362,16 @@ Quantile.0.975(R)
 64
 </td>
 <td style="text-align:right;">
-1.278455
+1.278360
 </td>
 <td style="text-align:right;">
-0.1117342
+0.1121090
 </td>
 <td style="text-align:right;">
-1.094743
+1.093420
 </td>
 <td style="text-align:right;">
-1.481045
+1.483537
 </td>
 </tr>
 <tr>
@@ -408,16 +385,16 @@ Quantile.0.975(R)
 65
 </td>
 <td style="text-align:right;">
-1.307495
+1.307252
 </td>
 <td style="text-align:right;">
-0.1078097
+0.1076907
 </td>
 <td style="text-align:right;">
-1.127403
+1.126538
 </td>
 <td style="text-align:right;">
-1.505013
+1.505146
 </td>
 </tr>
 <tr>
@@ -431,28 +408,51 @@ Quantile.0.975(R)
 66
 </td>
 <td style="text-align:right;">
-1.295060
+1.295069
 </td>
 <td style="text-align:right;">
-0.1038498
+0.1037385
 </td>
 <td style="text-align:right;">
-1.107987
+1.108025
 </td>
 <td style="text-align:right;">
-1.482543
+1.481201
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+1.324522
+</td>
+<td style="text-align:right;">
+0.1040144
+</td>
+<td style="text-align:right;">
+1.132527
+</td>
+<td style="text-align:right;">
+1.504966
 </td>
 </tr>
 </tbody>
 </table>
-<p>The effective reproduction number based on the last week’s incidences show an average of 1.3 with a 95% confidence interval (1.11, 1.48).</p>
+<p>The effective reproduction number based on the last week’s incidences show an average of 1.32 with a 95% confidence interval (1.13, 1.5).</p>
 </div>
 <div id="cumulative-deaths-official-and-unofficial" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Cumulative Deaths (official and unofficial)</h3>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-deaths-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-19">Table 3.2: </span>Total number of deaths as of 2020-05-12
+<span id="tab:unnamed-chunk-19">Table 3.2: </span>Total number of deaths as of 2020-05-13
 </caption>
 <thead>
 <tr>
@@ -470,7 +470,7 @@ Total Deaths
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-448
+449
 </td>
 </tr>
 <tr>
@@ -531,15 +531,15 @@ Singapore
 </tr>
 <tr>
 <td style="text-align:left;">
-Bangladesh
+Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-16660
+17822
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Bangladesh(unoff)
+Bangladesh
 </td>
 <td style="text-align:right;">
 16660
@@ -635,7 +635,7 @@ Pakistan
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-448
+449
 </td>
 </tr>
 <tr>
