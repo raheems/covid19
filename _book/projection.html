@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-05-16" />
+<meta name="date" content="2020-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,10 +171,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.1" data-path="projection.html"><a href="projection.html#projection-for-the-next-5-days-1"><i class="fa fa-check"></i><b>4.2.1</b> Projection for the next 5 days</a></li>
 <li class="chapter" data-level="4.2.2" data-path="projection.html"><a href="projection.html#projection-for-100-days-into-the-future-1"><i class="fa fa-check"></i><b>4.2.2</b> Projection for 100 days into the future</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="projection.html"><a href="projection.html#projection-bangladesh-run3"><i class="fa fa-check"></i><b>4.3</b> Projection for Bangladesh (unofficial) Run 3</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="projection.html"><a href="projection.html#projection-for-the-next-5-days-2"><i class="fa fa-check"></i><b>4.3.1</b> Projection for the next 5 days</a></li>
-<li class="chapter" data-level="4.3.2" data-path="projection.html"><a href="projection.html#projection-for-100-days-into-the-future-2"><i class="fa fa-check"></i><b>4.3.2</b> Projection for 100 days into the future</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scipubs.html"><a href="scipubs.html"><i class="fa fa-check"></i><b>5</b> Publications</a><ul>
 <li class="chapter" data-level="5.1" data-path="scipubs.html"><a href="scipubs.html#other-articles"><i class="fa fa-check"></i><b>5.1</b> Other articles</a></li>
@@ -193,6 +189,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.1" data-path="resources.html"><a href="resources.html#data-sources"><i class="fa fa-check"></i><b>8.1</b> Data Sources</a></li>
 <li class="chapter" data-level="8.2" data-path="resources.html"><a href="resources.html#computational-resources"><i class="fa fa-check"></i><b>8.2</b> Computational Resources</a></li>
 <li class="chapter" data-level="8.3" data-path="resources.html"><a href="resources.html#dashboards"><i class="fa fa-check"></i><b>8.3</b> Dashboards</a></li>
+<li class="chapter" data-level="8.4" data-path="resources.html"><a href="resources.html#dashboards-from-bangladesh"><i class="fa fa-check"></i><b>8.4</b> Dashboards from Bangladesh</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -217,7 +214,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="projection" class="section level1">
 <h1><span class="header-section-number">Report 4</span> Projections</h1>
-<p><strong>Report last updated:</strong> 2020-05-16</p>
+<p><strong>Report last updated:</strong> 2020-05-17</p>
 <ul>
 <li><p>In this udpate, second round of prjections (Run 2) have been added. Please scroll down to find the projections. As usual, the last two current values were not used for fitting the model. Also, the model is conservative/pessimistic i.e., it slightly overestimates new cases.</p></li>
 <li><p>In addition to that, a new paramter to control the <code>run_date</code> was added to the <code>fit_seir()</code> function. See the code for more details.</p></li>
@@ -883,293 +880,145 @@ NA
 <h3><span class="header-section-number">4.2.2</span> Projection for 100 days into the future</h3>
 <p>Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August.</p>
 <p><img src="covid19_files/figure-html/projection-bangladesh-graph-100-run2-1.png" width="960" /></p>
-</div>
-</div>
-<div id="projection-bangladesh-run3" class="section level2">
-<h2><span class="header-section-number">4.3</span> Projection for Bangladesh (unofficial) Run 3</h2>
-<p><strong>Run date</strong>: 11 May 2020</p>
-<p>This is the third projection. For the initial project, please scroll up. The methodology is discussed above.</p>
-<p><img src="covid19_files/figure-html/projection-bangladesh-graph-run3-1.png" width="960" /></p>
-<p>It turns out that the bottom right one fits the current data best. So lets put that figure on a bigger canvas. Please note that in Run 1, we used a similar <span class="math inline">\(R_0\)</span> but a lower ascertainment rate. This time, a higher ascertainment rate is associated with a similar <span class="math inline">\(R_0\)</span>.</p>
-<p><img src="covid19_files/figure-html/projection-bangladesh-graph-best-run3-1.png" width="960" /></p>
-<pre><code>## Joining, by = &quot;date&quot;</code></pre>
-<p><img src="covid19_files/figure-html/projection-bangladesh-graph-best-run3-2.png" width="960" /></p>
-<div id="projection-for-the-next-5-days-2" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Projection for the next 5 days</h3>
-<pre><code>## Joining, by = &quot;date&quot;</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:unnamed-chunk-27">Table 4.3: </span>Predicted new cases for the next 5 days
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:right;">
-Actual daily cases
-</th>
-<th style="text-align:right;">
-Projected daily cases
-</th>
-<th style="text-align:right;">
-Actual cumulative cases
-</th>
-<th style="text-align:right;">
-Projected cumulative cases
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-63
-</td>
-<td style="text-align:left;">
-2020-05-09
-</td>
-<td style="text-align:right;">
-636
-</td>
-<td style="text-align:right;">
-1866
-</td>
-<td style="text-align:right;">
-13770
-</td>
-<td style="text-align:right;">
-13895
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-64
-</td>
-<td style="text-align:left;">
-2020-05-10
-</td>
-<td style="text-align:right;">
-887
-</td>
-<td style="text-align:right;">
-2156
-</td>
-<td style="text-align:right;">
-14657
-</td>
-<td style="text-align:right;">
-16051
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-65
-</td>
-<td style="text-align:left;">
-2020-05-11
-</td>
-<td style="text-align:right;">
-1034
-</td>
-<td style="text-align:right;">
-2491
-</td>
-<td style="text-align:right;">
-15691
-</td>
-<td style="text-align:right;">
-18542
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-66
-</td>
-<td style="text-align:left;">
-2020-05-12
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-2876
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-21418
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-67
-</td>
-<td style="text-align:left;">
-2020-05-13
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-3322
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-24740
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-68
-</td>
-<td style="text-align:left;">
-2020-05-14
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-3836
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-28576
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-69
-</td>
-<td style="text-align:left;">
-2020-05-15
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-4431
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-33007
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-70
-</td>
-<td style="text-align:left;">
-2020-05-16
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-5116
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-38123
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-71
-</td>
-<td style="text-align:left;">
-2020-05-17
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-5907
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-44030
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-72
-</td>
-<td style="text-align:left;">
-2020-05-18
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-6820
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-50850
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-73
-</td>
-<td style="text-align:left;">
-2020-05-19
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-7873
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-58723
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-74
-</td>
-<td style="text-align:left;">
-2020-05-20
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-9089
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-67812
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="projection-for-100-days-into-the-future-2" class="section level3">
-<h3><span class="header-section-number">4.3.2</span> Projection for 100 days into the future</h3>
-<p>Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August.</p>
-<p><img src="covid19_files/figure-html/projection-bangladesh-graph-100-run3-1.png" width="960" /></p>
+<!-- ## Projection for Bangladesh (unofficial) Run 3 {#projection-bangladesh-run3} -->
+<!-- __Run date__: 11 May 2020 -->
+<!-- This is the third projection. For the initial project, please scroll up. The methodology is discussed above. -->
+<!-- ```{r, projection-bangladesh-graph-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE} -->
+<!-- run_date = ymd("2020-05-11") -->
+<!-- a1 <- fit_seir(country = "Bangladesh(unoff)",  af=.25, nfuture = 5, -->
+<!--                run_date = run_date) -->
+<!-- p1<- a1$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" )) -->
+<!-- a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = 5, -->
+<!--                run_date = run_date) -->
+<!-- p2<- a2$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" )) -->
+<!-- a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = 5, -->
+<!--                run_date = run_date) -->
+<!-- p3<- a3$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" )) -->
+<!-- a4 <- fit_seir(country = "Bangladesh(unoff)", af=.9, nfuture = 5, run_date = run_date) -->
+<!-- p4<- a4$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" )) -->
+<!-- grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, -->
+<!--              top = textGrob(paste0("COVID-19 observed and 5-day projected incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n",  today()), -->
+<!--              gp=gpar(fontsize=16, font=16))) -->
+<!-- ``` -->
+<!-- It turns out that the bottom right one fits the current data best. So lets put that figure on a bigger canvas. Please note that in Run 1, we used a similar $R_0$ but a lower ascertainment rate. This time, a higher ascertainment rate is associated with a similar $R_0$. -->
+<!-- ```{r, projection-bangladesh-graph-best-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE} -->
+<!-- # Plotting the best fit -->
+<!-- # p4 + ggtitle(paste0("Best fit model\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)", " ", run_date)) -->
+<!-- p4 + ggtitle(paste0("Best fit model as of ", run_date, "\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed, green=Recovered)\n", " ","R0 =", format(a4$R0, digit=3)," and ", "assumsed reporting= ", a4$af*100,"%")) -->
+<!-- a5 <- fit_seir(country = "Bangladesh(unoff)", af=.96, npast = 0, nfuture = 5, run_date = run_date) -->
+<!-- p5<- a5$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a5$R0, digit=3),"and","assumsed reporting =", a5$af*100,"%" )) -->
+<!-- p5 -->
+<!-- ``` -->
+<!-- ### Projection for the next 5 days -->
+<!-- ```{r, echo=FALSE, fig.cap="Actual and Predicted Cumulative Cases using SEIR Model"} -->
+<!-- a5 <- fit_seir(country = "Bangladesh(unoff)", af=1.1, npast = 0, nfuture = 5, run_date = run_date) -->
+<!-- a5$fitted_cases %>% as.data.frame() %>% -->
+<!--   mutate( -->
+<!--     Date = date, -->
+<!--     `Actual daily cases` = c(0, diff(cum_cases)), -->
+<!--     `Actual cumulative cases` = cum_cases, -->
+<!--     `Projected cumulative cases` = round(I, digits = 0), -->
+<!--     `Projected daily cases` = c(0, diff(`Projected cumulative cases`)) -->
+<!--   ) %>% -->
+<!--   select(Date, `Actual daily cases`, `Projected daily cases`, -->
+<!--          `Actual cumulative cases`, -->
+<!--           `Projected cumulative cases` ) %>% -->
+<!--   tail(12) %>% -->
+<!--   kable(format = "html", -->
+<!--         caption=paste("Predicted new cases for the next 5 days")) %>% -->
+<!--           kable_styling(position = "center") -->
+<!-- ``` -->
+<!-- ### Projection for 100 days into the future -->
+<!-- Assuming the situation will remain like this including the interventions currently in place, the 100 day projection suggests that the the peak of the epidemic will be around the middle of June. The trajectory also suggests that the epidemic will end by end of July or early August. -->
+<!-- ```{r, projection-bangladesh-graph-100-run3, fig.width=10, fig.height=8, echo = FALSE, warning=FALSE, cache=TRUE, message=FALSE} -->
+<!-- nfuture=100 -->
+<!-- a1 <- fit_seir(country = "Bangladesh(unoff)", af=.25, nfuture = nfuture, run_date = run_date) -->
+<!-- p1<- a1$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a1$R0, digit=3),"and","assumsed reporting =", a1$af*100,"%" )) -->
+<!-- a2 <- fit_seir(country = "Bangladesh(unoff)", af=.5, nfuture = nfuture) -->
+<!-- p2<- a2$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a2$R0, digit=3),"and","assumsed reporting =", a2$af*100,"%" )) -->
+<!-- a3 <- fit_seir(country = "Bangladesh(unoff)", af=.75, nfuture = nfuture) -->
+<!-- p3<- a3$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a3$R0, digit=3),"and","assumsed reporting =", a3$af*100,"%" )) -->
+<!-- a4 <- fit_seir(country = "Bangladesh(unoff)", af=1.1, nfuture = nfuture) -->
+<!-- p4<- a4$fitted_cases %>% -->
+<!--   ggplot(aes(x = date)) + -->
+<!--   geom_line(aes(y = I), colour = "red") + -->
+<!--   geom_line(aes(y = E), colour = "blue") + -->
+<!--   # geom_line(aes(y = R), colour = "darkgreen") + -->
+<!--   geom_point(aes(y = cum_cases), colour = "orange") + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   # scale_y_continuous(labels = scales::comma, trans = 'log') + -->
+<!--   labs(y = "Cumulative incidence", -->
+<!--        title = paste("R0 =", format(a4$R0, digit=3),"and","assumsed reporting =", a4$af*100,"%" )) -->
+<!-- grid.arrange(grobs = list(p1, p2, p3, p4), ncol=2, -->
+<!--              top = textGrob(paste0("COVID-19 observed and 100-day projected  incidence for Bangladesh (unofficial)\n(orange=actual cases, red=predicted incidence from SEIR model, blue=Exposed)\n",  today()), -->
+<!--              gp=gpar(fontsize=16, font=16))) -->
+<!-- # grid.arrange(a, b, c, d,ncol=2, -->
+<!-- #      nrow=2, top=textGrob("Title", gp=gpar(fontsize=15,font=8))) -->
+<!-- ``` -->
 
 </div>
 </div>

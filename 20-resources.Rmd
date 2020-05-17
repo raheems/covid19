@@ -14,6 +14,7 @@
 - R package [EpiModel](http://www.epimodel.org/)
 - [Tim Churches Blog](timchurches.github.io/)
 - [Learning Machines Blog](https://blog.ephorie.de/)
+- [Infectious disease modeling beyond SIR model](https://towardsdatascience.com/infectious-disease-modelling-beyond-the-basic-sir-model-216369c584c4)
 
 ## Dashboards
 
@@ -22,3 +23,7 @@
 - http://91-divoc.com/pages/covid-visualization/
 
 - [Beautiful Shiny Dashboard by Shubhram Pandey ](https://shubhrampandey.shinyapps.io/coronaVirusViz/_w_6ea524e3/_w_f14b34f2/)
+
+## Dashboards from Bangladesh
+
+- [By Rana Tuhin](https://rana2hin.shinyapps.io/covid19_bd/)
