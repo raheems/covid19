@@ -26,7 +26,9 @@ bd_unoff_cases <- bd_unoff %>%
     , daily_cases = c(0, diff(cum_cases))
   ) %>%
   # filter(date <= date_cut_off) %>%
-  select(date, country, cum_cases, daily_cases)
+  select(date, country, cum_cases, daily_cases) %>%
+  drop_na()
+
 bd_incidence_object <- bd_unoff_cases %>% uncount(daily_cases)
 # Crate incidence object using incidence package
 bd_incidence_object <- incidence::incidence(bd_incidence_object$date)
