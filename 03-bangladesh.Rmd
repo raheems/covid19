@@ -37,7 +37,7 @@ bd_incidence_peak <- incidence::find_peak(bd_incidence_object)
 plot(bd_incidence_object) + 
   geom_vline(xintercept = bd_incidence_peak, col = "red", 
              lty = 2, size=1) +  
-  labs(title = "Daily unofficial new infections in Bangladesh ", 
+  labs(title = paste0("Daily unofficial new infections in Bangladesh as of ", date_data_refreshed), 
        subtitle = "(Red dashed line indicates date of peak infections)") + theme(text = element_text(size = 12))
 ```
 
