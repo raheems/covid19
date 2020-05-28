@@ -38,7 +38,10 @@ plot(bd_incidence_object) +
   geom_vline(xintercept = bd_incidence_peak, col = "red", 
              lty = 2, size=1) +  
   labs(title = paste0("Daily unofficial new infections in Bangladesh as of ", max(bd_unoff_cases$date)), 
-       subtitle = "(Red dashed line indicates date of peak infections)") + theme(text = element_text(size = 12))
+       subtitle = "(Red dashed line indicates date of peak infections)") + 
+  #theme(text = element_text(size = 12))
+  theme(text = element_text(size = 12), axis.text.x = element_text(angle = 90, hjust = 1))
+
 ```
 
 
