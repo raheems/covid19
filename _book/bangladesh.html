@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-06-07" />
+<meta name="date" content="2020-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -222,13 +222,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-peak-1.png" width="768" /></p>
 <p>We fit a log linear model to estimate the doubling time (growh phase) and halving time (decline phase, when that happens). The estimated fitted line (solid line) with 95% confidence interval (dotten lines) are superimposed on the epidemic curve below.</p>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-fitted-1.png" width="768" /></p>
-<p>The current doubling time as of 2020-06-07 is 7.5 days with a 95% confidence interval of (6.9, 8.2) days.</p>
+<p>The current doubling time as of 2020-06-08 is 7.6 days with a 95% confidence interval of (7, 8.3) days.</p>
 <div id="estimating-the-overall-reproduction-number" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Estimating the Overall Reproduction Number</h3>
 <p>The log-linear model estimates the <span class="math inline">\(R_0\)</span> as follows:</p>
 <p><img src="covid19_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.638   1.797   1.827   1.827   1.858   1.936</code></pre>
+##   1.697   1.778   1.804   1.807   1.829   1.950</code></pre>
 </div>
 <div id="estimating-the-instantaneous-reproduction-number-r_e" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Estimating the Instantaneous Reproduction Number (<span class="math inline">\(R_e\)</span>)</h3>
@@ -253,7 +253,7 @@ bd_res_uncertain_si &lt;-<span class="st"> </span>
 <p><img src="covid19_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-18">Table 3.1: </span>Instantaneous Effective Reproduction Number by Week as of 2020-06-07
+<span id="tab:unnamed-chunk-18">Table 3.1: </span>Instantaneous Effective Reproduction Number by Week as of 2020-06-08
 </caption>
 <thead>
 <tr>
@@ -282,29 +282,6 @@ Quantile.0.975(R)
 <tbody>
 <tr>
 <td style="text-align:left;">
-79
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-86
-</td>
-<td style="text-align:right;">
-1.241206
-</td>
-<td style="text-align:right;">
-0.0694550
-</td>
-<td style="text-align:right;">
-1.103161
-</td>
-<td style="text-align:right;">
-1.369060
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 80
 </td>
 <td style="text-align:right;">
@@ -314,16 +291,16 @@ Quantile.0.975(R)
 87
 </td>
 <td style="text-align:right;">
-1.354034
+1.350630
 </td>
 <td style="text-align:right;">
-0.0758410
+0.0772730
 </td>
 <td style="text-align:right;">
-1.195244
+1.185263
 </td>
 <td style="text-align:right;">
-1.484107
+1.478698
 </td>
 </tr>
 <tr>
@@ -337,16 +314,16 @@ Quantile.0.975(R)
 88
 </td>
 <td style="text-align:right;">
-1.404613
+1.400275
 </td>
 <td style="text-align:right;">
-0.0912665
+0.0947907
 </td>
 <td style="text-align:right;">
-1.188345
+1.173905
 </td>
 <td style="text-align:right;">
-1.541944
+1.537452
 </td>
 </tr>
 <tr>
@@ -360,16 +337,16 @@ Quantile.0.975(R)
 89
 </td>
 <td style="text-align:right;">
-1.383473
+1.379090
 </td>
 <td style="text-align:right;">
-0.1065140
+0.1110742
 </td>
 <td style="text-align:right;">
-1.133115
+1.118635
 </td>
 <td style="text-align:right;">
-1.531434
+1.527031
 </td>
 </tr>
 <tr>
@@ -383,16 +360,16 @@ Quantile.0.975(R)
 90
 </td>
 <td style="text-align:right;">
-1.351268
+1.347819
 </td>
 <td style="text-align:right;">
-0.1156139
+0.1200912
 </td>
 <td style="text-align:right;">
-1.103282
+1.089102
 </td>
 <td style="text-align:right;">
-1.514592
+1.512393
 </td>
 </tr>
 <tr>
@@ -406,16 +383,16 @@ Quantile.0.975(R)
 91
 </td>
 <td style="text-align:right;">
-1.358440
+1.355919
 </td>
 <td style="text-align:right;">
-0.1220748
+0.1260240
 </td>
 <td style="text-align:right;">
-1.119998
+1.106754
 </td>
 <td style="text-align:right;">
-1.542186
+1.542499
 </td>
 </tr>
 <tr>
@@ -429,28 +406,51 @@ Quantile.0.975(R)
 92
 </td>
 <td style="text-align:right;">
-1.311606
+1.309473
 </td>
 <td style="text-align:right;">
-0.1207852
+0.1247064
 </td>
 <td style="text-align:right;">
-1.085753
+1.073222
 </td>
 <td style="text-align:right;">
-1.506371
+1.509058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+86
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+1.274914
+</td>
+<td style="text-align:right;">
+0.1180111
+</td>
+<td style="text-align:right;">
+1.064792
+</td>
+<td style="text-align:right;">
+1.479166
 </td>
 </tr>
 </tbody>
 </table>
-<p>The effective reproduction number based on the last week’s incidences show an average of 1.31 with a 95% confidence interval (1.09, 1.51).</p>
+<p>The effective reproduction number based on the last week’s incidences show an average of 1.27 with a 95% confidence interval (1.06, 1.48).</p>
 </div>
 <div id="cumulative-deaths-official-and-unofficial" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Cumulative Deaths (official and unofficial)</h3>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-deaths-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-19">Table 3.2: </span>Total number of deaths as of 2020-06-07
+<span id="tab:unnamed-chunk-19">Table 3.2: </span>Total number of deaths as of 2020-06-08
 </caption>
 <thead>
 <tr>
@@ -468,7 +468,7 @@ Total Deaths
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-928
+951
 </td>
 </tr>
 <tr>
@@ -476,7 +476,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-846
+888
 </td>
 </tr>
 </tbody>
@@ -490,7 +490,7 @@ Bangladesh
 <p><img src="covid19_files/figure-html/covid19-cases-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-20">Table 3.3: </span>Total number of cases as of 2020-06-06
+<span id="tab:unnamed-chunk-20">Table 3.3: </span>Total number of cases as of 2020-06-07
 </caption>
 <thead>
 <tr>
@@ -508,7 +508,7 @@ Total Cases
 India
 </td>
 <td style="text-align:right;">
-246622
+257486
 </td>
 </tr>
 <tr>
@@ -516,7 +516,7 @@ India
 Pakistan
 </td>
 <td style="text-align:right;">
-93983
+98943
 </td>
 </tr>
 <tr>
@@ -524,7 +524,7 @@ Pakistan
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-65769
+68504
 </td>
 </tr>
 <tr>
@@ -532,7 +532,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-63026
+65769
 </td>
 </tr>
 <tr>
@@ -540,7 +540,7 @@ Bangladesh
 Singapore
 </td>
 <td style="text-align:right;">
-37527
+37910
 </td>
 </tr>
 <tr>
@@ -548,7 +548,7 @@ Singapore
 Indonesia
 </td>
 <td style="text-align:right;">
-30514
+31186
 </td>
 </tr>
 <tr>
@@ -556,7 +556,7 @@ Indonesia
 Malaysia
 </td>
 <td style="text-align:right;">
-8303
+8322
 </td>
 </tr>
 <tr>
@@ -564,7 +564,7 @@ Malaysia
 Nepal
 </td>
 <td style="text-align:right;">
-3235
+3448
 </td>
 </tr>
 <tr>
@@ -572,7 +572,7 @@ Nepal
 Sri Lanka
 </td>
 <td style="text-align:right;">
-1814
+1835
 </td>
 </tr>
 <tr>
@@ -580,7 +580,7 @@ Sri Lanka
 Bhutan
 </td>
 <td style="text-align:right;">
-48
+59
 </td>
 </tr>
 </tbody>
@@ -591,7 +591,7 @@ Bhutan
 <p><img src="covid19_files/figure-html/covid19-death-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-21">Table 3.4: </span>Total number of deaths as of 2020-06-06
+<span id="tab:unnamed-chunk-21">Table 3.4: </span>Total number of deaths as of 2020-06-07
 </caption>
 <thead>
 <tr>
@@ -609,7 +609,7 @@ Total Deaths
 India
 </td>
 <td style="text-align:right;">
-6946
+7207
 </td>
 </tr>
 <tr>
@@ -617,7 +617,7 @@ India
 Pakistan
 </td>
 <td style="text-align:right;">
-1935
+2002
 </td>
 </tr>
 <tr>
@@ -625,7 +625,7 @@ Pakistan
 Indonesia
 </td>
 <td style="text-align:right;">
-1801
+1851
 </td>
 </tr>
 <tr>
@@ -633,7 +633,7 @@ Indonesia
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-928
+951
 </td>
 </tr>
 <tr>
@@ -641,7 +641,7 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;">
-846
+888
 </td>
 </tr>
 <tr>
@@ -689,10 +689,10 @@ Bhutan
 </div>
 <div id="cases-and-deaths-compared-on-a-specific-day-1" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Cases and deaths compared on a specific day</h3>
-<p>Bangladesh has entered into day 91 since first confirmed case.</p>
+<p>Bangladesh has entered into day 92 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-23">Table 3.5: </span>Bangladesh and its peers: total cases and deaths compared on day 91
+<span id="tab:unnamed-chunk-23">Table 3.5: </span>Bangladesh and its peers: total cases and deaths compared on day 92
 </caption>
 <thead>
 <tr>
@@ -713,10 +713,10 @@ Total deaths
 Indonesia
 </td>
 <td style="text-align:right;">
-26473
+26940
 </td>
 <td style="text-align:right;">
-1613
+1641
 </td>
 </tr>
 <tr>
@@ -724,10 +724,10 @@ Indonesia
 Pakistan
 </td>
 <td style="text-align:right;">
-57705
+59151
 </td>
 <td style="text-align:right;">
-1197
+1225
 </td>
 </tr>
 <tr>
@@ -735,10 +735,10 @@ Pakistan
 India
 </td>
 <td style="text-align:right;">
-33062
+34863
 </td>
 <td style="text-align:right;">
-1079
+1154
 </td>
 </tr>
 <tr>
@@ -746,10 +746,10 @@ India
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-63026
+65769
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-926
+950
 </td>
 </tr>
 <tr>
@@ -757,10 +757,10 @@ Bangladesh(unoff)
 Bangladesh
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-63026
+65769
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-846
+888
 </td>
 </tr>
 <tr>
@@ -768,10 +768,10 @@ Bangladesh
 Malaysia
 </td>
 <td style="text-align:right;">
-5691
+5742
 </td>
 <td style="text-align:right;">
-96
+98
 </td>
 </tr>
 <tr>
@@ -779,7 +779,7 @@ Malaysia
 Singapore
 </td>
 <td style="text-align:right;">
-10141
+11178
 </td>
 <td style="text-align:right;">
 12
@@ -790,7 +790,7 @@ Singapore
 Sri Lanka
 </td>
 <td style="text-align:right;">
-523
+588
 </td>
 <td style="text-align:right;">
 7
@@ -801,7 +801,7 @@ Sri Lanka
 Bhutan
 </td>
 <td style="text-align:right;">
-47
+48
 </td>
 <td style="text-align:right;">
 0
