@@ -124,7 +124,7 @@ plot_Ri(bd_res_parametric_si)
 ```
 
 
-### Simulating the $R_e$ on Weekly Window
+### Simulating the $R_e$ on Weekly Sliding Window
 
 Now we perform a simulation of different SI distribution to obtain the $R_e$. For this, we vary the parameters of gamma distribution and obtain the following.
 
