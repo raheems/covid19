@@ -92,7 +92,7 @@ summary(growth_R0)
 
 ### Estimating the Effectuve Reproduction Number ($R_e$)
 
-The estimation of effective reproduction number involves the distribution of serial interval (SI). Based on the literature (REF to be added), a gamma distribution with mean 6 and standard deviation 3.5
+The estimation of effective reproduction number involves the distribution of serial interval (SI). Based on the literature (REF to be added), a gamma distribution with mean 7.5 and standard deviation 3.5
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
