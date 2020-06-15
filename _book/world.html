@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-06-14" />
+<meta name="date" content="2020-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1.1" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-overall-reproduction-number"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Overall Reproduction Number</a></li>
 <li class="chapter" data-level="3.1.2" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-instantaneous-reproduction-number-r_e"><i class="fa fa-check"></i><b>3.1.2</b> Estimating the Instantaneous Reproduction Number (<span class="math inline">\(R_e\)</span>)</a></li>
 <li class="chapter" data-level="3.1.3" data-path="bangladesh.html"><a href="bangladesh.html#simulating-the-r_e"><i class="fa fa-check"></i><b>3.1.3</b> Simulating the <span class="math inline">\(R_e\)</span></a></li>
-<li class="chapter" data-level="3.1.4" data-path="bangladesh.html"><a href="bangladesh.html#cumulative-deaths-official-and-unofficial"><i class="fa fa-check"></i><b>3.1.4</b> Cumulative Deaths (official and unofficial)</a></li>
+<li class="chapter" data-level="3.1.4" data-path="bangladesh.html"><a href="bangladesh.html#running-on-a-monthly-sliding-window"><i class="fa fa-check"></i><b>3.1.4</b> Running on a Monthly Sliding Window</a></li>
+<li class="chapter" data-level="3.1.5" data-path="bangladesh.html"><a href="bangladesh.html#cumulative-deaths-official-and-unofficial"><i class="fa fa-check"></i><b>3.1.5</b> Cumulative Deaths (official and unofficial)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.2</b> Bangladesh in South Asia</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="bangladesh.html"><a href="bangladesh.html#infection"><i class="fa fa-check"></i><b>3.2.1</b> Infection</a></li>
@@ -217,8 +218,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Report 1</span> World</h1>
 <div id="incidence-recovery-death" class="section level2">
 <h2><span class="header-section-number">1.1</span> Daily Incidence, Recovery, Deaths</h2>
-<p><strong>Report last updated:</strong> 2020-06-14</p>
-<p><strong>Data last refreshed:</strong> : 2020-06-13</p>
+<p><strong>Report last updated:</strong> 2020-06-15</p>
+<p><strong>Data last refreshed:</strong> : 2020-06-14</p>
 <p><img src="covid19_files/figure-html/global-incidence-recovery-deaths-1.png" width="768" /></p>
 </div>
 <div id="world-case-fatality" class="section level2">
@@ -236,7 +237,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/global-confirmed-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-3">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-06-13
+<span id="tab:unnamed-chunk-15">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-06-14
 </caption>
 <thead>
 <tr>
@@ -254,7 +255,7 @@ Confirmed
 US
 </td>
 <td style="text-align:right;">
-2074526
+2094058
 </td>
 </tr>
 <tr>
@@ -262,7 +263,7 @@ US
 Brazil
 </td>
 <td style="text-align:right;">
-850514
+867624
 </td>
 </tr>
 <tr>
@@ -270,7 +271,7 @@ Brazil
 Russia
 </td>
 <td style="text-align:right;">
-519458
+528267
 </td>
 </tr>
 <tr>
@@ -278,7 +279,7 @@ Russia
 India
 </td>
 <td style="text-align:right;">
-308993
+320922
 </td>
 </tr>
 <tr>
@@ -286,7 +287,7 @@ India
 United Kingdom
 </td>
 <td style="text-align:right;">
-295828
+297342
 </td>
 </tr>
 <tr>
@@ -294,7 +295,7 @@ United Kingdom
 Spain
 </td>
 <td style="text-align:right;">
-243605
+243928
 </td>
 </tr>
 <tr>
@@ -302,7 +303,7 @@ Spain
 Italy
 </td>
 <td style="text-align:right;">
-236651
+236989
 </td>
 </tr>
 <tr>
@@ -310,7 +311,7 @@ Italy
 Peru
 </td>
 <td style="text-align:right;">
-220749
+229736
 </td>
 </tr>
 <tr>
@@ -318,7 +319,7 @@ Peru
 France
 </td>
 <td style="text-align:right;">
-193746
+194153
 </td>
 </tr>
 <tr>
@@ -326,7 +327,7 @@ France
 Germany
 </td>
 <td style="text-align:right;">
-187267
+187518
 </td>
 </tr>
 <tr>
@@ -334,7 +335,7 @@ Germany
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-84379
+87520
 </td>
 </tr>
 </tbody>
@@ -349,7 +350,7 @@ Bangladesh(unoff)
 <p><img src="covid19_files/figure-html/global-deaths-since-first-case-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-4">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-06-13
+<span id="tab:unnamed-chunk-16">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-06-14
 </caption>
 <thead>
 <tr>
@@ -367,7 +368,7 @@ Confirmed
 US
 </td>
 <td style="text-align:right;">
-115436
+115732
 </td>
 </tr>
 <tr>
@@ -375,7 +376,7 @@ US
 Brazil
 </td>
 <td style="text-align:right;">
-42720
+43332
 </td>
 </tr>
 <tr>
@@ -383,7 +384,7 @@ Brazil
 United Kingdom
 </td>
 <td style="text-align:right;">
-41747
+41783
 </td>
 </tr>
 <tr>
@@ -391,7 +392,7 @@ United Kingdom
 Italy
 </td>
 <td style="text-align:right;">
-34301
+34345
 </td>
 </tr>
 <tr>
@@ -399,7 +400,7 @@ Italy
 France
 </td>
 <td style="text-align:right;">
-29401
+29410
 </td>
 </tr>
 <tr>
@@ -415,7 +416,7 @@ Spain
 Mexico
 </td>
 <td style="text-align:right;">
-16872
+17141
 </td>
 </tr>
 <tr>
@@ -423,7 +424,7 @@ Mexico
 Belgium
 </td>
 <td style="text-align:right;">
-9650
+9655
 </td>
 </tr>
 <tr>
@@ -431,15 +432,15 @@ Belgium
 India
 </td>
 <td style="text-align:right;">
-8884
+9195
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Germany
+Iran
 </td>
 <td style="text-align:right;">
-8793
+8837
 </td>
 </tr>
 <tr>
@@ -447,17 +448,17 @@ Germany
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;">
-983
+1182
 </td>
 </tr>
 </tbody>
 </table>
 <div id="cases-and-deaths-compared-on-a-specific-day" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Cases and deaths compared on a specific day</h3>
-<p>Bangladesh has entered into day 98 since first confirmed case.</p>
+<p>Bangladesh has entered into day 99 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-6">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 98
+<span id="tab:unnamed-chunk-18">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 99
 </caption>
 <thead>
 <tr>
@@ -478,10 +479,10 @@ Total deaths
 US
 </td>
 <td style="text-align:right;">
-1015518
+1042926
 </td>
 <td style="text-align:right;">
-58632
+61252
 </td>
 </tr>
 <tr>
@@ -489,10 +490,10 @@ US
 Brazil
 </td>
 <td style="text-align:right;">
-555383
+584016
 </td>
 <td style="text-align:right;">
-31199
+32548
 </td>
 </tr>
 <tr>
@@ -500,10 +501,10 @@ Brazil
 United Kingdom
 </td>
 <td style="text-align:right;">
-207977
+212629
 </td>
 <td style="text-align:right;">
-30689
+31316
 </td>
 </tr>
 <tr>
@@ -511,10 +512,10 @@ United Kingdom
 Italy
 </td>
 <td style="text-align:right;">
-215858
+217185
 </td>
 <td style="text-align:right;">
-29958
+30201
 </td>
 </tr>
 <tr>
@@ -522,10 +523,10 @@ Italy
 Spain
 </td>
 <td style="text-align:right;">
-222857
+223578
 </td>
 <td style="text-align:right;">
-26299
+26478
 </td>
 </tr>
 <tr>
@@ -533,21 +534,10 @@ Spain
 France
 </td>
 <td style="text-align:right;">
-167299
+167305
 </td>
 <td style="text-align:right;">
-24379
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-Bangladesh
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-84379
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-1139
+24597
 </td>
 </tr>
 <tr>
@@ -555,10 +545,21 @@ Bangladesh
 Bangladesh(unoff)
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-84379
+87520
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-983
+1182
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
+Bangladesh
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
+87520
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
+1171
 </td>
 </tr>
 </tbody>

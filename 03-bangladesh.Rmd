@@ -61,7 +61,7 @@ plot(bd_incidence_object) %>% add_incidence_fit(bd_incidence_fit) +
 
 The current doubling time as of `r today()` is `r round(get_info(bd_incidence_fit, "doubling"), 1)` days with a 95% confidence interval of (`r round(get_info(bd_incidence_fit, "doubling.conf"), 1)`) days. 
 
-### Estimating the Overall Reproduction Number 
+### Estimating the Overall Reproduction Number, $R_0$
 
 The log-linear model estimates the $R_0$ as follows:
 
@@ -73,7 +73,7 @@ library(distcrete)
 library(epitrix)
 
 mu <- 7.5  # days
-sigma <- 3.4  # days
+sigma <- 3.5  # days
 param <- gamma_mucv2shapescale(mu, sigma/mu)
 
 w <- distcrete("gamma", interval = 1, shape = param$shape, scale = param$scale, w = 0)
@@ -90,9 +90,9 @@ summary(growth_R0)
 ```
 
 
-### Estimating the Instantaneous Reproduction Number ($R_e$)
+### Estimating the Effectuve Reproduction Number ($R_e$)
 
-The estimation of effective reproduction number involves the distribution of serial interval (SI). Based on the literature (REF to be added), a gamma distribution with mean 7.5 and standard deviation 3.5
+The estimation of effective reproduction number involves the distribution of serial interval (SI). Based on the literature (REF to be added), a gamma distribution with mean 6 and standard deviation 3.5
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -124,7 +124,7 @@ plot_Ri(bd_res_parametric_si)
 ```
 
 
-### Simulating the $R_e$
+### Simulating the $R_e$ on Weekly Window
 
 Now we perform a simulation of different SI distribution to obtain the $R_e$. For this, we vary the parameters of gamma distribution and obtain the following.
 
@@ -133,7 +133,7 @@ Now we perform a simulation of different SI distribution to obtain the $R_e$. Fo
 # Recalculating with varying SI distribution parameters 
 # we get these results:
 
-config = make_config(list(mean_si = 7.5, std_mean_si = 3, 
+config = make_config(list(mean_si = 7.5, std_mean_si = 3.5, 
                                        min_mean_si = 2, max_mean_si =10.0,
                                        std_si = 3.5, std_std_si = 1,
                                        min_std_si = 0.5, max_std_si = 4))
@@ -150,7 +150,7 @@ plot_Ri(bd_res_uncertain_si)
 bd_res_uncertain_si$R %>%
   tail(7) %>%
   select(t_start, t_end, `Mean(R)`, `Std(R)`,  `Quantile.0.025(R)`, `Quantile.0.975(R)`) %>%
-  kable(format = "html", caption=paste("Instantaneous Effective Reproduction Number by Week as of ", date_data_refreshed)) %>%
+  kable(format = "html", caption=paste("Effective Reproduction Number by Week as of ", date_data_refreshed)) %>%
   kable_styling(position = "center")
 
 R_CI = tail(bd_res_uncertain_si$R, 1)
@@ -160,6 +160,48 @@ R_UCI = round(as.numeric(R_CI["Quantile.0.975(R)"]), 2)
 ```
 
 The effective reproduction number based on the last week's incidences show an average of `r R_mean` with a 95\% confidence interval (`r R_LCI`, `r R_UCI`).
+
+
+### Simulating $R_e$ on a Monthly Sliding Window
+
+```{r, echo=FALSE, warning=FALSE}
+
+# Runnign monthly config
+T <- nrow(bd_confirmed_cases)
+t_start <- seq(2, T-29) # starting at 2 as conditional on the past observations
+t_end <- t_start + 29 # adding 6 to get 7-day windows as bounds included in window
+
+config = make_config(list(
+  t_start = t_start, t_end = t_end,
+  mean_si = 7.5, std_mean_si = 3.5, 
+                                       min_mean_si = 2, max_mean_si =10.0,
+                                       std_si = 3.5, std_std_si = 1,
+                                       min_std_si = 0.5, max_std_si = 4))
+bd_res_uncertain_si_monthly <- 
+  estimate_R(bd_confirmed_cases$daily_cases, method = "uncertain_si", 
+             config = config)
+
+# plot_Ri(bd_res_uncertain_si)
+```
+
+```{r, echo=FALSE}
+# print the last 30 days of data
+bd_res_uncertain_si_monthly$R %>%
+  tail(30) %>%
+  select(t_start, t_end, `Mean(R)`, `Std(R)`,  `Quantile.0.025(R)`, `Quantile.0.975(R)`) %>%
+  kable(format = "html", caption=paste("Effective Reproduction Number by Month as of ", date_data_refreshed)) %>%
+  kable_styling(position = "center")
+
+
+R_CI = tail(bd_res_uncertain_si_monthly$R, 1)
+R_mean = round(as.numeric(R_CI["Mean(R)"]), 2)
+R_LCI = round(as.numeric(R_CI["Quantile.0.025(R)"]), 2)
+R_UCI = round(as.numeric(R_CI["Quantile.0.975(R)"]), 2)
+```
+
+
+The effective reproduction number based on the last months's incidences show an average of `r R_mean` with a 95\% confidence interval (`r R_LCI`, `r R_UCI`).
+
 
 ### Cumulative Deaths (official and unofficial)
 
