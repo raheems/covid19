@@ -150,10 +150,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="bangladesh.html"><a href="bangladesh.html"><i class="fa fa-check"></i><b>3</b> Bangladesh</a><ul>
 <li class="chapter" data-level="3.1" data-path="bangladesh.html"><a href="bangladesh.html#epidemic-curve-and-search-for-peak"><i class="fa fa-check"></i><b>3.1</b> Epidemic curve and search for peak</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-overall-reproduction-number"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Overall Reproduction Number</a></li>
-<li class="chapter" data-level="3.1.2" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-instantaneous-reproduction-number-r_e"><i class="fa fa-check"></i><b>3.1.2</b> Estimating the Instantaneous Reproduction Number (<span class="math inline">\(R_e\)</span>)</a></li>
-<li class="chapter" data-level="3.1.3" data-path="bangladesh.html"><a href="bangladesh.html#simulating-the-r_e"><i class="fa fa-check"></i><b>3.1.3</b> Simulating the <span class="math inline">\(R_e\)</span></a></li>
-<li class="chapter" data-level="3.1.4" data-path="bangladesh.html"><a href="bangladesh.html#running-on-a-monthly-sliding-window"><i class="fa fa-check"></i><b>3.1.4</b> Running on a Monthly Sliding Window</a></li>
+<li class="chapter" data-level="3.1.1" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-overall-reproduction-number-r_0"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Overall Reproduction Number, <span class="math inline">\(R_0\)</span></a></li>
+<li class="chapter" data-level="3.1.2" data-path="bangladesh.html"><a href="bangladesh.html#estimating-the-effectuve-reproduction-number-r_e"><i class="fa fa-check"></i><b>3.1.2</b> Estimating the Effectuve Reproduction Number (<span class="math inline">\(R_e\)</span>)</a></li>
+<li class="chapter" data-level="3.1.3" data-path="bangladesh.html"><a href="bangladesh.html#simulating-the-r_e-on-weekly-sliding-window"><i class="fa fa-check"></i><b>3.1.3</b> Simulating the <span class="math inline">\(R_e\)</span> on Weekly Sliding Window</a></li>
+<li class="chapter" data-level="3.1.4" data-path="bangladesh.html"><a href="bangladesh.html#simulating-r_e-on-a-monthly-sliding-window"><i class="fa fa-check"></i><b>3.1.4</b> Simulating <span class="math inline">\(R_e\)</span> on a Monthly Sliding Window</a></li>
 <li class="chapter" data-level="3.1.5" data-path="bangladesh.html"><a href="bangladesh.html#cumulative-deaths-official-and-unofficial"><i class="fa fa-check"></i><b>3.1.5</b> Cumulative Deaths (official and unofficial)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="bangladesh.html"><a href="bangladesh.html#bangladesh-in-south-asia"><i class="fa fa-check"></i><b>3.2</b> Bangladesh in South Asia</a><ul>
@@ -237,7 +237,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/global-confirmed-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-15">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-06-14
+<span id="tab:unnamed-chunk-3">Table 1.1: </span>Top 10 countries by confirmed cases as of 2020-06-14
 </caption>
 <thead>
 <tr>
@@ -350,7 +350,7 @@ Bangladesh(unoff)
 <p><img src="covid19_files/figure-html/global-deaths-since-first-case-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-16">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-06-14
+<span id="tab:unnamed-chunk-4">Table 1.2: </span>Top 10 countries by confirmed deaths as of 2020-06-14
 </caption>
 <thead>
 <tr>
@@ -458,7 +458,7 @@ Bangladesh(unoff)
 <p>Bangladesh has entered into day 99 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-18">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 99
+<span id="tab:unnamed-chunk-6">Table 1.3: </span>Bangladesh in the world: total cases and deaths compared on day 99
 </caption>
 <thead>
 <tr>
