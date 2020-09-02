@@ -24,7 +24,7 @@
 <meta name="author" content="Enayetur Raheem, Ph.D." />
 
 
-<meta name="date" content="2020-08-23" />
+<meta name="date" content="2020-09-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,13 +223,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-peak-1.png" width="768" /></p>
 <p>We fit a log linear model to estimate the doubling time (growh phase) and halving time (decline phase, when that happens). The estimated fitted line (solid line) with 95% confidence interval (dotten lines) are superimposed on the epidemic curve below.</p>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-epidemic-curve-fitted-1.png" width="768" /></p>
-<p>The current doubling time as of 2020-08-23 is 9.9 days with a 95% confidence interval of (9.1, 10.9) days.</p>
+<p>The current doubling time as of 2020-09-01 is 9.9 days with a 95% confidence interval of (9.1, 10.9) days.</p>
 <div id="estimating-the-overall-reproduction-number-r_0" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Estimating the Overall Reproduction Number, <span class="math inline">\(R_0\)</span></h3>
 <p>The log-linear model estimates the <span class="math inline">\(R_0\)</span> as follows:</p>
 <p><img src="covid19_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.514   1.566   1.582   1.586   1.605   1.653</code></pre>
+##   1.511   1.565   1.586   1.584   1.606   1.643</code></pre>
 </div>
 <div id="estimating-the-effectuve-reproduction-number-r_e" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Estimating the Effectuve Reproduction Number (<span class="math inline">\(R_e\)</span>)</h3>
@@ -292,16 +292,16 @@ Quantile.0.975(R)
 112
 </td>
 <td style="text-align:right;">
-1.047344
+1.045345
 </td>
 <td style="text-align:right;">
-0.0174468
+0.0170248
 </td>
 <td style="text-align:right;">
-1.019552
+1.0187811
 </td>
 <td style="text-align:right;">
-1.084178
+1.082631
 </td>
 </tr>
 <tr>
@@ -315,16 +315,16 @@ Quantile.0.975(R)
 113
 </td>
 <td style="text-align:right;">
-1.050392
+1.048395
 </td>
 <td style="text-align:right;">
-0.0147207
+0.0146095
 </td>
 <td style="text-align:right;">
-1.024629
+1.0224955
 </td>
 <td style="text-align:right;">
-1.080934
+1.079120
 </td>
 </tr>
 <tr>
@@ -338,16 +338,16 @@ Quantile.0.975(R)
 114
 </td>
 <td style="text-align:right;">
-1.064629
+1.063008
 </td>
 <td style="text-align:right;">
-0.0139052
+0.0140338
 </td>
 <td style="text-align:right;">
-1.036825
+1.0339223
 </td>
 <td style="text-align:right;">
-1.091733
+1.090041
 </td>
 </tr>
 <tr>
@@ -361,16 +361,16 @@ Quantile.0.975(R)
 115
 </td>
 <td style="text-align:right;">
-1.067878
+1.066326
 </td>
 <td style="text-align:right;">
-0.0153355
+0.0159029
 </td>
 <td style="text-align:right;">
-1.032645
+1.0297628
 </td>
 <td style="text-align:right;">
-1.094216
+1.093237
 </td>
 </tr>
 <tr>
@@ -384,16 +384,16 @@ Quantile.0.975(R)
 116
 </td>
 <td style="text-align:right;">
-1.072551
+1.070774
 </td>
 <td style="text-align:right;">
-0.0176730
+0.0183131
 </td>
 <td style="text-align:right;">
-1.032202
+1.0288760
 </td>
 <td style="text-align:right;">
-1.100114
+1.098839
 </td>
 </tr>
 <tr>
@@ -407,16 +407,16 @@ Quantile.0.975(R)
 117
 </td>
 <td style="text-align:right;">
-1.066871
+1.064893
 </td>
 <td style="text-align:right;">
-0.0202122
+0.0208134
 </td>
 <td style="text-align:right;">
-1.022956
+1.0194970
 </td>
 <td style="text-align:right;">
-1.097182
+1.095742
 </td>
 </tr>
 <tr>
@@ -430,21 +430,21 @@ Quantile.0.975(R)
 118
 </td>
 <td style="text-align:right;">
-1.027640
+1.025810
 </td>
 <td style="text-align:right;">
-0.0210478
+0.0214422
 </td>
 <td style="text-align:right;">
-0.985451
+0.9831175
 </td>
 <td style="text-align:right;">
-1.060125
+1.059451
 </td>
 </tr>
 </tbody>
 </table>
-<p>The effective reproduction number based on the last week’s incidences show an average of 1.03 with a 95% confidence interval (0.99, 1.06).</p>
+<p>The effective reproduction number based on the last week’s incidences show an average of 1.03 with a 95% confidence interval (0.98, 1.06).</p>
 </div>
 <div id="simulating-r_e-on-a-monthly-sliding-window" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Simulating <span class="math inline">\(R_e\)</span> on a Monthly Sliding Window</h3>
@@ -488,16 +488,16 @@ Quantile.0.975(R)
 89
 </td>
 <td style="text-align:right;">
-1.324013
+1.326954
 </td>
 <td style="text-align:right;">
-0.1158013
+0.1261080
 </td>
 <td style="text-align:right;">
-1.105847
+1.089060
 </td>
 <td style="text-align:right;">
-1.524013
+1.519831
 </td>
 </tr>
 <tr>
@@ -511,16 +511,16 @@ Quantile.0.975(R)
 90
 </td>
 <td style="text-align:right;">
-1.321989
+1.325225
 </td>
 <td style="text-align:right;">
-0.1163432
+0.1263326
 </td>
 <td style="text-align:right;">
-1.107388
+1.092050
 </td>
 <td style="text-align:right;">
-1.524554
+1.520896
 </td>
 </tr>
 <tr>
@@ -534,16 +534,16 @@ Quantile.0.975(R)
 91
 </td>
 <td style="text-align:right;">
-1.314725
+1.318044
 </td>
 <td style="text-align:right;">
-0.1157234
+0.1255254
 </td>
 <td style="text-align:right;">
-1.103747
+1.088668
 </td>
 <td style="text-align:right;">
-1.517526
+1.514205
 </td>
 </tr>
 <tr>
@@ -557,16 +557,16 @@ Quantile.0.975(R)
 92
 </td>
 <td style="text-align:right;">
-1.308363
+1.311816
 </td>
 <td style="text-align:right;">
-0.1140593
+0.1237210
 </td>
 <td style="text-align:right;">
-1.102949
+1.087481
 </td>
 <td style="text-align:right;">
-1.511302
+1.507825
 </td>
 </tr>
 <tr>
@@ -580,16 +580,16 @@ Quantile.0.975(R)
 93
 </td>
 <td style="text-align:right;">
-1.302137
+1.305565
 </td>
 <td style="text-align:right;">
-0.1118073
+0.1212007
 </td>
 <td style="text-align:right;">
-1.101203
+1.086408
 </td>
 <td style="text-align:right;">
-1.503062
+1.499526
 </td>
 </tr>
 <tr>
@@ -603,16 +603,16 @@ Quantile.0.975(R)
 94
 </td>
 <td style="text-align:right;">
-1.299070
+1.302542
 </td>
 <td style="text-align:right;">
-0.1092366
+0.1185245
 </td>
 <td style="text-align:right;">
-1.102474
+1.087796
 </td>
 <td style="text-align:right;">
-1.496488
+1.492941
 </td>
 </tr>
 <tr>
@@ -626,16 +626,16 @@ Quantile.0.975(R)
 95
 </td>
 <td style="text-align:right;">
-1.291904
+1.295164
 </td>
 <td style="text-align:right;">
-0.1066554
+0.1159056
 </td>
 <td style="text-align:right;">
-1.098814
+1.084299
 </td>
 <td style="text-align:right;">
-1.485113
+1.480842
 </td>
 </tr>
 <tr>
@@ -649,16 +649,16 @@ Quantile.0.975(R)
 96
 </td>
 <td style="text-align:right;">
-1.285475
+1.288602
 </td>
 <td style="text-align:right;">
-0.1040735
+0.1130497
 </td>
 <td style="text-align:right;">
-1.096658
+1.082831
 </td>
 <td style="text-align:right;">
-1.474425
+1.469385
 </td>
 </tr>
 <tr>
@@ -672,16 +672,16 @@ Quantile.0.975(R)
 97
 </td>
 <td style="text-align:right;">
-1.280307
+1.283456
 </td>
 <td style="text-align:right;">
-0.1017191
+0.1105250
 </td>
 <td style="text-align:right;">
-1.095358
+1.081968
 </td>
 <td style="text-align:right;">
-1.464201
+1.459287
 </td>
 </tr>
 <tr>
@@ -695,16 +695,16 @@ Quantile.0.975(R)
 98
 </td>
 <td style="text-align:right;">
-1.264902
+1.267833
 </td>
 <td style="text-align:right;">
-0.0987061
+0.1072642
 </td>
 <td style="text-align:right;">
-1.085565
+1.071909
 </td>
 <td style="text-align:right;">
-1.442622
+1.438398
 </td>
 </tr>
 <tr>
@@ -718,16 +718,16 @@ Quantile.0.975(R)
 99
 </td>
 <td style="text-align:right;">
-1.252607
+1.255555
 </td>
 <td style="text-align:right;">
-0.0951101
+0.1032531
 </td>
 <td style="text-align:right;">
-1.081773
+1.069256
 </td>
 <td style="text-align:right;">
-1.424532
+1.420231
 </td>
 </tr>
 <tr>
@@ -741,16 +741,16 @@ Quantile.0.975(R)
 100
 </td>
 <td style="text-align:right;">
-1.244880
+1.247890
 </td>
 <td style="text-align:right;">
-0.0914179
+0.0992174
 </td>
 <td style="text-align:right;">
-1.081940
+1.070455
 </td>
 <td style="text-align:right;">
-1.411545
+1.407121
 </td>
 </tr>
 <tr>
@@ -764,16 +764,16 @@ Quantile.0.975(R)
 101
 </td>
 <td style="text-align:right;">
-1.244680
+1.247569
 </td>
 <td style="text-align:right;">
-0.0883170
+0.0959380
 </td>
 <td style="text-align:right;">
-1.087178
+1.075298
 </td>
 <td style="text-align:right;">
-1.406450
+1.402551
 </td>
 </tr>
 <tr>
@@ -787,16 +787,16 @@ Quantile.0.975(R)
 102
 </td>
 <td style="text-align:right;">
-1.240604
+1.243326
 </td>
 <td style="text-align:right;">
-0.0857014
+0.0932506
 </td>
 <td style="text-align:right;">
-1.085273
+1.072993
 </td>
 <td style="text-align:right;">
-1.396941
+1.393173
 </td>
 </tr>
 <tr>
@@ -810,16 +810,16 @@ Quantile.0.975(R)
 103
 </td>
 <td style="text-align:right;">
-1.238707
+1.241206
 </td>
 <td style="text-align:right;">
-0.0836805
+0.0911213
 </td>
 <td style="text-align:right;">
-1.085193
+1.073308
 </td>
 <td style="text-align:right;">
-1.390209
+1.386426
 </td>
 </tr>
 <tr>
@@ -833,16 +833,16 @@ Quantile.0.975(R)
 104
 </td>
 <td style="text-align:right;">
-1.221935
+1.224183
 </td>
 <td style="text-align:right;">
-0.0812075
+0.0886039
 </td>
 <td style="text-align:right;">
-1.071589
+1.059560
 </td>
 <td style="text-align:right;">
-1.367789
+1.364148
 </td>
 </tr>
 <tr>
@@ -856,16 +856,16 @@ Quantile.0.975(R)
 105
 </td>
 <td style="text-align:right;">
-1.203981
+1.206378
 </td>
 <td style="text-align:right;">
-0.0778628
+0.0847310
 </td>
 <td style="text-align:right;">
-1.062670
+1.052150
 </td>
 <td style="text-align:right;">
-1.343491
+1.340569
 </td>
 </tr>
 <tr>
@@ -879,16 +879,16 @@ Quantile.0.975(R)
 106
 </td>
 <td style="text-align:right;">
-1.193132
+1.195628
 </td>
 <td style="text-align:right;">
-0.0739856
+0.0802210
 </td>
 <td style="text-align:right;">
-1.062119
+1.053081
 </td>
 <td style="text-align:right;">
-1.327153
+1.323778
 </td>
 </tr>
 <tr>
@@ -902,16 +902,16 @@ Quantile.0.975(R)
 107
 </td>
 <td style="text-align:right;">
-1.180074
+1.182396
 </td>
 <td style="text-align:right;">
-0.0697333
+0.0757024
 </td>
 <td style="text-align:right;">
-1.057732
+1.048958
 </td>
 <td style="text-align:right;">
-1.308293
+1.305340
 </td>
 </tr>
 <tr>
@@ -925,16 +925,16 @@ Quantile.0.975(R)
 108
 </td>
 <td style="text-align:right;">
-1.172047
+1.174429
 </td>
 <td style="text-align:right;">
-0.0653738
+0.0708955
 </td>
 <td style="text-align:right;">
-1.058363
+1.050180
 </td>
 <td style="text-align:right;">
-1.293715
+1.290643
 </td>
 </tr>
 <tr>
@@ -948,16 +948,16 @@ Quantile.0.975(R)
 109
 </td>
 <td style="text-align:right;">
-1.159963
+1.162148
 </td>
 <td style="text-align:right;">
-0.0609565
+0.0662167
 </td>
 <td style="text-align:right;">
-1.052923
+1.044938
 </td>
 <td style="text-align:right;">
-1.273773
+1.271391
 </td>
 </tr>
 <tr>
@@ -971,16 +971,16 @@ Quantile.0.975(R)
 110
 </td>
 <td style="text-align:right;">
-1.166199
+1.168330
 </td>
 <td style="text-align:right;">
-0.0574771
+0.0624971
 </td>
 <td style="text-align:right;">
-1.065315
+1.057936
 </td>
 <td style="text-align:right;">
-1.274240
+1.271482
 </td>
 </tr>
 <tr>
@@ -994,16 +994,16 @@ Quantile.0.975(R)
 111
 </td>
 <td style="text-align:right;">
-1.166504
+1.168217
 </td>
 <td style="text-align:right;">
-0.0554011
+0.0605297
 </td>
 <td style="text-align:right;">
-1.064266
+1.055782
 </td>
 <td style="text-align:right;">
-1.268520
+1.266521
 </td>
 </tr>
 <tr>
@@ -1017,16 +1017,16 @@ Quantile.0.975(R)
 112
 </td>
 <td style="text-align:right;">
-1.156279
+1.157727
 </td>
 <td style="text-align:right;">
-0.0539923
+0.0591191
 </td>
 <td style="text-align:right;">
-1.054201
+1.045307
 </td>
 <td style="text-align:right;">
-1.252992
+1.251567
 </td>
 </tr>
 <tr>
@@ -1040,16 +1040,16 @@ Quantile.0.975(R)
 113
 </td>
 <td style="text-align:right;">
-1.144875
+1.146266
 </td>
 <td style="text-align:right;">
-0.0522984
+0.0570756
 </td>
 <td style="text-align:right;">
-1.046848
+1.039489
 </td>
 <td style="text-align:right;">
-1.237567
+1.235751
 </td>
 </tr>
 <tr>
@@ -1063,16 +1063,16 @@ Quantile.0.975(R)
 114
 </td>
 <td style="text-align:right;">
-1.145815
+1.147364
 </td>
 <td style="text-align:right;">
-0.0506609
+0.0551322
 </td>
 <td style="text-align:right;">
-1.053429
+1.046753
 </td>
 <td style="text-align:right;">
-1.235619
+1.233861
 </td>
 </tr>
 <tr>
@@ -1086,16 +1086,16 @@ Quantile.0.975(R)
 115
 </td>
 <td style="text-align:right;">
-1.133795
+1.135147
 </td>
 <td style="text-align:right;">
-0.0490128
+0.0534206
 </td>
 <td style="text-align:right;">
-1.043587
+1.036561
 </td>
 <td style="text-align:right;">
-1.220322
+1.219160
 </td>
 </tr>
 <tr>
@@ -1109,16 +1109,16 @@ Quantile.0.975(R)
 116
 </td>
 <td style="text-align:right;">
-1.125601
+1.127088
 </td>
 <td style="text-align:right;">
-0.0467519
+0.0508392
 </td>
 <td style="text-align:right;">
-1.041517
+1.035451
 </td>
 <td style="text-align:right;">
-1.209042
+1.208104
 </td>
 </tr>
 <tr>
@@ -1132,16 +1132,16 @@ Quantile.0.975(R)
 117
 </td>
 <td style="text-align:right;">
-1.115192
+1.116674
 </td>
 <td style="text-align:right;">
-0.0440560
+0.0478534
 </td>
 <td style="text-align:right;">
-1.036587
+1.031446
 </td>
 <td style="text-align:right;">
-1.195053
+1.193975
 </td>
 </tr>
 <tr>
@@ -1155,28 +1155,28 @@ Quantile.0.975(R)
 118
 </td>
 <td style="text-align:right;">
-1.098516
+1.099911
 </td>
 <td style="text-align:right;">
-0.0407070
+0.0441800
 </td>
 <td style="text-align:right;">
-1.027136
+1.022130
 </td>
 <td style="text-align:right;">
-1.173550
+1.172025
 </td>
 </tr>
 </tbody>
 </table>
-<p>The effective reproduction number based on the last months’s incidences show an average of 1.1 with a 95% confidence interval (1.03, 1.17).</p>
+<p>The effective reproduction number based on the last months’s incidences show an average of 1.1 with a 95% confidence interval (1.02, 1.17).</p>
 </div>
 <div id="cumulative-deaths-official-and-unofficial" class="section level3">
 <h3><span class="header-section-number">3.1.5</span> Cumulative Deaths (official and unofficial)</h3>
 <p><img src="covid19_files/figure-html/covid19-bangladesh-deaths-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-21">Table 3.3: </span>Total number of deaths as of 2020-08-22
+<span id="tab:unnamed-chunk-21">Table 3.3: </span>Total number of deaths as of 2020-08-31
 </caption>
 <thead>
 <tr>
@@ -1194,7 +1194,7 @@ Total Deaths
 Bangladesh
 </td>
 <td style="text-align:right;">
-3907
+4281
 </td>
 </tr>
 <tr>
@@ -1216,7 +1216,7 @@ Bangladesh(unoff)
 <p><img src="covid19_files/figure-html/covid19-cases-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-22">Table 3.4: </span>Total number of cases as of 2020-08-22
+<span id="tab:unnamed-chunk-22">Table 3.4: </span>Total number of cases as of 2020-08-31
 </caption>
 <thead>
 <tr>
@@ -1234,7 +1234,7 @@ Total Cases
 India
 </td>
 <td style="text-align:right;">
-3044940
+3691166
 </td>
 </tr>
 <tr>
@@ -1242,7 +1242,7 @@ India
 Bangladesh
 </td>
 <td style="text-align:right;">
-292625
+312996
 </td>
 </tr>
 <tr>
@@ -1250,7 +1250,15 @@ Bangladesh
 Pakistan
 </td>
 <td style="text-align:right;">
-292174
+295849
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Indonesia
+</td>
+<td style="text-align:right;">
+174796
 </td>
 </tr>
 <tr>
@@ -1263,18 +1271,10 @@ Bangladesh(unoff)
 </tr>
 <tr>
 <td style="text-align:left;">
-Indonesia
-</td>
-<td style="text-align:right;">
-151498
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Singapore
 </td>
 <td style="text-align:right;">
-56266
+56812
 </td>
 </tr>
 <tr>
@@ -1282,7 +1282,7 @@ Singapore
 Nepal
 </td>
 <td style="text-align:right;">
-31117
+39460
 </td>
 </tr>
 <tr>
@@ -1290,7 +1290,7 @@ Nepal
 Malaysia
 </td>
 <td style="text-align:right;">
-9257
+9340
 </td>
 </tr>
 <tr>
@@ -1298,7 +1298,7 @@ Malaysia
 Sri Lanka
 </td>
 <td style="text-align:right;">
-2947
+3049
 </td>
 </tr>
 <tr>
@@ -1306,7 +1306,7 @@ Sri Lanka
 Bhutan
 </td>
 <td style="text-align:right;">
-155
+225
 </td>
 </tr>
 </tbody>
@@ -1317,7 +1317,7 @@ Bhutan
 <p><img src="covid19_files/figure-html/covid19-death-south-asia-1.png" width="768" /></p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-23">Table 3.5: </span>Total number of deaths as of 2020-08-22
+<span id="tab:unnamed-chunk-23">Table 3.5: </span>Total number of deaths as of 2020-08-31
 </caption>
 <thead>
 <tr>
@@ -1335,7 +1335,7 @@ Total Deaths
 India
 </td>
 <td style="text-align:right;">
-56706
+65288
 </td>
 </tr>
 <tr>
@@ -1343,7 +1343,7 @@ India
 Indonesia
 </td>
 <td style="text-align:right;">
-6594
+7417
 </td>
 </tr>
 <tr>
@@ -1351,7 +1351,7 @@ Indonesia
 Pakistan
 </td>
 <td style="text-align:right;">
-6231
+6294
 </td>
 </tr>
 <tr>
@@ -1359,7 +1359,7 @@ Pakistan
 Bangladesh
 </td>
 <td style="text-align:right;">
-3907
+4281
 </td>
 </tr>
 <tr>
@@ -1375,7 +1375,7 @@ Bangladesh(unoff)
 Nepal
 </td>
 <td style="text-align:right;">
-146
+228
 </td>
 </tr>
 <tr>
@@ -1383,7 +1383,7 @@ Nepal
 Malaysia
 </td>
 <td style="text-align:right;">
-125
+127
 </td>
 </tr>
 <tr>
@@ -1415,10 +1415,10 @@ Bhutan
 </div>
 <div id="cases-and-deaths-compared-on-a-specific-day-1" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Cases and deaths compared on a specific day</h3>
-<p>Bangladesh has entered into day 168 since first confirmed case.</p>
+<p>Bangladesh has entered into day 177 since first confirmed case.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-25">Table 3.6: </span>Bangladesh and its peers: total cases and deaths compared on day 168
+<span id="tab:unnamed-chunk-25">Table 3.6: </span>Bangladesh and its peers: total cases and deaths compared on day 177
 </caption>
 <thead>
 <tr>
@@ -1439,10 +1439,10 @@ Total deaths
 India
 </td>
 <td style="text-align:right;">
-968857
+1337024
 </td>
 <td style="text-align:right;">
-24914
+31358
 </td>
 </tr>
 <tr>
@@ -1450,10 +1450,10 @@ India
 Indonesia
 </td>
 <td style="text-align:right;">
-139549
+157859
 </td>
 <td style="text-align:right;">
-6150
+6858
 </td>
 </tr>
 <tr>
@@ -1461,10 +1461,10 @@ Indonesia
 Pakistan
 </td>
 <td style="text-align:right;">
-284660
+290445
 </td>
 <td style="text-align:right;">
-6097
+6201
 </td>
 </tr>
 <tr>
@@ -1472,10 +1472,10 @@ Pakistan
 Bangladesh
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-292625
+312996
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: #f49a86 !important;">
-3907
+4281
 </td>
 </tr>
 <tr>
@@ -1483,10 +1483,10 @@ Bangladesh
 Malaysia
 </td>
 <td style="text-align:right;">
-8696
+8779
 </td>
 <td style="text-align:right;">
-121
+123
 </td>
 </tr>
 <tr>
@@ -1494,10 +1494,10 @@ Malaysia
 Nepal
 </td>
 <td style="text-align:right;">
-16649
+17658
 </td>
 <td style="text-align:right;">
-35
+40
 </td>
 </tr>
 <tr>
@@ -1505,10 +1505,10 @@ Nepal
 Singapore
 </td>
 <td style="text-align:right;">
-45298
+47453
 </td>
 <td style="text-align:right;">
-26
+27
 </td>
 </tr>
 <tr>
@@ -1516,7 +1516,7 @@ Singapore
 Sri Lanka
 </td>
 <td style="text-align:right;">
-2617
+2730
 </td>
 <td style="text-align:right;">
 11
@@ -1527,7 +1527,7 @@ Sri Lanka
 Bhutan
 </td>
 <td style="text-align:right;">
-153
+195
 </td>
 <td style="text-align:right;">
 0
